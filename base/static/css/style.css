@@ -10,16 +10,17 @@ body{
     border: 0px;
 }
 
+.search-icon{
+    height: 2rem;
+}
+
 .material-symbols-outlined {
     padding-top: .3rem;
+    font-size: 2rem;
+    color: grey;
   font-variation-settings:
   'FILL' 0,
   'wght' 450,
   'GRAD' 1500,
   'opsz' 40
-}
-
-.nav-icons{
-    text-decoration: none;
-    color: black;
 }
