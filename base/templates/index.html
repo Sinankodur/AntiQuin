@@ -28,6 +28,7 @@
       <div class="container pt-4 ps-1">
         <img src="{% static "img\logo.png" %}" alt="logo" class="logo" />
         <!-- search filter -->
+
         <div class="search-bar ps-5 pe-1">
           <select class="form-control search-option" id="search">
             <option value="">ALL CATEGORIES</option>
@@ -37,6 +38,7 @@
             <option value="3">SHORTS</option>
           </select>
         </div>
+
         <!-- search bar -->
         <div class="me-auto">
           <form class="d-flex ms-1" role="search">
@@ -49,6 +51,7 @@
             <span class="material-symbols-outlined ms-2">search</span>
           </form>
         </div>
+
         <!-- nav icons -->
         <div>
           <a href=""
@@ -61,6 +64,21 @@
             ><span class="material-symbols-outlined"> shopping_cart </span></a
           >
         </div>
+
+        <!-- cart total -->
+        <!-- need to work on backend -->
+        <div class="pt-2">
+          <ul style="list-style-type: none">
+            <li>
+              <span class="badge text-dark bg-dark-subtle text-wrap"
+                >Your Cart</span
+              >
+            </li>
+            <li>
+              <span>₹000.0</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
     <hr />
@@ -69,6 +87,7 @@
       <div class="row">
         <div class="col-lg-4">
           <img src="" alt="..." />
+          <button class="btn btn-warning w">Buy</button>
         </div>
       </div>
     </div>
