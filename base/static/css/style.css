@@ -31,3 +31,9 @@ body{
   'GRAD' 1500,
   'opsz' 40
 }
+
+.nav-icons{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+}

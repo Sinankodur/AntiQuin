@@ -28,49 +28,57 @@
       <div class="container pt-3 ps-1">
         <img src="{% static "img\logo.png" %}" alt="logo" class="logo" />
 
+        <div>
         <!-- search filter -->
-        <div class="search-bar">
-          <ul class="search-bar-list rounded">
-            <li>
-              <select class="form-control search-option" id="search">
-                <option value="">All categories</option>
-                <option value="0">SHIRTS</option>
-                <option value="1">JEANS</option>
-                <option value="2">T-SHIRTS</option>
-                <option value="3">SHORTS</option>
-              </select>
-            </li>
+        <ul class="search-bar-list rounded">
+          <li class="mt-auto">
+            <select class="form-control search-option" id="search">
+              <option value="">All categories</option>
+              <option value="0">SHIRTS</option>
+              <option value="1">JEANS</option>
+              <option value="2">T-SHIRTS</option>
+              <option value="3">SHORTS</option>
+            </select>
+          </li>
 
-            <li class="me-auto">
-              <form class="d-flex ms-1" role="search">
-                <input
-                  class="form-control search-option"
-                  type="search"
-                  placeholder="I'm searching for..."
-                  aria-label="Search"
-                />
-                <span class="material-symbols-outlined ms-2">search</span>
-              </form>
-            </li>
-          </ul>
+          <li class="me-auto mt-auto">
+            <form class="d-flex ms-1 mt-auto" role="search">
+              <input
+                class="form-control search-option"
+                type="search"
+                placeholder="I'm searching for..."
+                aria-label="Search"
+              />
+              <span class="material-symbols-outlined ms-2">search</span>
+            </form>
+          </li>
+        </ul>
         </div>
 
         <!-- nav icons -->
         <div>
-          <a href=""
+          <ul class="nav-icons">
+          <li>
+            <a href=""
             ><span class="material-symbols-outlined"> account_circle </span></a
           >
-          <a href=""
+          </li>
+          <li>
+            <a href=""
             ><span class="material-symbols-outlined"> favorite </span></a
           >
-          <a href=""
+          </li>
+          <li>
+            <a href=""
             ><span class="material-symbols-outlined"> shopping_cart </span></a
           >
+          </li>
+        </ul>
         </div>
-
+        
         <!-- cart total -->
         <!-- need to work on backend -->
-        <div class="pt-2">
+        
           <ul style="list-style-type: none">
             <li>
               <span class="badge text-dark bg-dark-subtle text-wrap"
