@@ -6,6 +6,13 @@ body{
     height: 2.5rem;
 }
 
+.search-bar-list{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    border: 1rem;
+}
+
 .search-option{
     border: 0px;
 }
