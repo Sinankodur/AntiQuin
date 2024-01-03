@@ -1,0 +1,25 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.logo{
+    height: 2.5rem;
+}
+
+.search-option{
+    border: 0px;
+}
+
+.material-symbols-outlined {
+    padding-top: .3rem;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 450,
+  'GRAD' 1500,
+  'opsz' 40
+}
+
+.nav-icons{
+    text-decoration: none;
+    color: black;
+}
