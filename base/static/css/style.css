@@ -39,3 +39,11 @@ body{
     display: flex;
     justify-content: space-around;
 }
+
+.product-img{
+    height: 25rem;
+}
+
+.btn-buy{
+    width: 8.5rem;
+}
