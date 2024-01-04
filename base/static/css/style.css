@@ -44,6 +44,10 @@ body{
     height: 25rem;
 }
 
+.btn-menu{
+    display: none;
+}
+
 
 @media screen and (max-width: 768px) {
     .search-bar{
@@ -66,13 +70,7 @@ body{
 }
 
 @media screen and (max-width: 375px) {
-    .user-panel{
-        display: flex;
-        justify-content: flex-end;
-
-    }
-
-    .logo{
-        display: inline;
+    .user-panel-div{
+        height: 2rem;
     }
 }
