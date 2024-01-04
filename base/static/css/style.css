@@ -34,7 +34,7 @@ body{
   'opsz' 40
 }
 
-.nav-icons{
+.user-panel{
     list-style-type: none;
     display: flex;
     justify-content: space-around;
@@ -45,9 +45,35 @@ body{
 }
 
 
-
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
     .search-bar{
         display: none;
+    }
+    
+    .cart-div{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .search-bar{
+        display: none;
+    }
+
+    .cart-div{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .user-panel{
+        display: none;
+    }
+
+    .logo{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 60%;
     }
 }
