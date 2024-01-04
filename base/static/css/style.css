@@ -44,10 +44,7 @@ body{
     height: 25rem;
 }
 
-.btn-buy{
-    width: 8.5rem;
+.add-btn{
+    width: 20rem;
 }
 
-.product-div{
-    height: 100rem;
-}
