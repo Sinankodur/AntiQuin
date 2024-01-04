@@ -8,4 +8,4 @@ def home(request):
 
 def add_product(request):
     data = Products.objects.all()
-    return render(request,)
+    return render(request,"index.html",{"details" : data})
