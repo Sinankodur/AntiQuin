@@ -67,13 +67,12 @@ body{
 
 @media screen and (max-width: 375px) {
     .user-panel{
-        display: none;
+        display: flex;
+        justify-content: flex-end;
+
     }
 
     .logo{
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 60%;
+        display: inline;
     }
 }
