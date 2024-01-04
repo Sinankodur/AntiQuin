@@ -96,18 +96,20 @@
 
     <div class="container pt-5">
       <h2>Featured Products</h2>
-      {% for i in details %}
-      <div class="card">
-        <div class="card-body">
-          <div>
-            <img src="{{i.product_img}}" alt="">
-          </div>
-          <p>{{i.name}}</p>
-          <p>{{i.price}}</p>
-        </div>
+      <div class="row">
+        {% for i in details %}
+          <div class="col-lg-4 pt-3 pb-3">
+            <div class="card product-div">
+              <div class="card-body">
+                <img src="{{i.product_img.url}}" alt="" class="img-fluid ">
+                <span>{{i.name}}</span>
+                <span>{{i.price}}</span><br>
+                <a href="" class="btn btn-warning">Buy</a>
+              </div>
+            </div>
+          </div>    
+        {% endfor %}
       </div>
-
-      {% endfor %}
     </div>
 
     <script
