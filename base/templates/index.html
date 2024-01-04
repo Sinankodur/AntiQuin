@@ -49,7 +49,9 @@
                   placeholder="I'm searching for..."
                   aria-label="Search"
                 />
-                <a href=""><span class="material-symbols-outlined ms-3">search</span></a>
+                <a href=""
+                  ><span class="material-symbols-outlined ms-3">search</span></a
+                >
               </form>
             </li>
           </ul>
@@ -58,58 +60,65 @@
         <!-- nav icons -->
         <div class="pt-3">
           <ul class="nav-icons">
-          <li class="pe-3">
-            <a href=""
-            ><span class="material-symbols-outlined"> account_circle </span></a
-          >
-          </li>
-          <li class="pe-3">
-            <a href=""
-            ><span class="material-symbols-outlined"> favorite </span></a
-          >
-          </li>
-          <li>
-            <a href=""
-            ><span class="material-symbols-outlined"> shopping_cart </span></a
-          >
-          </li>
-        </ul>
+            <li class="pe-3">
+              <a href=""
+                ><span class="material-symbols-outlined">
+                  account_circle
+                </span></a
+              >
+            </li>
+            <li class="pe-3">
+              <a href=""
+                ><span class="material-symbols-outlined"> favorite </span></a
+              >
+            </li>
+            <li>
+              <a href=""
+                ><span class="material-symbols-outlined">
+                  shopping_cart
+                </span></a
+              >
+            </li>
+          </ul>
         </div>
-        
+
         <!-- cart total -->
         <!-- need to work on backend -->
         <div class="pt-3">
           <ul style="list-style-type: none">
             <li>
-              <span class="badge text-dark bg-dark-subtle text-wrap">Your Cart</span>
+              <span class="badge text-dark bg-dark-subtle text-wrap"
+                >Your Cart</span
+              >
             </li>
             <li>
               <span>₹000.0</span>
             </li>
           </ul>
         </div>
-        </div>
       </div>
     </nav>
     <hr />
 
-
+    <!-- Products -->
     <div class="container pt-5">
       <h2>Featured Products</h2>
       <div class="row">
         {% for i in details %}
-          <div class="col-lg-4 pt-3 pb-3">
-            <div class="card product-div">
-              <div class="card-body">
-                <img src="{{i.product_img.url}}" alt="" class="img-fluid ">
-                <div class="row pt-2 pb-3">
-                  <div class="col-9">{{i.name}}</div>
+        <!-- loop starts here.... -->
+
+        <div class="col-lg-4 pt-3 pb-3">
+          <div class="card product-div">
+            <div class="card-body">
+              <img src="{{i.product_img.url}}" alt="" class="img-fluid" />
+              <div class="row pt-2 pb-3">
+                <div class="col-9">{{i.name}}</div>
                 <div class="col-3 text-center">{{i.price}}</div>
-                </div>
-                <a href="" class="btn add-btn">Add to cart</atype=>
               </div>
+              <a href="" class="btn add-btn">Add to cart</a>
             </div>
-          </div>    
+          </div>
+        </div>
         {% endfor %}
       </div>
     </div>
