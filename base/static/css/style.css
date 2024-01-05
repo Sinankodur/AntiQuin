@@ -40,6 +40,11 @@ body{
     justify-content: space-around;
 }
 
+.div-cart ul{
+    list-style-type: none;
+}
+
+
 .product-img{
     height: 25rem;
 }
@@ -48,22 +53,22 @@ body{
     display: none;
 }
 
-
-
-
 @media screen and (max-width: 1000px) {
     .search-bar{
         display: none;
     }
 
-    .cart-div{
-        display: grid;
-        justify-content: right;
-    }
 }
 
 @media screen and (max-width: 375px) {
     .user-panel-div{
         height: 2rem;
     }
+}
+
+@media screen and (max-width: 460px) {
+    .div-cart{
+        display: none;
+    }
+    
 }

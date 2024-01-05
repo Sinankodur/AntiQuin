@@ -92,12 +92,12 @@
 
         <!-- cart total -->
         <!-- need to work on backend -->
-        <div class="cart-div pt-3">
-          <ul style="list-style-type: none">
+        <div class="div-cart pt-3">
+          <ul>
             <li>
-              <span class="badge text-dark bg-dark-subtle text-wrap"
-                >Your Cart</span
-              >
+              <span class="badge text-dark bg-dark-subtle text-wrap">
+                Your Cart
+              </span>
             </li>
             <li>
               <span>₹000.0</span>
@@ -117,14 +117,14 @@
         {% for i in details %}
         <!-- loop starts here.... -->
 
-        <div class="col-lg-3 pt-3 pb-3">
+        <div class="col-lg-3 col-md-4 col-sm-6 pt-3 pb-3">
           <div class="card product-div">
             <div class="card-body">
               <img src="{{i.product_img.url}}" alt="" class="img-fluid" />
-              
+
               <div class="col-9 text-secondary">{{i.name}}</div>
               <div class="col-3 text-center text-dark">₹{{i.price}}</div>
-              
+
               <a href="" class="btn add-btn">Add to cart</a>
             </div>
           </div>
