@@ -49,9 +49,6 @@ body{
     height: 25rem;
 }
 
-.btn-menu{
-    display: none;
-}
 
 @media screen and (max-width: 1000px) {
     .search-bar{
@@ -60,15 +57,18 @@ body{
 
 }
 
-@media screen and (max-width: 375px) {
-    .user-panel-div{
-        height: 2rem;
-    }
-}
-
 @media screen and (max-width: 465px) {
     .div-cart{
         display: none;
     }
 }
 
+.btn-menu{
+    display: none;
+}
+
+@media screen and (max-width: 360px) {
+    .btn-menu{
+        display: block;
+    }
+}
