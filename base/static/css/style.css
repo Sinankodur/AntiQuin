@@ -49,15 +49,7 @@ body{
 }
 
 
-@media screen and (max-width: 768px) {
-    .search-bar{
-        display: none;
-    }
-    
-    .cart-div{
-        display: none;
-    }
-}
+
 
 @media screen and (max-width: 1000px) {
     .search-bar{
@@ -65,7 +57,8 @@ body{
     }
 
     .cart-div{
-        display: none;
+        display: grid;
+        justify-content: right;
     }
 }
 
