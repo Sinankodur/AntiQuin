@@ -87,13 +87,13 @@ body{
     font-size: 3rem;
 }
 
-.insta :hover{
+/* .insta :hover{
     color: rgb(225, 48, 108);
 }
 
 .wtsp :hover{
     color: rgb(37, 211, 102);
-}
+} */
 
 /* -------------- add-btn queries ------------ */
 
@@ -127,7 +127,13 @@ body{
 
 @media screen and (max-width: 768px){
     .add-btn{
-      width: 13.2rem;
+      width: 12.2rem;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .add-btn{
+        width: 13.5rem;
     }
 }
 
@@ -239,3 +245,18 @@ body{
     }
 }
 
+
+.social-media-div{
+    position: fixed;
+    width: 3.7rem;
+    height: 3.5rem;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.social-media-link :hover{
+    color: white;
+}
