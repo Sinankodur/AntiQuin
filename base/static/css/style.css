@@ -261,3 +261,8 @@ body{
     color: white;
 }
 
+/* ---------------- MENU CLOSE BUTTON --------------------------- */
+
+.close-btn{
+    display: none;
+}

@@ -87,15 +87,30 @@
                 >
               </li>
               <li class="pe-3">
-                <a href=""
-                  ><span class="material-symbols-outlined"> favorite </span></a
-                >
+                <a href="" class="position-relative"
+                  ><span class="material-symbols-outlined"> favorite </span>
+                  <!-- work on backend -------------------------- -->
+                  <span
+                    class="position-absolute bottom-50 ps-1 pe-1 translate-middle badge rounded-pill bg-warning"
+                  >
+                    0
+                    <span class="visually-hidden">unread messages</span>
+                  </span>
+                </a>
               </li>
               <li>
-                <a href=""
+                <a href="" class="position-relative"
                   ><span class="material-symbols-outlined">
                     shopping_cart
-                  </span></a
+                  </span>
+                  <!-- work on backend -------------------------- -->
+                  <span
+                    class="position-absolute bottom-50 ps-1 pe-1 translate-middle badge rounded-pill bg-warning"
+                  >
+                    0
+                    <span class="visually-hidden">unread messages</span>
+                  </span>
+                  </a
                 >
               </li>
             </ul>
@@ -124,6 +139,13 @@
             class="menu-icon"
           ></iconify-icon
         ></a>
+        <a href="">
+          <button
+            type="button"
+            class="btn-close close-btn"
+            aria-label="Close"
+          ></button>
+        </a>
       </div>
     </nav>
     <hr />
@@ -140,11 +162,16 @@
         <div class="col-lg-3 col-md-4 col-sm-6 pt-3 pb-3">
           <div class="card product-div">
             <div class="card-img">
-              <img src="{{i.product_img.url}}" alt="" class="img-fluid" height="20rem"/>
+              <img
+                src="{{i.product_img.url}}"
+                alt=""
+                class="img-fluid"
+                height="20rem"
+              />
             </div>
             <div class="card-body">
               <div class="text-secondary">{{i.name}}</div>
-              <div ><p class="fw-bold">₹{{i.price}}</p></div>
+              <div class="fw-bold">₹{{i.price}}</div>
 
               <a href="" class="btn btn-warning add-btn">Add to cart</a>
             </div>
@@ -156,10 +183,7 @@
       <!-- fixed social media icon -->
       <!-- need to work on it -->
       <div class="ms-auto social-media-div">
-        <a
-          href=""
-          class="social-media-link"
-        >
+        <a href="" class="social-media-link">
           <i class="bx bxl-whatsapp social-media"></i>
         </a>
       </div>
