@@ -126,8 +126,20 @@ body{
     }
 }
 
+@media screen and (max-width: 768px){
+    .add-btn{
+      width: 30rem;
+    }
+}
+
 @media screen and (max-width: 425px) {
     .add-btn{
         width: 20rem;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .add-btn{
+        width: 17rem;
     }
 }
