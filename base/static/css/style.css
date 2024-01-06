@@ -58,6 +58,11 @@ body{
     display: flex;
 }
 
+.social-media{
+    color: black;
+    font-size: 3rem;
+}
+
 @media screen and (max-width: 1000px) {
     .search-bar{
         display: none;
@@ -80,4 +85,13 @@ body{
     .user-panel-div{
         display: none;
     }
+}
+
+
+.insta :hover{
+    color: rgb(225, 48, 108);
+}
+
+.wtsp :hover{
+    color: rgb(37, 211, 102);
 }
