@@ -97,7 +97,6 @@ body{
 
 /* -------------- add-btn queries ------------ */
 
-
 @media screen and (max-width: 1440px) {
     .add-btn{
         width: 17rem;
@@ -239,3 +238,4 @@ body{
         width: 15rem;
     }
 }
+
