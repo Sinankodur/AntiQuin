@@ -49,6 +49,15 @@ body{
     height: 25rem;
 }
 
+.user-panel-div{
+    display: none;
+}
+
+.menu-icon{
+    display: none;
+    color: black;
+}
+
 
 @media screen and (max-width: 1000px) {
     .search-bar{
@@ -63,9 +72,6 @@ body{
     }
 }
 
-.menu-icon{
-    display: none;
-}
 
 @media screen and (max-width: 360px) {
     .menu-icon{
