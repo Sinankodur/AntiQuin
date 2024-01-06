@@ -63,12 +63,16 @@ body{
     }
 }
 
-.btn-menu{
+.menu-icon{
     display: none;
 }
 
 @media screen and (max-width: 360px) {
-    .btn-menu{
+    .menu-icon{
         display: block;
+    }
+
+    .user-panel-div{
+        display: none;
     }
 }
