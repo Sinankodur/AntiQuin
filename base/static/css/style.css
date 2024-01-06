@@ -116,7 +116,7 @@ body{
 
 @media screen and (max-width: 1200px) {
     .add-btn{
-        width: 8rem;
+        width: 11.5rem;
     }
 }
 
@@ -128,18 +128,114 @@ body{
 
 @media screen and (max-width: 768px){
     .add-btn{
-      width: 30rem;
+      width: 13.2rem;
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 575.5px) {
+    .add-btn{
+        width: 32rem;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .add-btn{
+        width: 31rem;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .add-btn{
+        width: 30rem;
+    }
+}
+
+@media screen and (max-width: 527px) {
+    .add-btn{
+        width: 29rem;
+    }
+}
+
+@media screen and (max-width: 510px) {
+    .add-btn{
+        width: 28rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .add-btn{
+        width: 27rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .add-btn{
+        width: 26.5rem;
+    }
+}
+
+@media screen and (max-width: 465px) {
+    .add-btn{
+        width: 25rem;
+    }
+}
+
+@media screen and (max-width: 445px) {
+    .add-btn{
+        width: 24rem;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .add-btn{
+        width: 23rem;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .add-btn{
+        width: 22rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .add-btn{
+        width: 21rem;
+    }
+}
+
+@media screen and (max-width: 385px) {
     .add-btn{
         width: 20rem;
     }
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 365px) {
+    .add-btn{
+        width: 19rem;
+    }
+}
+
+@media screen and (max-width: 355px) {
+    .add-btn{
+        width: 18rem;
+    }
+}
+
+@media screen and (max-width: 340px) {
     .add-btn{
         width: 17rem;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .add-btn{
+        width: 16rem;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .add-btn{
+        width: 15rem;
     }
 }
