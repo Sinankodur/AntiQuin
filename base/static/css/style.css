@@ -49,10 +49,6 @@ body{
     height: 25rem;
 }
 
-.user-panel-div{
-    display: none;
-}
-
 .menu-icon{
     display: none;
     color: black;
@@ -81,4 +77,8 @@ body{
     .user-panel-div{
         display: none;
     }
+}
+
+@media screen and (max-width: 768px) {
+    .
 }
