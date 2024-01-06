@@ -30,9 +30,13 @@
     <!-- iconify -->
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <!-- font-awesome cdn -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <!-- css file -->
     <link rel="stylesheet" href="{% static "css\style.css" %}">
+
     <title>AntiQuin</title>
   </head>
   <body>
@@ -62,7 +66,9 @@
                   aria-label="Search"
                 />
                 <a href=""
-                  ><span class="material-symbols-outlined text-secondary ms-3">search</span></a
+                  ><span class="material-symbols-outlined text-secondary ms-3"
+                    >search</span
+                  ></a
                 >
               </form>
             </li>
@@ -122,6 +128,8 @@
     </nav>
     <hr />
 
+    {% block content %}{% endblock content %}
+
     <!-- Products -->
     <div class="container pt-5">
       <h2>Featured Products</h2>
@@ -135,8 +143,8 @@
               <img src="{{i.product_img.url}}" alt="" class="img-fluid" />
             </div>
             <div class="card-body">
-              <div class="col-9 text-secondary">{{i.name}}</div>
-              <div class="col-3 text-center text-dark">₹{{i.price}}</div>
+              <div class="text-secondary">{{i.name}}</div>
+              <div ><p class="fw-bold">₹{{i.price}}</p></div>
 
               <a href="" class="btn btn-warning add-btn">Add to cart</a>
             </div>
@@ -148,7 +156,12 @@
       <!-- fixed social media icon -->
       <!-- need to work on it -->
       <div class="ms-auto social-media-div">
-        <a href="" class="social-media-link"><i class='bx bxl-whatsapp social-media'></i></a>
+        <a
+          href=""
+          class="social-media-link"
+        >
+          <i class="bx bxl-whatsapp social-media"></i>
+        </a>
       </div>
     </div>
 

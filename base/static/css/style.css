@@ -84,7 +84,7 @@ body{
 
 .social-media{
     color: black;
-    font-size: 3rem;
+    font-size: 2.5rem;
 }
 
 /* .insta :hover{
@@ -248,10 +248,10 @@ body{
 
 .social-media-div{
     position: fixed;
-    width: 3.7rem;
-    height: 3.5rem;
-    bottom: 40px;
-    right: 40px;
+    width: 3rem;
+    height: 2.8rem;
+    bottom: 1.2rem;
+    right: 1rem;
     background-color: #25d366;
     border-radius: 50px;
     text-align: center;
@@ -260,3 +260,4 @@ body{
 .social-media-link :hover{
     color: white;
 }
+
