@@ -54,6 +54,9 @@ body{
     color: black;
 }
 
+.main-user-cart-div{
+    display: flex;
+}
 
 @media screen and (max-width: 1000px) {
     .search-bar{
@@ -65,6 +68,10 @@ body{
 @media screen and (max-width: 465px) {
     .div-cart{
         display: none;
+    }
+
+    .main-user-cart-div{
+        margin-left: 0;
     }
 }
 
@@ -80,5 +87,8 @@ body{
 }
 
 @media screen and (max-width: 768px) {
-    .
+    .main-user-cart-div{
+        display: flex;
+        margin-left: 12rem;
+    }
 }
