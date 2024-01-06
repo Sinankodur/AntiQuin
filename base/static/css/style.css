@@ -44,7 +44,6 @@ body{
     list-style-type: none;
 }
 
-
 .product-img{
     height: 25rem;
 }
@@ -58,10 +57,6 @@ body{
     display: flex;
 }
 
-.social-media{
-    color: black;
-    font-size: 3rem;
-}
 
 @media screen and (max-width: 1000px) {
     .search-bar{
@@ -87,6 +82,10 @@ body{
     }
 }
 
+.social-media{
+    color: black;
+    font-size: 3rem;
+}
 
 .insta :hover{
     color: rgb(225, 48, 108);
@@ -95,3 +94,4 @@ body{
 .wtsp :hover{
     color: rgb(37, 211, 102);
 }
+
