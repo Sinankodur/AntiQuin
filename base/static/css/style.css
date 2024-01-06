@@ -95,6 +95,39 @@ body{
     color: rgb(37, 211, 102);
 }
 
-@media screen and (max-width:1440px) {
-    
+/* -------------- add-btn queries ------------ */
+
+
+@media screen and (max-width: 1440px) {
+    .add-btn{
+        width: 17rem;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .add-btn{
+        width: 15rem;
+    }
+}
+
+.add-btn{
+    width: 14.2rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .add-btn{
+        width: 8rem;
+    }
+}
+
+@media screen and (max-width: 998px) {
+    .add-btn{
+        width: 12rem;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .add-btn{
+        width: 20rem;
+    }
 }
