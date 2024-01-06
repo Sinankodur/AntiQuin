@@ -69,10 +69,6 @@ body{
     .div-cart{
         display: none;
     }
-
-    .main-user-cart-div{
-        margin-left: 0;
-    }
 }
 
 
@@ -83,12 +79,5 @@ body{
 
     .user-panel-div{
         display: none;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .main-user-cart-div{
-        display: flex;
-        margin-left: 12rem;
     }
 }
