@@ -266,3 +266,8 @@ body{
 .close-btn{
     display: none;
 }
+
+
+.signup-form{
+    margin-top: 6rem;
+}
