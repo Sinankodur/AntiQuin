@@ -26,22 +26,22 @@
     <title>Sign Up - AntiQuin</title>
   </head>
   <body>
-    <div class="container signup-form">
-      <div class="row rounded">
+    <div class="container signup-form bg-secondary text-white">
+      <div class="row">
         <div class="col-lg-6">
-          <h3 class="lh-1">Welcome to AntiQuin</h3>
-          <p class="lh-1 font-monospace fw-semibold">
+          <h3 class="lh-1 text-white">Welcome to AntiQuin</h3>
+          <p class="lh-1 font-monospace fw-semibold text-warning">
             Your premier destination for timeless treasures and unique finds!
             Immerse yourself in a world where the past meets the present, and
             discover a curated collection of extraordinary antiques, vintage
             items, and one-of-a-kind pieces that tell stories of bygone eras
           </p>
-          <img src="{% static "img\antiquin img-1.jpeg" %}" alt=""
-          class="img-fluid">
+          {% comment %} <img src="{% static "img\antiquin img-1.jpeg" %}" alt="" {% endcomment %}
+          class="img-fluid rounded">
         </div>
 
-        <div class="col-lg-5 ms-auto">
-          <h1 class="text-center">Sign Up</h1>
+        <div class="col-lg-6 mt-auto">
+          <h1 class="text-center">Sign up</h1>
           <form action="" method="post">
             {% csrf_token %}
 
