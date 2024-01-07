@@ -21,14 +21,42 @@
       rel="stylesheet"
     />
     <!-- css file -->
-    <link rel="stylesheet" href="{% static "css\style.css" %}">
+    <!-- <link rel="stylesheet" href="{% static "css\style.css" %}"> -->
+    <link rel="stylesheet" href="/base/static/css/style.css" />
     <title>Sign Up - AntiQuin</title>
   </head>
   <body>
- 
-    <div class="container">
+    <div class="container mt-5 pt-5">
+      <div class="row rounded">
+        <div class="col-lg-6">
+          <h3 class="lh-1">
+            Welcome to AntiQuin,
+          </h3>
+          <p class="lh-1 text-justify">
+            your premier destination for timeless treasures
+            and unique finds! Immerse yourself in a world where the past meets
+            the present, and discover a curated collection of extraordinary
+            antiques, vintage items, and one-of-a-kind pieces that tell stories
+            of bygone eras
+          </p>
+          <!-- {% comment %} <img src="{% static "img\antiquin img-1.jpeg" %}" alt=""> {% endcomment %} -->
+          <img
+            src="/base/static/img/antiquin img-1.jpeg"
+            alt=""
+            class="img-fluid"
+          />
+        </div>
 
+        <div class="col-lg-5 ms-auto pt-5">
+            <form action="">
+                <input type="text" class="form-control" placeholder="Username">
+                <br>
+                <input type="password" class="form-control" placeholder="Password">
+                <br>
+
+            </form>
+        </div>
+      </div>
     </div>
-
   </body>
 </html>
