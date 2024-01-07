@@ -45,22 +45,22 @@
           <form action="" method="post">
             {% csrf_token %}
 
-            <div class="ps-5 pt-5">
+            <div class="ps-5 pt-4">
               <label for="username">Username</label><br />
               {{ form.username }}
-              <br />
+              
 
-              <label>Email</label><br />
+              <label for="email">Email</label><br />
               {{ form.email }}
-              <br />
+              
 
-              <label>Password</label><br />
+              <label for="password1">Password</label><br />
               {{ form.password1 }}
-              <br />
+              
 
-              <label>Confirm Password</label> <br />
+              <label for="password2">Confirm Password</label><br />
               {{ form.password2 }}
-              <br /><br />
+              <br />
 
               {% if form.errors or form.non_field_errors %}
               <div>

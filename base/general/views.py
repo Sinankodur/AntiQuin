@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Products
 from .forms import SignupForm
 
@@ -11,5 +11,13 @@ def home(request):
     return render(request,"index.html",{"details" : data})
 
 def sign_up(request):
-    form = SignupForm()
-    return render(request, 'sign_up.html', {'form' : form})
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            return redirect('/login/')
+    else:
+        form = SignupForm()
+    return render(request, 'signup.html', {'form' : form})

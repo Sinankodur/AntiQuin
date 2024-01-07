@@ -9,24 +9,24 @@ class SignupForm(UserCreationForm):
 
     username = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': 'Your username',
-        'class': 'form-control',
+        'class': 'form-control mb-3',
         'id': 'username'
     }))
     
-    email = forms.CharField(widget=forms.EmailField(attrs={
+    email = forms.CharField(widget=forms.EmailInput(attrs={
         'placeholder': 'Your email address',
-        'class' : 'form-control',
+        'class' : 'form-control mb-3',
         'id' : 'email'
     }))
 
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Your password',
-        'class' : 'form-control',
-        'id' : 'email'
+        'class' : 'form-control mb-3',
+        'id' : 'password1'
     }))
 
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Confirm your password',
         'class' : 'form-control',
-        'id' : 'email'
+        'id' : 'password2'
     }))
