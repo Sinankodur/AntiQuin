@@ -29,8 +29,8 @@
     <div class="container signup-form">
       <div class="row rounded">
         <div class="col-lg-6">
-          <h3 class="lh-1">Welcome to AntiQuin,</h3>
-          <p class="lh-1 text-justify">
+          <h3 class="lh-1">Welcome to AntiQuin</h3>
+          <p class="lh-1 font-monospace fw-semibold">
             Your premier destination for timeless treasures and unique finds!
             Immerse yourself in a world where the past meets the present, and
             discover a curated collection of extraordinary antiques, vintage
@@ -45,7 +45,7 @@
           <form action="" method="post">
             {% csrf_token %}
 
-            <div class=" pt-4">
+            <div class="pt-4">
               <label for="username">Username</label><br />
               {{ form.username }}
               

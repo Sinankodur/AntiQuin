@@ -267,7 +267,10 @@ body{
     display: none;
 }
 
-
 .signup-form{
     margin-top: 6rem;
+    border: #0000000d solid .1rem;
+    border-radius: 2rem;
+    padding: 2rem
+    
 }
