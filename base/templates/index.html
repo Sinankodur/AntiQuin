@@ -49,10 +49,10 @@
             <li class="mt-1">
               <select class="form-control search-option" id="search">
                 <option value="">All categories</option>
-                <option value="0">SHIRTS</option>
-                <option value="1">JEANS</option>
-                <option value="2">T-SHIRTS</option>
-                <option value="3">SHORTS</option>
+                <option value="0">Shirts</option>
+                <option value="1">Jeans</option>
+                <option value="2">T-shirts</option>
+                <option value="3">Shorts</option>
               </select>
             </li>
 
@@ -123,6 +123,7 @@
                   Your Cart
                 </span>
               </li>
+              <!-- ----------------------------cart total------------------ -->
               <li>
                 <span>₹000.0</span>
               </li>
@@ -154,22 +155,21 @@
     <div class="container pt-5">
       <h2>Featured Products</h2>
       <div class="row">
-        {% for i in details %}
+        {% for i in products %}
         <!-- loop starts here.... -->
 
         <div class="col-lg-3 col-md-4 col-sm-6 pt-3 pb-3">
           <div class="card product-div">
             <div class="card-img">
               <img
-                src="{{i.product_img.url}}"
+                src="{{i.image.url}}"
                 alt=""
-                class="img-fluid"
-                height="20rem"
+                class="img-fluid item-img"
               />
             </div>
             <div class="card-body">
-              <div class="text-secondary">{{i.name}}</div>
-              <div class="fw-bold">₹{{i.price}}</div>
+              <div class="text-dark fs-6 lh-1 fw-bold">{{i.name}}</div>
+              <div class="fs-6 text-body-tertiary fw-light pb-2">Price: ₹{{i.price}}</div>
 
               <a href="" class="btn btn-warning add-btn">Add to cart</a>
             </div>

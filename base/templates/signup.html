@@ -34,7 +34,7 @@
             Your premier destination for timeless treasures and unique finds!
             Immerse yourself in a world where the past meets the present, and
             discover a curated collection of extraordinary antiques, vintage
-            items, and one-of-a-kind pieces that tell stories of bygone eras
+            items, and one-of-a-kind pieces that tell stories of bygone eras.
           </p>
           <img src="{% static "img\antiquin img-1.jpeg" %}" alt=""
           class="img-fluid rounded">
@@ -44,37 +44,37 @@
 
         <div class="col-lg-4 mt-auto">
           <h1 class="text-center">Sign up</h1>
-          <form action="" method="post">
-            {% csrf_token %}
+          <div class="pt-2">
+            <form action="" method="post">
+              {% csrf_token %}
 
-            <div class="pt-2">
-              <label for="username">Username</label><br />
-              {{ form.username }}
-              
+                <label for="username">Username</label><br />
+                {{ form.username }}
+                
 
-              <label for="email">Email</label><br />
-              {{ form.email }}
-              
+                <label for="email">Email</label><br />
+                {{ form.email }}
+                
 
-              <label for="password1">Password</label><br />
-              {{ form.password1 }}
-              
+                <label for="password1">Password</label><br />
+                {{ form.password1 }}
+                
 
-              <label for="password2">Confirm Password</label><br />
-              {{ form.password2 }}
-              <br />
+                <label for="password2">Confirm Password</label><br />
+                {{ form.password2 }}
+                <br />
 
-              {% if form.errors or form.non_field_errors %}
-              <div>
-                {% for field in forms %} {{ field.errors }} {% endfor %}
+                {% if form.errors or form.non_field_errors %}
+                <div>
+                  {% for field in forms %} {{ field.errors }} {% endfor %}
 
-                {{form.non_field_errors }}
-              </div>
-              {% endif %}
-              
-              <button class="btn btn-dark">Submit</button>
-            </div>
-          </form>
+                  {{form.non_field_errors }}
+                </div>
+                {% endif %}
+                
+                <button class="btn btn-dark" type="submit">Submit</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
