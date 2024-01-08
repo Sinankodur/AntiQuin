@@ -1,10 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-# from .models import Products
+from item.models import Products
 
-# # Create your views here.
+# Create your views here.
 
-# def detail(request,pk):
-#     product = get_object_or_404(Products, pk=pk)
+def detail(request,pk):
+    product = get_object_or_404(Products, pk=pk)
     
 
-#     return render(request, 'details.html', {'product': product})
+    return render(request, 'details.html', {'product': product})
