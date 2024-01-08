@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render, get_object_or_404
-from .models import Products, Category
+from item.models import Products, Category
 from .forms import SignupForm
 
 # Create your views here.
@@ -24,10 +24,3 @@ def sign_up(request):
         form = SignupForm()
     
     return render(request, 'signup.html', {'form' : form})
-
-
-def detail(request,pk):
-    product = get_object_or_404(Products, pk=pk)
-    
-
-    return render(request, 'details.html', {'product': product})
