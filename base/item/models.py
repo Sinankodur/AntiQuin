@@ -8,6 +8,7 @@ class Category(models.Model):
     name = models.CharField(max_length=255)
 
     class Meta:
+        ordering = ('name',)
         verbose_name_plural = 'Categories'
     
     def __str__(self):
@@ -23,7 +24,6 @@ class Products(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ('created_at',)
         verbose_name_plural = 'Products'
 
     def __str__(self):
