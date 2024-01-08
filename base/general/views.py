@@ -28,5 +28,6 @@ def sign_up(request):
 
 def detail(request,pk):
     product = get_object_or_404(Products, pk=pk)
+    
 
     return render(request, 'details.html', {'product': product})

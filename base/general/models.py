@@ -21,7 +21,7 @@ class Products(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('created_at',)
         verbose_name_plural = 'Products'
 
     def __str__(self):
