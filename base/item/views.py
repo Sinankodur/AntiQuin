@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from item.models import Products
+from .models import Products
 
 # Create your views here.
+app_name = 'item'
 
 def detail(request,pk):
     product = get_object_or_404(Products, pk=pk)
