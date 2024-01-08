@@ -1,9 +1,25 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %} {{ product.name }} {% endblock title %} 
 
 {% block content %}
 
+<div class="container">
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="card">
+                <div class="card-img">
+                    <img src="{% static "product.image.url" %}" alt="" class="rounded">
+                </div>
+            </div>
+        </div>
 
+        <div class="col-lg-5">
+            <div class="card">
+                <div class="card-title">{{product.name}}</div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
