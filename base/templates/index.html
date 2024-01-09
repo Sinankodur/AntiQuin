@@ -4,8 +4,8 @@
 {% block content %}
 
 <!-- Products -->
-<div class="container pt-5">
-  <h2>Featured Products</h2>
+<div class="container pt-4">
+  <h2 class="pb-2">Featured Products</h2>
   <div class="row">
     {% for i in products %}
     <!-- loop starts here.... -->
@@ -14,7 +14,7 @@
       <div class="card product-div">
         <a href="{% url "item:detail" i.id %}">
           <div class="card-img">
-            <img src="{{i.image.url}}" alt="" class="img-fluid item-img" />
+            <img src="{{i.image.url}}" alt="image of {{product.item}}" class="img-fluid item-img" />
           </div>
         </a>
         <div class="card-body">
@@ -23,7 +23,12 @@
             Price: ₹{{i.price}}
           </div>
 
-          <a href="" class="btn btn-warning add-btn">Add to cart</a>
+          <div class="d-grid gap-2">
+            <button class="btn btn-warning" 
+            onclick="location.href = '#' ">
+            Add to cart
+          </button>
+          </div>
         </div>
       </div>
     </div>

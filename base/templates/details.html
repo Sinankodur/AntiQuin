@@ -25,11 +25,47 @@
         {% endif %}
         <div class="card-text text-body-tertiary">MRP inclusive of all taxes</div>
         <p class="card-text">Rs. {{ product.price }}</p>
-        <!-- <div class="card-text pb-5"><span class="fw-lighter text-body-tertiary">Seller : {{ product.created_by.username }} </span></div> -->
+
+
+
+        <p class="text-black-50">
+          <i class='bx bx-info-circle'></i>
+          Delivery Time : 2-7 Days
+        </p>
+
         <button class="btn btn-warning fs-6">Add
             <i class='bx bx-shopping-bag fw-medium'></i>
         </button>
       </div>
+    </div>
+  </div>
+
+  <div class="container pt-5">
+    <h2>Related Products</h2>
+    <hr>
+    <div class="row">
+      {% for i in related_items %}
+  
+      <div class="col-lg-3 col-md-4 col-sm-4 pt-3 pb-3">
+        <div class="card product-div">
+          <a href="{% url "item:detail" i.id %}">
+            <div class="card-img">
+              <img src="{{i.image.url}}" alt="" class="img-fluid item-img" />
+            </div>
+          </a>
+          <div class="card-body">
+            <div class="text-dark fs-6 lh-1 fw-bold">{{i.name}}</div>
+            <div class="fs-6 text-body-tertiary fw-light pb-2">
+              Price: ₹{{i.price}}
+            </div>
+
+            <div class="d-grid gap-2">
+              <button class="btn btn-warning" onclick="location.href = '#' ">Add to cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
   </div>
 </div>
