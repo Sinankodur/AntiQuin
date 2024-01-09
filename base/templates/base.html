@@ -49,10 +49,13 @@
             <li class="mt-1">
               <select class="form-control search-option" id="search">
                 <option value="">All categories</option>
-                {% for i in categories %}
-                <option>{{i.categories}}</option>
-                {% endfor %}
+
+                {% for i in category %}
+
+                <option class="text-dark">{{i.category}}</option>
                 
+                {% endfor %}
+
               </select>
             </li>
 
