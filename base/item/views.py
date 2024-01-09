@@ -5,7 +5,6 @@ from .models import Products
 
 
 def detail(request,pk):
-    product = get_object_or_404(Products, pk=pk)
-    
+    product = Products.objects.get(pk=pk)
 
     return render(request, 'details.html', {'product': product})
