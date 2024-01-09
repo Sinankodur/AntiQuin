@@ -41,8 +41,9 @@
   <body>
     <nav class="navbar">
       <div class="container pt-3">
-        <img src="{% static "img\logo.png" %}" alt="logo" class="logo" />
-
+        <a href="{% url "home" %}">
+          <img src="{% static "img\logo.png" %}" alt="logo" class="logo" />
+        </a>
         <div class="search-bar pt-3 ms-auto">
           <!-- search filter -->
           <ul class="search-bar-list rounded">
@@ -102,13 +103,14 @@
               </li>
               <li>
                 <a href="" class="position-relative"
-                  ><span class="material-symbols-outlined">
-                    shopping_cart
-                  </span>
+                  ><span class="shopping-bag"><i 
+                  class='bx bx-shopping-bag fw-medium'
+                  ></i></span>
                   <!-- work on backend -------------------------- -->
-                  <span
-                    class="position-absolute bottom-50 ps-1 pe-1 translate-middle badge rounded-pill bg-warning"
+                  <span 
+                    class="position-absolute bottom-50 ps-1 pe-1 badge translate-middle rounded-pill bg-warning"
                   >
+                  
                     0
                     <span class="visually-hidden">unread messages</span>
                   </span>

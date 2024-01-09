@@ -1,25 +1,37 @@
-{% extends "base.html" %}
-{% load static %}
-{% block title %} {{ product.name }} {% endblock title %} 
-
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block title %} {{ product.name }}
+{% endblock title %} {% block content %}
 
 <div class="container">
-    <div class="row">
-        <div class="col-lg-7">
-            <div class="card">
-                <div class="card-img">
-                    <img src="{% static "product.image.url" %}" alt="" class="rounded">
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-lg-7 col-md-7 col-sm-7">
+      <div class="card">
+        <div class="card-img">
+          <img
+            src="{{ product.image.url }}"
+            alt=""
+            class="img-fluid rounded mx-auto d-block"
+          />
         </div>
-
-        <div class="col-lg-5">
-            <div class="card">
-                <div class="card-title">{{product.name}}</div>
-            </div>
-        </div>
+      </div>
     </div>
+
+    <div class="col-lg-5 col-md-5 col-sm-5">
+      <div class="card p-3">
+        {% if product.description %}
+        <h5 class='card-title'>{{ product.description }}</h5>
+
+        {% else %}
+        <h5 class="card-title">{{ product.name }}</h5>
+        {% endif %}
+        <div class="card-text text-body-tertiary">MRP inclusive of all taxes</div>
+        <p class="card-text">Rs. {{ product.price }}</p>
+        <!-- <div class="card-text pb-5"><span class="fw-lighter text-body-tertiary">Seller : {{ product.created_by.username }} </span></div> -->
+        <button class="btn btn-warning fs-6">Add
+            <i class='bx bx-shopping-bag fw-medium'></i>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock content %}
