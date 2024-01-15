@@ -1,0 +1,50 @@
+{% extends "core/base.html" %} {% load static %}
+<title>{% block title %}Home{% endblock title %}</title>
+
+{% block content %}
+
+<!-- Products -->
+<div class="container pt-4">
+  <h2 class="pb-2">Featured Products</h2>
+  <div class="row">
+    {% for product in products %}
+    <!-- loop starts here.... -->
+
+    <div class="col-lg-3 col-md-4 col-sm-6 pt-3 pb-3">
+      <div class="card product-div">
+        <a href="{% url "item:detail" product.id %}">
+          <div class="card-img">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="image of {{ product.name }}" class="img-fluid item-img" />
+            {% else %}
+            <img src="#" alt="image of {{ product.name }}" class="img-fluid item-img" />
+            {% endif %}
+          </div>
+        </a>
+        <div class="card-body">
+          <div class="text-dark fs-6 lh-1 fw-bold">{{product.name}}</div>
+          <div class="fs-6 text-body-tertiary fw-light pb-2">
+            Price: ₹{{product.price}}
+          </div>
+
+          <div class="d-grid gap-2">
+            <button class="btn btn-warning" 
+            onclick="location.href = '#' ">
+            Add to cart
+          </button>
+        </div>
+      </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- fixed social media icon -->
+  <!-- need to work on it -->
+  <div class="ms-auto social-media-div">
+    <a href="http://wa.me/918606923166" class="social-media-link">
+      <i class="bx bxl-whatsapp social-media"></i>
+    </a>
+  </div>
+</div>
+{% endblock content %}

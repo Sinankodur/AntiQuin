@@ -1,0 +1,171 @@
+body {
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .logo {
+    height: 2.5rem;
+  }
+  
+  .search-bar-list {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    border-style: solid;
+    border-color: rgb(242, 240, 240);
+    padding: 0.5rem 2rem 0.5rem 0.5rem;
+  }
+  
+  .search-option {
+    border: 0px;
+  }
+  
+  .search-icon {
+    height: 2rem;
+  }
+  
+  .search-submit-btn{
+    border:none;
+    background-color: white;
+  }
+  
+  .material-symbols-outlined {
+    padding-top: 0.3rem;
+    font-size: 2rem;
+    color: rgb(66, 64, 64);
+    font-variation-settings: "FILL" 0, "wght" 450, "GRAD" 1500, "opsz" 40;
+  }
+  
+  .shopping-bag {
+    padding-top: 0.3rem;
+    font-size: 2rem;
+    color: rgb(66, 64, 64);
+  }
+  
+  .user-panel {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .div-cart ul {
+    list-style-type: none;
+  }
+  
+  .item-img {
+    height: 20rem;
+    width: 18rem;
+  }
+  
+  .menu-icon {
+    display: none;
+    color: black;
+  }
+  
+  .main-user-cart-div {
+    display: flex;
+  }
+  
+  @media screen and (max-width: 1200px) {
+    .search-bar {
+      display: none;
+    }
+  }
+  
+  @media screen and (max-width: 465px) {
+    .div-cart {
+      display: none;
+    }
+  }
+  
+  @media screen and (max-width: 360px) {
+    .menu-icon {
+      display: block;
+    }
+  
+    .user-panel-div {
+      display: none;
+    }
+  }
+  
+  .social-media {
+    color: black;
+    font-size: 2.5rem;
+  }
+  
+  /* .insta :hover{
+      color: rgb(225, 48, 108);
+  }
+  
+  .wtsp :hover{
+      color: rgb(37, 211, 102);
+  } */
+  
+  @media screen and (max-width: 575.5px) {
+    .item-img {
+      height: 38rem;
+      width: 39rem;
+    }
+  }
+  
+  @media screen and (max-width: 430px) {
+    .item-img {
+      height: 30rem;
+      width: 30rem;
+    }
+  }
+  
+  @media screen and (max-width: 385px) {
+    .item-img {
+      height: 28rem;
+      width: 30rem;
+    }
+  }
+  
+  @media screen and (max-width: 320px) {
+    .item-img {
+      height: 20rem;
+      width: 19rem;
+    }
+  }
+  
+  .social-media-div {
+    position: fixed;
+    width: 3rem;
+    height: 2.8rem;
+    bottom: 1.2rem;
+    right: 1rem;
+    background-color: #25d366;
+    border-radius: 50px;
+    text-align: center;
+  }
+  
+  .social-media-link :hover {
+    color: white;
+  }
+  
+  /* ---------------- MENU CLOSE BUTTON --------------------------- */
+  
+  .close-btn {
+    display: none;
+  }
+  
+  .signup-form {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 1.5rem;
+    width: 34rem;
+    padding: 3rem;
+    box-shadow: 0 .5rem 4rem rgba(0, 0, 0, 0.25);
+  }
+  
+  .btn-qty{
+    padding: .3% 2%;
+    box-shadow: 0 .5rem 3rem rgba(0, 0, 0, 0.25);
+  }
+  
+  .card-qty{
+    border: solid rgba(0, 0, 0, 0.239);
+    padding: .5rem;
+    
+  }
+  
