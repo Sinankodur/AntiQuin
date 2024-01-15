@@ -7,7 +7,7 @@ for(var i = 0; i < updateBtns.length; i++){
         console.log('productId:',productId, 'action:',action);
 
         console.log('USER:', user);
-        if (user === 'AnonymousUser') {
+        if (user == 'anonymousUser') {
             console.log('Not logged in');
         }
         else{
