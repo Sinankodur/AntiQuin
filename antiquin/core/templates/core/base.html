@@ -35,6 +35,10 @@
     <!-- css file -->
     <link rel="stylesheet" href="{% static "css\style.css" %}">
     <title>{% block title %}{% endblock title %} | AntiQuin</title>
+
+    <script type="text/javascript">
+      let user =' {{request.user}}'
+    </script>
   </head>
   <body>
     <nav class="navbar">

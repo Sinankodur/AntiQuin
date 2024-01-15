@@ -15,7 +15,7 @@
         <a href="{% url "item:detail" product.id %}">
           <div class="card-img">
             {% if product.image %}
-            <img src="{{ product.image.url }}" alt="image of {{ product.name }}" class="img-fluid item-img" />
+            <img src="{{ product.image.url }}" class="img-fluid item-img" />
             {% else %}
             <img src="#" alt="image of {{ product.name }}" class="img-fluid item-img" />
             {% endif %}
@@ -28,8 +28,12 @@
           </div>
 
           <div class="d-grid gap-2">
-            <button class="btn btn-warning" 
-            onclick="location.href = '#' ">
+            <button 
+              class="btn btn-warning update-cart"
+              {% comment %} onclick="location.href = '#' " {% endcomment %}
+              data-product="{{ product.id }}"
+              data-action="add"
+            >
             Add to cart
           </button>
         </div>
