@@ -55,10 +55,14 @@
 
                 {% for category in categories %}
 
-                <option class="text-dark">{{ category.name }}</option>
-
+                <option 
+                  class="text-dark" 
+                  value="{{ category.id }}"
+                >
+                  {{ category.name }}
+                </option>
+                
                 {% endfor %}
-
               </select>
             </li>
 
