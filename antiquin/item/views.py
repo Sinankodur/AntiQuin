@@ -5,13 +5,13 @@ from django.http import JsonResponse
 
 def detail(request,pk):
     product = Product.objects.get(pk=pk)
-    category = Category.objects.all()
+    categories = Category.objects.all()
 
     related_items = Product.objects.filter(category=product.category, is_sold = False).exclude(pk=pk)[0:4]
 
     return render(request, 'item/details.html', {
         'product': product, 
-        'category': category,
+        'categories': categories,
         "related_items": related_items
     })
 
