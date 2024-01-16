@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Cart, CartItem
-from item.models import Product
+from .models import Cart, CartItem, Product
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 

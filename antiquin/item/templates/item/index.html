@@ -30,9 +30,7 @@
           <div class="d-grid gap-2">
             <button 
               class="btn btn-warning update-cart"
-              {% comment %} onclick="location.href = '' " {% endcomment %}
-              data-product="{{ product.id }}"
-              data-action="add"
+              onclick="location.href = '{% url "cart:add_to_cart" product.id %}' "
             >
             Add to cart
           </button>
