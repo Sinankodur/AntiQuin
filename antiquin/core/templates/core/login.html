@@ -35,22 +35,25 @@
     <div class="container-fluid">
       <div class="position-relative">
         <div class="position-absolute top-0 start-0 mt-4 ms-3">
-          <a href="{% url "home" %}"
-             class='text-dark text-decoration-none pe-2'
+          <button
+              onclick="location.href = '{% url "home" %}' " 
+             class='text-dark search-submit-btn pe-2'
           >
             <i class='bx bxs-home' ></i>
             Home
-          </a>
+          </button>
           |
-          <a href="{% url "sign_up" %}"
-            class="text-dark text-decoration-none ps-2">
+          <button 
+            onclick="history.back()"
+            class="text-dark search-submit-btn rounded ps-2">
             <i class='bx bx-arrow-back'></i>
             Back
+          </button>
         </div>
       </div>
     </div>
 
-    <div class="container">
+    <div class="container pt-5">
       <div class="container signup-form">
         <h1 class="text-center text-dark">
           Sign in to
