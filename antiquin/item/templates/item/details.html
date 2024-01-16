@@ -39,8 +39,12 @@
           Delivery Time : 2-7 Days
         </p>
 
-        <button class="btn btn-warning fs-6">Add
-            <i class='bx bx-shopping-bag fw-medium'></i>
+        <button 
+          class="btn btn-warning fs-6"
+          onclick="location.href = '{% url "cart:add_to_cart" product.id %}' "
+        >
+          Add
+          <i class='bx bx-shopping-bag fw-medium'></i>
         </button>
       </div>
     </div>

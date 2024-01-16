@@ -8,7 +8,6 @@
   <div class="row">
     {% for product in products %}
     <!-- loop starts here.... -->
-
     <div class="col-lg-3 col-md-4 col-sm-6 pt-3 pb-3">
       <div class="card product-div">
         <a class="product-img-link" href="{% url "item:detail" product.id %}">
@@ -25,16 +24,18 @@
           <div class="fs-6 text-body-tertiary fw-light pb-2">
             Price: ₹{{product.price}}
           </div>
+          
           <!-- -------------------- add to cart btn ------------------ -->
           <div class="d-grid gap-2">
             <button 
               class="btn btn-warning update-cart"
               onclick="location.href = '{% url "cart:add_to_cart" product.id %}' "
+              id="liveToastBtn"
             >
             Add to cart
-          </button>
+            </button>
+          </div>
         </div>
-      </div>
       </div>
     </div>
     {% endfor %}
@@ -46,6 +47,21 @@
     <a href="http://wa.me/918606923166" class="social-media-link">
       <i class="bx bxl-whatsapp social-media"></i>
     </a>
+  </div>
+</div>
+
+<!-- -------------- added to cart ------------ -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="..." class="rounded me-2" alt="...">
+      <strong class="me-auto">Bootstrap</strong>
+      <small>11 mins ago</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Hello, world! This is a toast message.
+    </div>
   </div>
 </div>
 {% endblock content %}
