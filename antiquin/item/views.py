@@ -26,7 +26,3 @@ def searchProduct(request):
         'products': products,
         'category': category,
     })
-
-def updateItem(request):
-    return JsonResponse('Item was added', safe=False)
-
