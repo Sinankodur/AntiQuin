@@ -5,7 +5,19 @@
 {% block content %}
 
 <div class="container">
-    
+  <h2>Your Cart</h2>
+  
+  <ul>
+    {% for item in cart_items %}
+    <li>
+        {{ item.product.name }} - Quantity: {{ item.quantity }} -
+        Price: {{ item.product.price }} - 
+        Subtotal: {{ item.product.price * item.quantity }}
+    </li>
+    {% endfor %}
+  </ul>
+
+  <p>Total: {{ total }}</p>
 </div>
 
 {% endblock content %}
