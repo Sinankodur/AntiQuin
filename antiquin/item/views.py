@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from item.models import Category,Product
+from django.http import JsonResponse
 
 
 def detail(request,pk):
@@ -14,7 +15,7 @@ def detail(request,pk):
         "related_items": related_items
     })
 
-def searchproduct(request):
+def searchProduct(request):
     if request.method == 'POST':
         searched = request.POST['searched']
         products = Product.objects.filter(name__contains=searched)
@@ -25,3 +26,7 @@ def searchproduct(request):
         'products': products,
         'category': category,
     })
+
+def updateItem(request):
+    return JsonResponse('Item was added', safe=False)
+

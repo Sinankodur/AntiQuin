@@ -26,11 +26,11 @@
           <div class="fs-6 text-body-tertiary fw-light pb-2">
             Price: ₹{{product.price}}
           </div>
-
+          <!-- -------------------- add to cart btn ------------------ -->
           <div class="d-grid gap-2">
             <button 
               class="btn btn-warning update-cart"
-              {% comment %} onclick="location.href = '#' " {% endcomment %}
+              {% comment %} onclick="location.href = '' " {% endcomment %}
               data-product="{{ product.id }}"
               data-action="add"
             >
