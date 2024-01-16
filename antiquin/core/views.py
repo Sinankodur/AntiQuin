@@ -7,7 +7,7 @@ def home(request):
     categories = Category.objects.all()
     products = Product.objects.filter(is_sold=False)[0:8]
 
-    return render(request,'item/index.html',{
+    return render(request,'core/index.html',{
         'categories' : categories,
         'products' : products,
     })
