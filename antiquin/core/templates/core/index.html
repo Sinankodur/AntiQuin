@@ -13,7 +13,7 @@
         <a class="product-img-link" href="{% url "item:detail" product.id %}">
           <div class="card-img">
             {% if product.image %}
-            <img src="{{ product.image.url }}" class="img-fluid item-img" />
+            <img src="{{ product.image.url }}" class="img-fluid item-img object-fit-cover" />
             {% else %}
             <img src="#" alt="image of {{ product.name }}" class="img-fluid item-img" />
             {% endif %}

@@ -12,7 +12,7 @@
     <li class=" p-2">
       <img src="{{ item.product.image.url }}" class="img-fluid" width="35rem" />
       {{ item.product.name }} - 
-        Quantity: {{ item.quantity }} -
+        Quantity: <input type="number" value="{{ item.quantity }}" class="form-control d-inline p-2">  -
         Price: {{ item.product.price }} - 
         Subtotal : {% widthratio item.product.price 1 item.quantity %}
     </li>
