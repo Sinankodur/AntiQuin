@@ -5,14 +5,16 @@
 {% block content %}
 
 <div class="container">
-  <h2>Your Cart</h2>
+  <h2 class="pt-3">Your Cart</h2>
   
-  <ul>
+  <ul class="pt-4">
     {% for item in cart_items %}
-    <li>
-        {{ item.product.name }} - Quantity: {{ item.quantity }} -
+    <li class="pb-2">
+        <img src="{{ item.product.image }}" >
+        {{ item.product.name }} - 
+        Quantity: {{ item.quantity }} -
         Price: {{ item.product.price }} - 
-        Subtotal: {{ item.product.price * item.quantity }}
+        Subtotal : {% widthratio item.product.price 1 item.quantity %}
     </li>
     {% endfor %}
   </ul>

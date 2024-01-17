@@ -111,15 +111,17 @@
                   </span>
                 </a>
               </li>
+
+              <!-- view cart ------------------- -->
+              
               <li>
-                <a href="" class="position-relative"
-                  ><span class="shopping-bag"><i 
-                  class='bx bx-shopping-bag fw-medium'
-                  ></i></span>
+                <a href="{% url "cart:view_cart" %}" class="position-relative">
+                  <span class="shopping-bag">
+                    <i class='bx bx-shopping-bag fw-medium'></i>
+                  </span>
                   <!-- work on backend -------------------------- -->
                   <span 
-                    class="position-absolute bottom-50 ps-1 pe-1 badge translate-middle rounded-pill bg-warning"
-                  >
+                    class="position-absolute bottom-50 ps-1 pe-1 badge translate-middle rounded-pill bg-warning">
                     0
                     <span class="visually-hidden">unread messages</span>
                   </span>
