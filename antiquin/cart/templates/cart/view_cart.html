@@ -9,9 +9,9 @@
   
   <ul class="pt-4">
     {% for item in cart_items %}
-    <li class="pb-2">
-        <img src="{{ item.product.image }}" >
-        {{ item.product.name }} - 
+    <li class=" p-2">
+      <img src="{{ item.product.image.url }}" class="img-fluid" width="35rem" />
+      {{ item.product.name }} - 
         Quantity: {{ item.quantity }} -
         Price: {{ item.product.price }} - 
         Subtotal : {% widthratio item.product.price 1 item.quantity %}
