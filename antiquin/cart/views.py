@@ -28,5 +28,4 @@ def view_cart(request):
         'total': total,
         'categories' : categories,
         'product' : product,
-
     })
