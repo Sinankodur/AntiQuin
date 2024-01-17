@@ -27,5 +27,6 @@ def view_cart(request):
         'cart_items': cart_items,
         'total': total,
         'categories' : categories,
-        'product' : product
+        'product' : product,
+        
     })
