@@ -16,6 +16,9 @@ def home(request):
         'total' : total,
     })
 
+def searchfilter(request, category_id):
+    category = Category.objects.filter('')
+
 def sign_up(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
