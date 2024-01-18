@@ -4,6 +4,18 @@
 
 {% block content %}
 
+<div class="container-fluid">
+  <button 
+    onclick="history.back()"
+    class="btn btn-warning rounded"
+  >
+    <i class='bx bx-arrow-back pe-2'></i>
+    Continue Shopping
+  </button>
+  <br/>
+  <br/>
+</div>
+
 <div class="container">
   <h2 class="pt-3">Your Cart</h2>
   
@@ -12,8 +24,8 @@
     <li class=" p-2">
       <img src="{{ item.product.image.url }}" class="img-fluid" width="35rem" />
       {{ item.product.name }} - 
-        Quantity: <input type="number" value="{{ item.quantity }}" class="form-control d-inline p-2">  -
-        Price: {{ item.product.price }} - 
+        Price: {{ item.product.price }} -
+        Quantity: <input type="number" value="{{ item.quantity }}" class=" p-2">  -
         Subtotal : {% widthratio item.product.price 1 item.quantity %}
     </li>
     {% endfor %}

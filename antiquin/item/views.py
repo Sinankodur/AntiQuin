@@ -19,10 +19,10 @@ def searchProduct(request):
     if request.method == 'POST':
         searched = request.POST['searched']
         products = Product.objects.filter(name__contains=searched)
-        category = Category.objects.all()
+        categories = Category.objects.all()
 
     return render(request, 'item/searchProducts.html' ,{
         'searched': searched,
         'products': products,
-        'category': category,
+        'categories': categories,
     })
