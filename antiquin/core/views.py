@@ -10,6 +10,7 @@ def home(request):
     cart_items = CartItem.objects.all()
     total = sum(item.product.price * item.quantity for item in cart_items)
 
+
     return render(request,'core/index.html',{
         'categories' : categories,
         'products' : products,

@@ -19,7 +19,7 @@ def add_to_cart(request, product_id):
 @login_required
 def view_cart(request):
     cart_items = CartItem.objects.all()
-    total = sum(item.product.price * item.quantity for item in cart_items)
+    total = sum((item.product.price * item.quantity for item in cart_items))
     categories= Category.objects.all()
     product = Product.objects.all()
 
