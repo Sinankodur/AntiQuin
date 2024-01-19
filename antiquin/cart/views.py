@@ -26,6 +26,7 @@ def view_cart(request):
     user = request.user
     cart = Cart.objects.get(user=user)
     cart_items = CartItem.objects.filter(cart=cart)
+    product_count = CartItem.objects.filter(cart=cart).count()
     total = sum(item.product.price * item.quantity for item in cart_items)
     categories= Category.objects.all()
     product = Product.objects.all()
@@ -35,4 +36,5 @@ def view_cart(request):
         'total': total,
         'categories' : categories,
         'product' : product,
+        'product_count' : product_count
     })

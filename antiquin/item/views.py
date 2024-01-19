@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from item.models import Category,Product
-from cart.models import CartItem
+from cart.models import CartItem, Cart
 from django.contrib.auth.decorators import login_required
 from .forms import NewProductForm
 
@@ -8,7 +8,10 @@ def detail(request,pk):
     product = Product.objects.get(pk=pk)
     categories = Category.objects.all()
     related_items = Product.objects.filter(category=product.category, is_sold = False).exclude(pk=pk)[0:4]
-    cart_items = CartItem.objects.all()
+    user = request.user
+    cart = Cart.objects.get(user=user)
+    cart_items = CartItem.objects.filter(cart=cart)
+    product_count = CartItem.objects.filter(cart=cart).count()
     total = sum(item.product.price * item.quantity for item in cart_items)
 
 
@@ -16,7 +19,8 @@ def detail(request,pk):
         'product': product, 
         'categories': categories,
         "related_items": related_items,
-        'total' : total
+        'total' : total,
+        'product_count' : product_count
     })
 
 def searchProduct(request):

@@ -118,10 +118,14 @@
                   <span class="shopping-bag">
                     <i class='bx bx-shopping-bag fw-medium'></i>
                   </span>
-                  <!-- work on backend -------------------------- -->
+                  <!-- work on backend done -------------------------- -->
                   <span 
                     class="position-absolute bottom-50 ps-1 pe-1 badge translate-middle rounded-pill bg-warning">
+                    {% if product_count != 0 and request.user.username and request.user.is_authenticated%}
+                    {{ product_count }}
+                    {% else %}
                     0
+                    {% endif %}
                   </span>
                 </a>
               </li>
