@@ -2,7 +2,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Cart, CartItem, Product
 from item.models import Category
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 
+
+def edit(request):
+    if not request.user.is_staff:
+        raise PermissionDenied
 
 @login_required
 def add_to_cart(request, product_id):
@@ -18,8 +23,10 @@ def add_to_cart(request, product_id):
 
 @login_required
 def view_cart(request):
-    cart_items = CartItem.objects.all()
-    total = sum((item.product.price * item.quantity for item in cart_items))
+    user = request.user
+    cart = Cart.objects.get(user=user)
+    cart_items = CartItem.objects.filter(cart=cart)
+    total = sum(item.product.price * item.quantity for item in cart_items)
     categories= Category.objects.all()
     product = Product.objects.all()
 

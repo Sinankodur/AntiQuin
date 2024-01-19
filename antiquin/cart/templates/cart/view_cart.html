@@ -17,20 +17,8 @@
 </div>
 
 <div class="container">
-  <h2 class="pt-3">Your Cart</h2>
-  
-  {% comment %} <ul class="pt-4">
-    {% for item in cart_items %}
-    <li class=" p-2">
-      <img src="{{ item.product.image.url }}" class="img-fluid" width="35rem" />
-      {{ item.product.name }} - 
-        Price: {{ item.product.price }} -
-        Quantity: <input type="number" value="{{ item.quantity }}" class=" p-2">  -
-        Subtotal : {% widthratio item.product.price 1 item.quantity %}
-    </li>
-    {% endfor %}
-  </ul> {% endcomment %}
-
+  <h2 class="text-body-tertiary pt-3">Your Cart</h2>
+  {% if cart_items %}
   <div class="row">
     <div class="col-lg-8">
       {% for item in cart_items %}  
@@ -48,8 +36,32 @@
                   <span class="text-secondary">{{ item.product.description }}</span>
                 {% endif %}
                 <br>
-                <span>Quantity</span>
-                <span><i class='bx bxs-plus-circle'></i></span>
+                <div class="row pt-3">
+                  <div class="col-lg-8 col-10 d-flex">
+                    <span>Quantity :</span>
+                    <span class="ps-1">
+                      <button 
+                        class="btn btn-light pb-0 pt-0 ps-1 pe-1"
+                        type="submit"
+                      >
+                        <i class='bx bxs-minus-circle'></i>
+                      </button>
+                    </span>
+
+                    <span class="ps-2">
+                      <span class="border border-1 ps-1 pe-1">{{ item.quantity }}</span>  
+                    </span>
+                    
+                    <span class="ps-2">
+                      <button 
+                        class="btn btn-light pb-0 pt-0 ps-1 pe-1"
+                        type="submit"
+                      >
+                        <span><i class='bx bxs-plus-circle'></i></span>
+                      </button>
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -59,5 +71,7 @@
     </div>
   </div>
 </div>
-
+{% else %}
+<p class="text-center text-body-tertiary pt-5">Your cart is empty</p>
+{% endif %}
 {% endblock content %}

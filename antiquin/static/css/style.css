@@ -64,9 +64,19 @@ body {
   .main-user-cart-div {
     display: flex;
   }
+
+  @media screen and (max-width: 2560px) {
+    .offcanvas-btn{
+      display: none;
+    }
+  }
   
   @media screen and (max-width: 1200px) {
     .search-bar {
+      display: none;
+    }
+
+    .offcanvas-btn{
       display: none;
     }
   }
@@ -75,15 +85,19 @@ body {
     .div-cart {
       display: none;
     }
+
+    .offcanvas-btn{
+      display: none;
+    }
   }
   
   @media screen and (max-width: 360px) {
-    .menu-icon {
-      display: block;
-    }
-  
     .user-panel-div {
       display: none;
+    }
+
+    .offcanvas-btn{
+      display: block;
     }
   }
   

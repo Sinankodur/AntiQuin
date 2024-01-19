@@ -25,8 +25,6 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <!-- iconify -->
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <!-- font-awesome cdn -->
     <link
       rel="stylesheet"
@@ -34,7 +32,6 @@
     />
     <!-- css file -->
     <link rel="stylesheet" href="{% static "css\style.css" %}">
-    <!-- js file -->
     <title>{% block title %}{% endblock title %} | AntiQuin</title>
   </head>
   <body>
@@ -110,7 +107,6 @@
                     class="position-absolute bottom-50 ps-1 pe-1 translate-middle badge rounded-pill bg-warning"
                   >
                     0
-                    <span class="visually-hidden">unread messages</span>
                   </span>
                 </a>
               </li>
@@ -126,7 +122,6 @@
                   <span 
                     class="position-absolute bottom-50 ps-1 pe-1 badge translate-middle rounded-pill bg-warning">
                     0
-                    <span class="visually-hidden">unread messages</span>
                   </span>
                 </a>
               </li>
@@ -144,26 +139,28 @@
               </li>
               <!-- ----------------------------cart total------------------ -->
               <li>
-                <span>₹{{ total }}</span>
+                {% if total and request.user.username and request.user.is_authenticated %}
+                  <span>₹{{ total }}</span>
+                {% else %}
+                  <span>₹000.0</span>
+                {% endif %}
               </li>
             </ul>
           </div>
         </div>
-        <!-- menu icon -----------responsive--------------- -->
-        <a href=""
-          ><iconify-icon
-            icon="mingcute:menu-fill"
-            width="2rem"
-            class="menu-icon"
-          ></iconify-icon
-        ></a>
-        <a href="">
-          <button
-            type="button"
-            class="btn-close close-btn"
-            aria-label="Close"
-          ></button>
-        </a>
+        <!-- menu icon  -->
+        <button class="navbar-toggler offcanvas-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title text-warning " id="offcanvasNavbarLabel">AntiQuin</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+
+          </div>
+        </div>
       </div>
     </nav>
     <hr />
