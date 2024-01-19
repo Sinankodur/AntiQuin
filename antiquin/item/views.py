@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from item.models import Category,Product
-from django.http import JsonResponse
-
+from django.contrib.auth.decorators import login_required
+from .forms import NewProductForm
 
 def detail(request,pk):
     product = Product.objects.get(pk=pk)
@@ -25,4 +25,15 @@ def searchProduct(request):
         'searched': searched,
         'products': products,
         'categories': categories,
+    })
+
+
+@login_required
+def add_items(request):
+    form = NewProductForm()
+
+    return render(request, 'item/form.html', { 
+        'form' : form,
+        'title' : 'Add Items',
+        
     })

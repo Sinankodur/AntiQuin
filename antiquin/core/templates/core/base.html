@@ -45,47 +45,46 @@
         </a>
         <div class="search-bar pt-3 ms-auto">
           <!-- search filter -->
-          <ul class="search-bar-list rounded">
-            <li class="mt-1">
-              <select class="form-control search-option" id="search">
-                <option value="">All categories</option>
+          <form
+            method="post"
+            action="{% url 'item:search' %}">
+            {% csrf_token %}
+            <ul class="search-bar-list rounded">
+              <li class="mt-1">
+                  <select class="form-control search-option" id="search" name="categories">
+                    <option value="">All categories</option>
 
-                {% for category in categories %}
+                    {% for category in categories %}
 
-                <option 
-                  class="text-dark" 
-                  value="{{ category.id }}"
-                >
-                  {{ category.name }}
-                </option>
-                
-                {% endfor %}
-              </select>
-            </li>
+                    <option 
+                      class="text-dark"
+                    >
+                      {{ category.name }}
+                    </option>
+                    
+                    {% endfor %}
+                  </select>
+              </li>
 
-            <li class="me-auto mt-auto">
-              <form 
-                class="d-flex ms-2 mt-auto" 
-                method="post"
-                action="{% url 'item:search' %}">
-                {% csrf_token %}
-
-                <input
-                  class="form-control search-option"
-                  placeholder="I'm searching for..."
-                  name='searched'
-                  value="{{ searched }}"
-                />
-                <button 
-                  class='search-submit-btn ms-3'
-                  type="submit"
-                  ><span class="material-symbols-outlined text-secondary"
-                    >search</span
-                  ></button
-                >
-              </form>
-            </li>
-          </ul>
+              <li class="me-auto mt-auto">
+                <div class="d-flex ms-2 mt-auto">              
+                  <input
+                    class="form-control search-option"
+                    placeholder="I'm searching for..."
+                    name='searched'
+                    value="{{ searched }}"
+                  />
+                  <button 
+                    class='search-submit-btn ms-3'
+                    type="submit"
+                    ><span class="material-symbols-outlined text-secondary"
+                      >search</span
+                    ></button
+                  >
+                </div>
+              </li>
+            </ul>
+          </form>
         </div>
 
         <div class="main-user-cart-div ms-auto">

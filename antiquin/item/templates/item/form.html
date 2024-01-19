@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+
+<h1 class="text-center"> {{ title }}</h1>
+
+<div class="container pt-4">
+    <form method="post" action="." enctype="multipart/form-date">
+        {% csrf_token %}
+        
+    </form>
+</div>
+
+{% endblock content %}
