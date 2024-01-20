@@ -32,10 +32,21 @@ def searchProduct(request):
         products = Product.objects.filter(name__contains=searched)
         categories = Category.objects.all()
 
+        user = request.user
+        cart = Cart.objects.get(user=user)
+        cart_items = CartItem.objects.filter(cart=cart)
+        product_count = cart_items.count()
+        total = sum(item.product.price * item.quantity for item in cart_items)
+
+        fav_count = Favourite.objects.filter(user=user).count()
+
     return render(request, 'item/searchProducts.html' ,{
         'searched': searched,
         'products': products,
         'categories': categories,
+        'total' : total,
+        'product_count' : product_count,
+        'fav_count' : fav_count
     })
 
 

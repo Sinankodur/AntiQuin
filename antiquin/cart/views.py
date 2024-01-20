@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Cart, CartItem, Product
 from item.models import Category
+from favourites.models import Favourite
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 
@@ -31,10 +32,14 @@ def view_cart(request):
     categories= Category.objects.all()
     product = Product.objects.all()
 
+    favourites = Favourite.objects.filter(user=user)
+    fav_count = favourites.count()
+
     return render(request, 'cart/view_cart.html', {
         'cart_items': cart_items,
         'total': total,
         'categories' : categories,
         'product' : product,
-        'product_count' : product_count
+        'product_count' : product_count,
+        'fav_count' : fav_count,
     })

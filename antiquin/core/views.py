@@ -12,7 +12,7 @@ def home(request):
     user = request.user
     cart = Cart.objects.get(user=user)
     cart_items = CartItem.objects.filter(cart=cart)
-    product_count = CartItem.objects.filter(cart=cart).count()
+    product_count = cart_items.count()
     total = sum(item.product.price * item.quantity for item in cart_items)
 
     fav_count = Favourite.objects.filter(user=user).count()

@@ -187,3 +187,6 @@ body {
     
   }
   
+  .btn-add-to-favourite:hover{
+    color: red;
+  }
