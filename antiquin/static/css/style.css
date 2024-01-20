@@ -187,6 +187,11 @@ body {
     
   }
   
-  .btn-add-to-favourite:hover{
-    color: red;
+  .btn-add-to-favourite{
+    color: white;
+    border: black ;
+  }
+
+  .btn-add-to-favourite :hover{
+    scale: 110%;
   }

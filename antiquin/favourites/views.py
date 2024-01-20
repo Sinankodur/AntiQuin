@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Favourite
+from item.models import Category
 from cart.models import Cart, CartItem
 
 @login_required
@@ -24,10 +25,12 @@ def view_favourites(request):
     cart_items = CartItem.objects.filter(cart=cart)
     product_count = CartItem.objects.filter(cart=cart).count()
     total = sum(item.product.price * item.quantity for item in cart_items)
+    categories = Category.objects.all()
 
     return render(request, 'favourites/favourites.html', {
         'favourites' : favourites,
         'fav_count' : fav_count,
         'product_count' : product_count,
-        'total' : total
+        'total' : total,
+        'categories' : categories
     })

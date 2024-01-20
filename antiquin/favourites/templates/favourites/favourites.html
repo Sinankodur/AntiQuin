@@ -20,28 +20,38 @@
     <div class="row">
       <div class="col-lg-8">
         {% for favourite in favourites %}  
-            <div class="card mb-3">
-              <div class="row">
-                <div class="col-4 col-lg-3 pb-3">
-                  <img src="{{ favourite.product.image.url }}" class="img-fluid img-thumbnail ms-1 mt-2"  />
-                </div>
+          <div class="card mb-3">
+            <div class="row">
+              <div class="col-4 col-lg-3 pb-3">
+                <a href="{% url "item:detail" favourite.product.id %}">
+                  <img src="{{ favourite.product.image.url }}" class="img-fluid img-thumbnail ms-1 mt-2"/>
+                </a>  
+              </div>
   
-                <div class="col-8 col-lg-8 pt-4 pb-4">
-                  <span class="">{{ favourite.product.name }}</span>
-                  <br>
-                  {% if favourite.product.description %}
-                    <span class="text-secondary">{{ favourite.product.description }}</span>
-                  {% endif %}
-                  <br>
+              <div class="col-8 col-lg-8 pt-4 pb-4">
+                <span class="">{{ favourite.product.name }}</span>
+                <br>
+                {% if favourite.product.description %}
+                  <span class="text-secondary">{{ favourite.product.description }}</span>
+                {% endif %}
+                <br>
+                
+                <div class="position-relative pe-5">
+                  <div class="position-absolute bottom-0 end-0">
+                    {{ favourite.product.price }}
+                  </div>
                 </div>
               </div>
+
+              
             </div>
           </div>
         {% endfor %}
       </div>
     </div>
-  </div>
-  {% else %}
-  <p class="text-center text-body-tertiary pt-3">Your cart is empty</p>
-  {% endif %}
+</div>
+{% else %}
+<p class="text-center text-body-tertiary pt-3">You haven't added any favorites yet.</p>
+{% endif %}
+
 {% endblock content %}
