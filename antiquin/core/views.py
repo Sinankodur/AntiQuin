@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth.models import User
+
 from item.models import Category, Product
 from cart.models import CartItem, Cart
 from favourites.models import Favourite
@@ -11,7 +13,10 @@ def home(request):
     products = Product.objects.filter(is_sold=False)[0:8]
     user = request.user
     
-    if isinstance(user, AnonymousUser):
+    if not user.is_authenticated():
+        user = User.objects.get(name="AnonUser")
+
+    else:
         cart = Cart.objects.get(user=user)
         cart_items = CartItem.objects.filter(cart=cart)
         product_count = cart_items.count()
@@ -19,13 +24,12 @@ def home(request):
 
         fav_count = Favourite.objects.filter(user=user).count()
 
-
         return render(request,'core/index.html',{
-            'categories' : categories,
-            'products' : products,
-            'total' : total,
-            'product_count' : product_count,
-            'fav_count' : fav_count,
+        'categories' : categories,
+        'products' : products,
+        'total' : total,
+        'product_count' : product_count,
+        'fav_count' : fav_count,
         })
 
 
@@ -44,3 +48,4 @@ def sign_up(request):
 
 def success(request):
     return render(request, 'core/success.html')
+

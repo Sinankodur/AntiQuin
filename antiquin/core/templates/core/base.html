@@ -106,7 +106,7 @@
                   <span
                     class="position-absolute bottom-50 ps-1 pe-1 translate-middle badge rounded-pill bg-warning"
                   >
-                  {% if fav_count != 0 and request.user.username and request.user.is_authenticated%}
+                  {% if fav_count and request.user.username %}
                   {{ fav_count }}
                   {% else %}
                   0
@@ -125,7 +125,7 @@
                   <!-- work on backend done -------------------------- -->
                   <span 
                     class="position-absolute bottom-50 ps-1 pe-1 badge translate-middle rounded-pill bg-warning">
-                    {% if product_count != 0 and request.user.username and request.user.is_authenticated%}
+                    {% if product_count and request.user.username %}
                     {{ product_count }}
                     {% else %}
                     0
@@ -147,7 +147,7 @@
               </li>
               <!-- ----------------------------cart total------------------ -->
               <li>
-                {% if total and request.user.username and request.user.is_authenticated %}
+                {% if total and request.user.username %}
                   <span>₹{{ total }}</span>
                 {% else %}
                   <span>₹000.0</span>
@@ -156,6 +156,7 @@
             </ul>
           </div>
         </div>
+        
         <!-- menu icon  -->
         <button class="navbar-toggler offcanvas-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -186,6 +187,5 @@
       integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
       crossorigin="anonymous"
     ></script>
-    
   </body>
 </html>
