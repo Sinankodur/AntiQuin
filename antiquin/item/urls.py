@@ -6,4 +6,5 @@ app_name = 'item'
 urlpatterns = [
     path('<int:pk>/',views.detail, name='detail'),
     path('search/',views.searchProduct, name='search'),
+    # path('new/',views.add_items,name='new')
 ]

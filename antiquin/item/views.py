@@ -9,22 +9,30 @@ def detail(request,pk):
     product = Product.objects.get(pk=pk)
     categories = Category.objects.all()
     related_items = Product.objects.filter(category=product.category, is_sold = False).exclude(pk=pk)[0:4]
-    user = request.user
-    cart = Cart.objects.get(user=user)
-    cart_items = CartItem.objects.filter(cart=cart)
-    product_count = CartItem.objects.filter(cart=cart).count()
-    total = sum(item.product.price * item.quantity for item in cart_items)
 
-    fav_count = Favourite.objects.filter(user=user).count()
+    if request.user.is_authenticated:
+        user = request.user.id
+        cart = Cart.objects.get(user=user)
+        cart_items = CartItem.objects.filter(cart=cart)
+        product_count = CartItem.objects.filter(cart=cart).count()
+        total = sum(item.product.price * item.quantity for item in cart_items)
 
+        fav_count = Favourite.objects.filter(user=user).count()
+
+        return render(request, 'item/details.html', {
+            'product': product, 
+            'categories': categories,
+            "related_items": related_items,
+            'total' : total,
+            'product_count' : product_count,
+            'fav_count' : fav_count
+        })
+    
     return render(request, 'item/details.html', {
-        'product': product, 
-        'categories': categories,
-        "related_items": related_items,
-        'total' : total,
-        'product_count' : product_count,
-        'fav_count' : fav_count
-    })
+            'product': product, 
+            'categories': categories,
+            "related_items": related_items,
+        })
 
 def searchProduct(request):
     if request.method == 'POST':
@@ -32,7 +40,8 @@ def searchProduct(request):
         products = Product.objects.filter(name__contains=searched)
         categories = Category.objects.all()
 
-        user = request.user
+    if request.user.is_authenticated:
+        user = request.user.id
         cart = Cart.objects.get(user=user)
         cart_items = CartItem.objects.filter(cart=cart)
         product_count = cart_items.count()
@@ -40,22 +49,28 @@ def searchProduct(request):
 
         fav_count = Favourite.objects.filter(user=user).count()
 
+        return render(request, 'item/searchProducts.html' ,{
+            'searched': searched,
+            'products': products,
+            'categories': categories,
+            'total' : total,
+            'product_count' : product_count,
+            'fav_count' : fav_count
+        })
+    
     return render(request, 'item/searchProducts.html' ,{
         'searched': searched,
         'products': products,
         'categories': categories,
-        'total' : total,
-        'product_count' : product_count,
-        'fav_count' : fav_count
-    })
+        })
 
 
-@login_required
-def add_items(request):
-    form = NewProductForm()
+# Account section
+# @login_required
+# def add_items(request):
+#     form = NewProductForm()
 
-    return render(request, 'item/form.html', { 
-        'form' : form,
-        'title' : 'Add Items',
-        
-    })
+#     return render(request, 'item/form.html', { 
+#         'form' : form,
+#         'title' : 'Add Items',
+#     })

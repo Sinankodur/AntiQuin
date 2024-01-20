@@ -32,11 +32,10 @@ from .forms import SignupForm
 from django.http import HttpResponse
 def home(request):
     if request.user.is_authenticated:
-        user_id = request.user.id
+        user = request.user.id
 
         categories = Category.objects.all()
         products = Product.objects.filter(is_sold=False)[0:8]
-        user = request.user
         
         cart = Cart.objects.get(user=user)
         cart_items = CartItem.objects.filter(cart=cart)
@@ -52,7 +51,9 @@ def home(request):
         'product_count' : product_count,
         'fav_count' : fav_count,
         })
+    
     else:
+
         categories = Category.objects.all()
         products = Product.objects.filter(is_sold=False)[0:8]
         return render(request,'core/index.html',{

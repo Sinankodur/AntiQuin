@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+
+<title> {% block title %}Profile{% endblock title %}</title>
+
+{% block content %}
+
+<div class="container-fluid">
+    {% if user.is_superuser %}
+        <button class="btn btn-light">
+            
+        </button>
+    {% endif %}
+</div>
+
+{% endblock content %}

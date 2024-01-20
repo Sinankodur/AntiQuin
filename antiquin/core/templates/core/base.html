@@ -93,11 +93,19 @@
           <div class="user-panel-div pt-3">
             <ul class="user-panel">
               <li class="pe-3">
+                {% if user.is_authenticated %}
+                <a href="{% url "account:profile" %}"
+                  ><span class="material-symbols-outlined">
+                    account_circle
+                  </span></a
+                >
+                {% else %}
                 <a href="{% url "sign_up" %}"
                   ><span class="material-symbols-outlined">
                     account_circle
                   </span></a
                 >
+                {% endif %}
               </li>
               <li class="pe-3">
                 <a href="{% url "favourites:favourites" %}" class="position-relative"
