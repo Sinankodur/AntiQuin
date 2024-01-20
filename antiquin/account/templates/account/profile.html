@@ -1,4 +1,5 @@
 {% extends "core/base.html" %}
+{% load static %}
 
 <title> {% block title %}Profile{% endblock title %}</title>
 
@@ -6,10 +7,16 @@
 
 <div class="container-fluid">
     {% if user.is_superuser %}
+        <button>hi</button>
+    {% comment %} {% else %} {% endcomment %}
         <button class="btn btn-light">
-            
+            <img src="{% static "img/web-store-icon.png" %}">
         </button>
+
+        <a href="{% url "logout_user" %}">logout</a>
     {% endif %}
+
+
 </div>
 
 {% endblock content %}
