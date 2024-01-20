@@ -100,13 +100,17 @@
                 >
               </li>
               <li class="pe-3">
-                <a href="" class="position-relative"
+                <a href="{% url "favourites:favourites" %}" class="position-relative"
                   ><span class="material-symbols-outlined"> favorite </span>
                   <!-- work on backend -------------------------- -->
                   <span
                     class="position-absolute bottom-50 ps-1 pe-1 translate-middle badge rounded-pill bg-warning"
                   >
-                    0
+                  {% if fav_count != 0 and request.user.username and request.user.is_authenticated%}
+                  {{ fav_count }}
+                  {% else %}
+                  0
+                  {% endif %}
                   </span>
                 </a>
               </li>

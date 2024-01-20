@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from item.models import Category,Product
 from cart.models import CartItem, Cart
+from favourites.models import Favourite
 from django.contrib.auth.decorators import login_required
 from .forms import NewProductForm
 
@@ -14,13 +15,15 @@ def detail(request,pk):
     product_count = CartItem.objects.filter(cart=cart).count()
     total = sum(item.product.price * item.quantity for item in cart_items)
 
+    fav_count = Favourite.objects.filter(user=user).count()
 
     return render(request, 'item/details.html', {
         'product': product, 
         'categories': categories,
         "related_items": related_items,
         'total' : total,
-        'product_count' : product_count
+        'product_count' : product_count,
+        'fav_count' : fav_count
     })
 
 def searchProduct(request):

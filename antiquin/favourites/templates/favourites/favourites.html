@@ -1,0 +1,47 @@
+{% extends "core/base.html" %}
+
+{% block title %}Favourites{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    <button 
+      onclick="history.back()"
+      class="btn btn-warning rounded-pill"
+    >
+      <i class='bx bx-arrow-back pe-1'></i>
+      continue shopping
+    </button>
+    <br/>
+    <br/>
+  
+    <h2 class="pt-3 pb-3">Your Cart</h2>
+    {% if favourites %}
+    <div class="row">
+      <div class="col-lg-8">
+        {% for item in favourites %}  
+            <div class="card mb-3">
+              <div class="row">
+                <div class="col-4 col-lg-3 pb-3">
+                  <img src="{{ item.product.image.url }}" class="img-fluid img-thumbnail ms-1 mt-2"  />
+                </div>
+  
+                <div class="col-8 col-lg-8 pt-4 pb-4">
+                  <span class="">{{ item.product.name }}</span>
+                  <br>
+                  {% if item.product.description %}
+                    <span class="text-secondary">{{ item.product.description }}</span>
+                  {% endif %}
+                  <br>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <p class="text-center text-body-tertiary pt-3">Your cart is empty</p>
+  {% endif %}
+{% endblock content %}

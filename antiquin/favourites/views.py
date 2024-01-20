@@ -17,5 +17,8 @@ def add_to_favourites(request, product_id):
 def view_favourites(request):
     user = request.user
     favourites = Favourite.objects.filter(user=user)
+    fav_count = Favourite.objects.filter(favourites=favourites).count()
 
-    return render(request, 'favourites/favourites.html')
+    return render(request, 'favourites/favourites.html', {
+        'fav_count' : fav_count,
+    })
