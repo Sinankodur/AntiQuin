@@ -1,9 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
+
+
 from .models import Cart, CartItem, Product
 from item.models import Category
 from favourites.models import Favourite
-from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
 
 
 def edit(request):
@@ -36,6 +40,9 @@ def view_cart(request):
         categories= Category.objects.all()
         product = Product.objects.all()
 
+        for item in cart_items:
+            item.subtotal = item.product.price * item.quantity
+
         favourites = Favourite.objects.filter(user=user)
         fav_count = favourites.count()
 
@@ -47,3 +54,9 @@ def view_cart(request):
         'product_count' : product_count,
         'fav_count' : fav_count,
     })
+
+@login_required
+def delete_item(request, item_id):
+    item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)
+    item.delete()
+    return redirect('/cart/view_cart')

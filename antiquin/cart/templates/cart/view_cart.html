@@ -22,52 +22,65 @@
       {% for item in cart_items %}  
       <div>
           <div class="card mb-3">
-            <div class="row">
-              <div class="col-4 col-lg-3 pb-3">
+            <div class="row p-2">
+              <div class="col-4 col-lg-3">
                 <a href="{% url "item:detail" item.product.id %}">
-                  <img src="{{ item.product.image.url }}" class="img-fluid img-thumbnail ms-1 mt-2"  />
+                  <img src="{{ item.product.image.url }}" class="img-thumbnail"  />
                 </a>
               </div>
+              
+              <div class="col-8 col-lg-8">
+                <div class="pt-2">{{ item.product.name }}</div>
+                <div class="pb-2">
+                  Rs. {{ item.product.price }}
+                </div>
 
-              <div class="col-8 col-lg-8 pt-4 pb-4">
-                <span class="">{{ item.product.name }}</span>
-                <br>
-                {% if item.product.description %}
-                  <span class="text-secondary">{{ item.product.description }}</span>
-                {% endif %}
-                <br>
-                <div class="row pt-3">
-                  <div class="col-lg-8 col-10 d-flex">
-                    <span>Quantity :</span>
-                    <span class="ps-1">
-                      <button 
-                        class="btn btn-light pb-0 pt-0 ps-1 pe-1"
-                        type="submit"
-                      >
-                        <i class='bx bxs-minus-circle'></i>
-                      </button>
-                    </span>
-
-                    <span class="ps-2">
-                      <span class="border border-1 ps-1 pe-1">{{ item.quantity }}</span>  
-                    </span>
+                <div class="row">
+                  <div class="col-12">
+                    <form 
+                      method="post"
+                      class="d-flex"
+                      {% comment %} action="{% url 'update_quantity' item.product.id %}" {% endcomment %}
+                    >
+                      {% csrf_token %}
+                      <div class="ps-1">
+                        Quantity
+                        <a 
+                          class="btn btn-light pb-0 pt-0 ps-1 pe-1"
+                        >
+                          <i class='bx bxs-minus-circle'></i>
+                        </a>
                     
-                    <span class="ps-2">
-                      <button 
-                        class="btn btn-light pb-0 pt-0 ps-1 pe-1"
-                        type="submit"
-                      >
-                        <span><i class='bx bxs-plus-circle'></i></span>
+                        <input 
+                          type="text"
+                          class="text-center"
+                          value="{{ item.quantity }}"
+                          style="width: 1.5rem; height: 1.5rem;"
+                          readonly
+                        >
+                        <a 
+                          class="btn btn-light pb-0 pt-0 ps-1 pe-1"
+                        >
+                          <span><i class='bx bxs-plus-circle'></i></span>
+                        </a>
+                      </div>
+                      <button type="submit" class="btn btn-light ms-auto ps-1 pe-1 pt-0 pb-0">
+                        <i class='bx bx-revision'></i>
                       </button>
-                    </span>
+                      <span class="ms-auto">{{ item.subtotal }}</span>
+                    </form>
                   </div>
                 </div>
-              </div>
-            </div>
-            
-            <div class="position-relative me-3">
-              <div class="position-absolute bottom-0 end-0">
-                {{ item.product.price }}
+
+                <!-- cart delete btn -->
+                <div>
+                  <button 
+                    class='btn btn-warning text-dark rounded-pill p-1 pb-0'
+                    onclick="alert('Item removed from cart!'), location.href= '{% url "cart:delete_item" item.id %}' "
+                  >
+                    <i class='bx bxs-x-square fs-5' ></i>
+                  </button>
+                </div>
               </div>
             </div>
           </div>

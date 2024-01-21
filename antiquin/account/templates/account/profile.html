@@ -6,7 +6,7 @@
 {% block content %}
 
 <div class="container-fluid">
-    {% if user.is_superuser %}
+    {% if user.is_staff %}
     <h4>Welcome {{ request.user }}</h4>
     <ul>
         <li>
