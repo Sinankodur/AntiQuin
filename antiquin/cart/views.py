@@ -26,6 +26,26 @@ def add_to_cart(request, product_id):
 
     return redirect('/cart/view_cart')
 
+
+@login_required
+def update_cart(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    cart = Cart.objects.get(user=request.user)
+    cart_item = CartItem.objects.get(cart=cart, product=product)
+
+    if request.method == 'POST':
+        action = request.POST.get('action')
+
+        if action == 'add':
+            cart_item.quantity += 1
+        elif action == 'remove' and cart_item.quantity > 1:
+            cart_item.quantity -= 1
+
+        cart_item.save()
+
+    return redirect('/cart/view_cart')
+
+
 @login_required
 def view_cart(request):
     cart_items = None
