@@ -5,41 +5,43 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
 from item.models import Category, Product
-from cart.models import CartItem, Cart
+from cart.models import Cart, CartItem
 from favourites.models import Favourite
 from .forms import SignupForm
 
 
 def home(request):
-    if request.user.is_authenticated:
-        user = request.user.id
+    cart_items = None
+    favourites = None
+    categories = Category.objects.all()
+    products = Product.objects.filter(is_sold=False)[:8]
 
+    if request.user.is_authenticated:
+        user = request.user
         categories = Category.objects.all()
-        products = Product.objects.filter(is_sold=False)[0:8]
-        
-        cart = Cart.objects.get(user=user)
-        cart_items = CartItem.objects.filter(cart=cart)
+        products = Product.objects.filter(is_sold=False)[:8]
+
+        user_cart, created = Cart.objects.get_or_create(user=user)
+
+        cart_items = CartItem.objects.filter(cart=user_cart)
         product_count = cart_items.count()
         total = sum(item.product.price * item.quantity for item in cart_items)
 
-        fav_count = Favourite.objects.filter(user=user).count()
+        favourites = Favourite.objects.filter(user=user)
+        fav_count = favourites.count()
 
-        return render(request,'core/index.html',{
+        return render(request, 'core/index.html', {
+            'categories': categories,
+            'products': products,
+            'total': total,
+            'product_count': product_count,
+            'fav_count': fav_count,
+        })
+
+    return render(request, 'core/index.html',{
         'categories' : categories,
-        'products' : products,
-        'total' : total,
-        'product_count' : product_count,
-        'fav_count' : fav_count,
-        })
-    
-    else:
-
-        categories = Category.objects.all()
-        products = Product.objects.filter(is_sold=False)[0:8]
-        return render(request,'core/index.html',{
-            'categories' : categories,
-            'products' : products,
-        })
+        'products' : products
+    })
 
 
 def sign_up(request):

@@ -24,16 +24,20 @@ def add_to_cart(request, product_id):
 
 @login_required
 def view_cart(request):
-    user = request.user
-    cart = Cart.objects.get(user=user)
-    cart_items = CartItem.objects.filter(cart=cart)
-    product_count = CartItem.objects.filter(cart=cart).count()
-    total = sum(item.product.price * item.quantity for item in cart_items)
-    categories= Category.objects.all()
-    product = Product.objects.all()
+    cart_items = None
+    favourites = None
+    
+    if request.user.is_authenticated:
+        user = request.user
+        cart = Cart.objects.get(user=user)
+        cart_items = CartItem.objects.filter(cart=cart)
+        product_count = CartItem.objects.filter(cart=cart).count()
+        total = sum(item.product.price * item.quantity for item in cart_items)
+        categories= Category.objects.all()
+        product = Product.objects.all()
 
-    favourites = Favourite.objects.filter(user=user)
-    fav_count = favourites.count()
+        favourites = Favourite.objects.filter(user=user)
+        fav_count = favourites.count()
 
     return render(request, 'cart/view_cart.html', {
         'cart_items': cart_items,
