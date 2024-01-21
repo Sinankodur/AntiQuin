@@ -67,7 +67,11 @@
           
         </h5>
         <div>
-          <form action="." method="post">
+          <form 
+            action="{% if request.GET.next %}{% url 'sign-in' %}?next={{ request.GET.next }}
+            {% else %}{% url 'sign-in' %}{% endif %}" 
+            method="post"
+          >
             {% csrf_token %} {{ form.username }} {{ form.password }} 
             {% if form.errors or form.non_field_errors %}
               <div class="text-danger-emphasis fs-6 lh-sm">

@@ -8,7 +8,12 @@
 <div class="container-fluid">
     {% if user.is_superuser %}
         <button>Add Items</button>
-    {% comment %} {% else %} {% endcomment %}
+        <button class="btn btn-light">
+            <img src="{% static "img/web-store-icon.png" %}">
+        </button>
+
+        <a href="{% url "logout_user" %}">logout</a>
+    {% else %}
         <button class="btn btn-light">
             <img src="{% static "img/web-store-icon.png" %}">
         </button>

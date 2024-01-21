@@ -100,7 +100,7 @@
                   </span></a
                 >
                 {% else %}
-                <a href="{% url "login" %}"
+                <a href="{% url "sign-in" %}"
                   ><span class="material-symbols-outlined">
                     account_circle
                   </span></a
@@ -108,8 +108,13 @@
                 {% endif %}
               </li>
               <li class="pe-3">
-                <a href="{% url "favourites:favourites" %}" class="position-relative"
-                  ><span class="material-symbols-outlined"> favorite </span>
+                <a 
+                  href="
+                    {% if user.is_authenticated %}{% url 'favourites:favourites' %}
+                    {% else %}
+                    {% url 'sign-in' %}?next={% url 'favourites:favourites' %}{% endif %}"
+                  class="position-relative"
+                ><span class="material-symbols-outlined"> favorite </span>
                   <!-- work on backend -------------------------- -->
                   <span
                     class="position-absolute bottom-50 ps-1 pe-1 translate-middle badge rounded-pill bg-warning"
@@ -126,7 +131,12 @@
               <!-- view cart ------------------- -->
               
               <li>
-                <a href="{% url "cart:view_cart" %}" class="position-relative">
+                <a 
+                  href="{% if user.is_authenticated %}{% url 'cart:view_cart' %}
+                  {% else %}{% url 'sign-in' %}?next={% url 'cart:view_cart' %}
+                  {% endif %}"
+                  class="position-relative"
+                >
                   <span class="shopping-bag">
                     <i class='bx bx-shopping-bag fw-medium'></i>
                   </span>

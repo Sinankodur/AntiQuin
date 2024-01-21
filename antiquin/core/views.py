@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import AnonymousUser
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login, authenticate
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 from item.models import Category, Product
 from cart.models import Cart, CartItem
 from favourites.models import Favourite
-from .forms import SignupForm
+from .forms import SignupForm, LoginForm
 
 
 def home(request):
@@ -18,8 +17,6 @@ def home(request):
 
     if request.user.is_authenticated:
         user = request.user
-        categories = Category.objects.all()
-        products = Product.objects.filter(is_sold=False)[:8]
 
         user_cart, created = Cart.objects.get_or_create(user=user)
 
@@ -56,6 +53,27 @@ def sign_up(request):
         form = SignupForm()
     
     return render(request, 'core/signup.html', {'form' : form})
+
+
+def sign_in(request):
+    if request.method == 'POST':
+        form = LoginForm(request, request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                next_url = request.GET.get('next', reverse('home'))
+                return HttpResponseRedirect(next_url)
+    else:
+        form = LoginForm()
+
+    return render(request, 'core/login.html', {
+        'form' : form
+    })
+
 
 def success(request):
     return render(request, 'core/success.html')
