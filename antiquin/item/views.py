@@ -1,8 +1,11 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+
+
 from item.models import Category,Product
 from cart.models import CartItem, Cart
 from favourites.models import Favourite
-from django.contrib.auth.decorators import login_required
 from .forms import NewProductForm
 
 def detail(request,pk):
@@ -37,7 +40,7 @@ def detail(request,pk):
 def searchProduct(request):
     if request.method == 'POST':
         searched = request.POST['searched']
-        products = Product.objects.filter(name__contains=searched)
+        products = Product.objects.filter(Q(name__contains=searched) | Q(description__contains=searched) )
         categories = Category.objects.all()
 
     if request.user.is_authenticated:

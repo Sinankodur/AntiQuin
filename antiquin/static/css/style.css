@@ -195,3 +195,13 @@ body {
   .btn-add-to-favourite :hover{
     scale: 110%;
   }
+
+  .profile-list li{
+    list-style-type: none;
+    margin-bottom: 1rem;
+  }
+
+
+  .profile-list li button{
+    width: 100%;
+  }

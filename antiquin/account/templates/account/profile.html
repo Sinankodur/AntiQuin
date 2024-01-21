@@ -5,75 +5,107 @@
 
 {% block content %}
 
-<div class="container-fluid">
-    {% if user.is_staff %}
-    <h4>Welcome {{ request.user }}</h4>
-    <ul>
-        <li>
-            <button class="btn btn-light">
-                <span class="p-4 pe-5">Add Items</span>
-            </button>
-        </li>
+<div class="container">
+    <div class='row'>
+        <div class='col-lg-4'>
+            {% if user.is_staff %}
+                <h4>Welcome {{ request.user }}</h4>
+                <br>
+                <ul class="profile-list ps-0">
+                    <li>
+                        <button class="btn btn-light p-2">
+                            <span class="">Add Items</span>
+                        </button>
+                    </li>
 
-        <li>
-            <button 
-             class="btn btn-light"
-             onclick="location.href = '' "
-            >
-                <img src="{% static "img/web-store-icon.png" %}">
-                <span class="p-4 pe-5">Orders</span>
-            </button>
-        </li>
+                    <li>
+                        <button 
+                        class="btn btn-light"
+                        onclick="location.href = '' "
+                        >
+                            <img src="{% static "img/web-store-icon.png" %}" class="me-auto">
+                            <span class="p-5 pe-5">Orders</span>
+                        </button>
+                    </li>
 
-        <li>
-            <div 
-             class="btn btn-light"
-             onclick="location.href = '' "
-            >
-                <img src="{% static "img/location-pin.png" %}">
-                <span class="p-4 pe-5">Address</span>
-            </div>
-        </li>
+                    <li>
+                        <button 
+                        class="btn btn-light"
+                        onclick="location.href = '' "
+                        >
+                            <img src="{% static "img/location-pin.png" %}">
+                            <span class="p-4 pe-5">Address</span>
+                        </button>
+                    </li>
 
-        <li>
-            <button 
-             class="btn btn-light"
-             onclick="location.href = '{% url "sign-out" %}' "
-            >
-                <img src="{% static "img/log-out.png" %}">
-                <span class="p-4 pe-5">Sign out</span>
-            </button>
-        </li>
-    </ul>
+                    <li>
+                        <button 
+                        class="btn btn-light"
+                        onclick="location.href = '{% url "sign-out" %}' "
+                        >
+                            <img src="{% static "img/log-out.png" %}">
+                            <span class="p-4 pe-5">Sign out</span>
+                        </button>
+                    </li>
+                </ul>
 
-    {% else %}
-    Welcome {{ request.user }}
-        <button 
-          class="btn btn-light"
-          onclick="location.href = '' "
-        >
-            <img src="{% static "img/web-store-icon.png" %}">
-            <span class="p-4 pe-5">Orders</span>
-        </button>
+            {% else %}
+            <h4>Welcome {{ request.user }}</h4>
+            <br>
+            <ol class="profile-list ps-0">
+                <li>
+                    <button 
+                    class="btn btn-light"
+                    onclick="location.href = '' "
+                    >
+                        <img src="{% static "img/web-store-icon.png" %}" class="me-auto">
+                        <span class="p-5 pe-5">Orders</span>
+                    </button>
+                </li>
 
-        <div 
-          class="btn btn-light "
-          onclick="location.href = '' "
-        >
-            <img src="{% static "img/location-pin.png" %}">
-            <span class="p-4 pe-5">Address</span>
+                <li>
+                    <button 
+                    class="btn btn-light"
+                    onclick="location.href = '' "
+                    >
+                        <img src="{% static "img/location-pin.png" %}">
+                        <span class="p-4 pe-5">Address</span>
+                    </button>
+                </li>
+
+                <li>
+                    <button 
+                    class="btn btn-light"
+                    onclick="location.href = '' "
+                    >
+                        <img src="{% static "img/credit-card.png" %}">
+                        <span class="p-4 pe-5">Payment Details</span>
+                    </button>
+                </li>
+
+                <li>
+                    <button 
+                    class="btn btn-light"
+                    onclick="location.href = '' "
+                    >
+                        <img src="{% static "img/phone.png" %}">
+                        <span class="p-4 pe-5">Contact Us</span>
+                    </button>
+                </li>
+
+                <li>
+                    <button 
+                    class="btn btn-light"
+                    onclick="location.href = '{% url "sign-out" %}' "
+                    >
+                        <img src="{% static "img/log-out.png" %}">
+                        <span class="p-4 pe-5">Sign out</span>
+                    </button>
+                </li>
+            </ol>
+            {% endif %}
         </div>
-
-        <button 
-          class="btn btn-light"
-          onclick="location.href = '{% url "sign-out" %}' "
-        >
-            <img src="{% static "img/log-out.png" %}">
-            <span class="p-4 pe-5">Sign out</span>
-        </button>
-    {% endif %}
-
-
+    </div>
 </div>
 
 {% endblock content %}
