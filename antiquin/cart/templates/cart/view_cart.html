@@ -18,73 +18,67 @@
   <h2 class="pt-3 pb-3">Your Cart</h2>
   {% if cart_items %}
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-7">
       {% for item in cart_items %}  
-      <div>
-          <div class="card mb-3">
-            <div class="row p-2">
-              <div class="col-4 col-lg-3">
-                <a href="{% url "item:detail" item.product.id %}">
-                  <img src="{{ item.product.image.url }}" class="img-thumbnail"  />
-                </a>
+        <div class="card mb-3">
+          <div class="row p-2">
+            <div class="col-4 col-lg-3">
+              <a href="{% url "item:detail" item.product.id %}">
+                <img src="{{ item.product.image.url }}" class="img-thumbnail"  />
+              </a>
+            </div>
+            
+            <div class="col-6 col-lg-6">
+              <div class="pt-2">{{ item.product.name }}</div>
+             <div class="pb-2">
+                Rs. {{ item.product.price }}
               </div>
-              
-              <div class="col-8 col-lg-8">
-                <div class="pt-2">{{ item.product.name }}</div>
-                <div class="pb-2">
-                  Rs. {{ item.product.price }}
-                </div>
 
-                <div class="row">
-                  <div class="col-12">
-                    <form 
-                      method="post"
-                      class="d-flex"
-                      {% comment %} action="{% url 'update_quantity' item.product.id %}" {% endcomment %}
-                    >
-                      {% csrf_token %}
-                      <div class="ps-1">
-                        Quantity
-                        <a 
-                          class="btn btn-light pb-0 pt-0 ps-1 pe-1"
-                        >
-                          <i class='bx bxs-minus-circle'></i>
-                        </a>
-                    
-                        <input 
-                          type="text"
-                          class="text-center"
-                          value="{{ item.quantity }}"
-                          style="width: 1.5rem; height: 1.5rem;"
-                          readonly
-                        >
-                        <a 
-                          class="btn btn-light pb-0 pt-0 ps-1 pe-1"
-                        >
-                          <span><i class='bx bxs-plus-circle'></i></span>
-                        </a>
-                      </div>
-                      <button type="submit" class="btn btn-light ms-auto ps-1 pe-1 pt-0 pb-0">
-                        <i class='bx bx-revision'></i>
-                      </button>
-                      <span class="ms-auto">{{ item.subtotal }}</span>
-                    </form>
-                  </div>
-                </div>
-
-                <!-- cart delete btn -->
-                <div>
-                  <button 
-                    class='btn btn-warning text-dark rounded-pill p-1 pb-0'
-                    onclick="alert('Item removed from cart!'), location.href= '{% url "cart:delete_item" item.id %}' "
+              <div class="row">
+                <div class="col-12">
+                  <form 
+                    method="post"
+                    class="d-flex"
+                    {% comment %} action="{% url 'update_quantity' item.product.id %}" {% endcomment %}
                   >
-                    <i class='bx bxs-x-square fs-5' ></i>
-                  </button>
+                    {% csrf_token %}
+                    <div>
+                      Quantity:
+                      <br>
+                      <a 
+                        class="btn btn-light pb-0 pt-0 ps-1 pe-1"
+                      >
+                        <i class='bx bxs-minus-circle'></i>
+                      </a>
+                  
+                      <input 
+                        type="text"
+                        class="text-center"
+                        value="{{ item.quantity }}"
+                        style="width: 1.5rem; height: 1.5rem;"
+                        readonly
+                      >
+                      <a 
+                        class="btn btn-light pb-0 pt-0 ps-1 pe-1"
+                      >
+                        <span><i class='bx bxs-plus-circle'></i></span>
+                      </a>
+                    </div>
+                  </form>
                 </div>
               </div>
+              <p class="">{{ item.subtotal }}</p>
+            </div>
+
+            <!-- cart delete btn -->
+            <div class="col-lg-3 col-2 pt-1 ms-auto">
+              <i 
+                class='bx bxs-x-square fs-4 text-danger'
+                onclick="alert('Item removed from cart!'), location.href= '{% url "cart:delete_item" item.id %}' "
+              ></i>
             </div>
           </div>
-      </div>
+        </div>
       {% endfor %}
       <p>Total: {{ total }}</p>
     </div>
