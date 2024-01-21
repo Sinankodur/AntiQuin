@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Favourite
 from item.models import Category
@@ -38,3 +38,9 @@ def view_favourites(request):
         'total' : total,
         'categories' : categories
     })
+
+@login_required
+def delete_item(request, item_id):
+    item = get_object_or_404(Favourite, id=item_id, user=request.user)
+    item.delete()
+    return redirect('/favourites')

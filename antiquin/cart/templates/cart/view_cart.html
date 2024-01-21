@@ -20,7 +20,7 @@
   <div class="row">
     <div class="col-lg-7">
       {% for item in cart_items %}  
-        <div class="card mb-3">
+        <div class="card mb-3 p-2">
           <div class="row p-2">
             <div class="col-4 col-lg-3">
               <a href="{% url "item:detail" item.product.id %}">
@@ -34,7 +34,7 @@
                 Rs. {{ item.product.price }}
               </div>
 
-              <div class="row">
+              <div class="row mb-2">
                 <div class="col-12">
                   <form 
                     method="post"
@@ -67,14 +67,14 @@
                   </form>
                 </div>
               </div>
-              <p class="">{{ item.subtotal }}</p>
+              <span>Subtotal: {{ item.subtotal }}</span>
             </div>
 
             <!-- cart delete btn -->
-            <div class="col-lg-3 col-2 pt-1 ms-auto">
+            <div class="col-lg-1 col-1 pt-1 ms-auto me-auto">
               <i 
                 class='bx bxs-x-square fs-4 text-danger'
-                onclick="alert('Item removed from cart!'), location.href= '{% url "cart:delete_item" item.id %}' "
+                onclick="location.href= '{% url "cart:delete_item" item.id %}' "
               ></i>
             </div>
           </div>

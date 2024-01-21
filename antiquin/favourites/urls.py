@@ -6,4 +6,5 @@ app_name = 'favourites'
 urlpatterns = [
     path('add_to_favourites/<int:product_id>',views.add_to_favourites, name='add_to_favourites'),
     path('favourites/',views.view_favourites, name="favourites"),
+    path('delete-item/<int:item_id>/',views.delete_item, name='delete_item')
 ]

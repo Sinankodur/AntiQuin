@@ -28,21 +28,24 @@
                 </a>  
               </div>
   
-              <div class="col-8 col-lg-8 pt-4 pb-4">
+              <div class="col-7 col-lg-8 pt-4 pb-4">
                 <span class="">{{ favourite.product.name }}</span>
                 <br>
                 {% if favourite.product.description %}
                   <span class="text-secondary">{{ favourite.product.description }}</span>
                 {% endif %}
                 <br>
-                
-                <div class="position-relative pe-5">
-                  <div class="position-absolute bottom-0 end-0">
-                    {{ favourite.product.price }}
-                  </div>
+                <br>
+                <div class="">
+                  {{ favourite.product.price }}
                 </div>
               </div>
-
+              <div class="col-1 col-lg-1 pt-2">
+                <i 
+                  class='bx bxs-x-square fs-4 text-danger'
+                  onclick="location.href= '{% url "favourites:delete_item" favourite.id %}' "
+                ></i>
+              </div>
               
             </div>
           </div>
