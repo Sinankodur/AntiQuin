@@ -18,18 +18,19 @@
     <h2 class="pt-3 pb-3">Favourites</h2>
     {% if favourites %}
     <div class="row">
-      <div class="col-lg-8">
+      
         {% for favourite in favourites %}  
+        <div class="col-lg-6 col-md-6">
           <div class="card mb-3">
-            <div class="row">
+            <div class="row p-3">
               <div class="col-4 col-lg-3 pb-3">
                 <a href="{% url "item:detail" favourite.product.id %}">
                   <img src="{{ favourite.product.image.url }}" class="img-fluid img-thumbnail ms-1 mt-2"/>
                 </a>  
               </div>
   
-              <div class="col-7 col-lg-8 pt-4 pb-4">
-                <span class="">{{ favourite.product.name }}</span>
+              <div class="col-6 col-lg-7 pt-4 pb-4">
+                <span>{{ favourite.product.name }}</span>
                 <br>
                 {% if favourite.product.description %}
                   <span class="text-secondary">{{ favourite.product.description }}</span>
@@ -37,20 +38,20 @@
                 <br>
                 <br>
                 <div class="">
-                  {{ favourite.product.price }}
+                  Rs. {{ favourite.product.price }}
                 </div>
               </div>
-              <div class="col-1 col-lg-1 pt-2">
+              <div class="col-2 col-lg-2 pt-2 ms-auto me-auto">
                 <i 
                   class='bx bxs-x-square fs-4 text-danger'
                   onclick="location.href= '{% url "favourites:delete_item" favourite.id %}' "
                 ></i>
               </div>
-              
             </div>
           </div>
+        </div>
         {% endfor %}
-      </div>
+      
     </div>
 </div>
 {% else %}

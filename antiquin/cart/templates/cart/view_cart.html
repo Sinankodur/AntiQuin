@@ -30,6 +30,9 @@
             
             <div class="col-6 col-lg-6">
               <div class="pt-2">{{ item.product.name }}</div>
+              {% if item.product.description %}
+                <span class="text-secondary">{{ item.product.description }}</span>
+              {% endif %}
              <div class="pb-2">
                 Rs. {{ item.product.price }}
               </div>
