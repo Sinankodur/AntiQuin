@@ -7,18 +7,70 @@
 
 <div class="container-fluid">
     {% if user.is_superuser %}
-        <button>Add Items</button>
-        <button class="btn btn-light">
-            <img src="{% static "img/web-store-icon.png" %}">
-        </button>
+    <h4>Welcome {{ request.user }}</h4>
+    <ul>
+        <li>
+            <button class="btn btn-light">
+                <span class="p-4 pe-5">Add Items</span>
+            </button>
+        </li>
 
-        <a href="{% url "logout_user" %}">logout</a>
+        <li>
+            <button 
+             class="btn btn-light"
+             onclick="location.href = '' "
+            >
+                <img src="{% static "img/web-store-icon.png" %}">
+                <span class="p-4 pe-5">Orders</span>
+            </button>
+        </li>
+
+        <li>
+            <div 
+             class="btn btn-light"
+             onclick="location.href = '' "
+            >
+                <img src="{% static "img/location-pin.png" %}">
+                <span class="p-4 pe-5">Address</span>
+            </div>
+        </li>
+
+        <li>
+            <button 
+             class="btn btn-light"
+             onclick="location.href = '{% url "sign-out" %}' "
+            >
+                <img src="{% static "img/log-out.png" %}">
+                <span class="p-4 pe-5">Sign out</span>
+            </button>
+        </li>
+    </ul>
+
     {% else %}
-        <button class="btn btn-light">
+    Welcome {{ request.user }}
+        <button 
+          class="btn btn-light"
+          onclick="location.href = '' "
+        >
             <img src="{% static "img/web-store-icon.png" %}">
+            <span class="p-4 pe-5">Orders</span>
         </button>
 
-        <a href="{% url "logout_user" %}">logout</a>
+        <div 
+          class="btn btn-light "
+          onclick="location.href = '' "
+        >
+            <img src="{% static "img/location-pin.png" %}">
+            <span class="p-4 pe-5">Address</span>
+        </div>
+
+        <button 
+          class="btn btn-light"
+          onclick="location.href = '{% url "sign-out" %}' "
+        >
+            <img src="{% static "img/log-out.png" %}">
+            <span class="p-4 pe-5">Sign out</span>
+        </button>
     {% endif %}
 
 

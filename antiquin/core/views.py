@@ -78,6 +78,6 @@ def sign_in(request):
 def success(request):
     return render(request, 'core/success.html')
 
-def logout_user(request):
+def sign_out(request):
     logout(request)
     return redirect('home')
