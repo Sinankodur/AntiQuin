@@ -18,8 +18,7 @@
   <h2 class="pt-3 pb-3">Your Cart</h2>
   {% if cart_items %}
   <div class="row">
-    
-      {% for item in cart_items %}  
+    {% for item in cart_items %}  
       <div class="col-lg-6 col-md-6">
         <div class="card mb-3 p-1">
           <div class="row p-1">
@@ -80,10 +79,16 @@
                   </div>
                 </div>
               </div>
-              <span>Subtotal: {{ item.subtotal }}</span>
+              <p>Subtotal: {{ item.subtotal }}</p>
+              <button 
+                class="btn btn-outline-warning text-dark"
+                onclick="location.href= '{% url "orders:order_now" item.product.id %}' "
+              >
+                Buy now
+              </button>
             </div>
 
-            <!-- cart delete btn -->
+            <!-- ------------ cart delete btn  --------------------- -->
             <div class="col-lg-1 col-1 pt-1 ms-auto me-auto">
               <i 
                 class='bx bxs-x-square fs-4 text-danger'
@@ -93,7 +98,7 @@
           </div>
         </div>
       </div>
-      {% endfor %}
+    {% endfor %}
     
   </div>
   <hr>

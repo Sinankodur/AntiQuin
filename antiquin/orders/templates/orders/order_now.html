@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Order Now{% endblock title %}
+
+{% block content %}
+    <h2>Order Now</h2>
+    <p>Product: {{ product.name }}</p>
+
+    <form method="post" action="{% url 'orders:order_now' product_id=product.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Place Order</button>
+    </form>
+{% endblock content %}
