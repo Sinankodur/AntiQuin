@@ -3,6 +3,8 @@
 {% block title %}Order Now{% endblock title %}
 
 {% block content %}
+
+<div class="container">
     <h2>Order Now</h2>
     <p>Product: {{ product.name }}</p>
 
@@ -11,4 +13,7 @@
         {{ form.as_p }}
         <button type="submit">Place Order</button>
     </form>
+</div>
+
+
 {% endblock content %}

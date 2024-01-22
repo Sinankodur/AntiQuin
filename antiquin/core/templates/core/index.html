@@ -30,7 +30,11 @@
           <div class="d-grid gap-2">
             <button 
               class="btn btn-warning"
+              {% if user.is_authenticated %}
               onclick="location.href = '{% url "cart:add_to_cart" product.id %}' "
+              {% else %}
+              onclick="location.href = '{% url 'sign-in' %}?next={% url "cart:add_to_cart" product.id %}' "
+              {% endif %}
             >
               Add to cart
             </button>

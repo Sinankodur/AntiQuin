@@ -119,6 +119,10 @@ body {
       height: 38rem;
       width: 39rem;
     }
+
+    .cart-category{
+      display: none;
+    }
   }
   
   @media screen and (max-width: 430px) {
@@ -200,7 +204,6 @@ body {
     list-style-type: none;
     margin-bottom: 1rem;
   }
-
 
   .profile-list li button{
     width: 100%;

@@ -1,112 +1,95 @@
 {% extends "core/base.html" %}
+{% load static %}
 
 {% block title %}Cart{% endblock title %}
 
 {% block content %}
 
-<div class="container">
-  <button 
-    onclick="history.back()"
-    class="btn btn-warning rounded-pill"
-  >
+<div class="container pb-5">
+  <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" onclick="history.back()">
     <i class='bx bx-arrow-back pe-1'></i>
     continue shopping
-  </button>
-  <br/>
-  <br/>
-
-  <h2 class="pt-3 pb-3">Your Cart</h2>
+  </a>
+  
+  <h2 class="pt-4 pb-1">Your Cart</h2>
+  <hr>
   {% if cart_items %}
-  <div class="row">
-    {% for item in cart_items %}  
-      <div class="col-lg-6 col-md-6">
-        <div class="card mb-3 p-1">
-          <div class="row p-1">
-            <div class="col-4 col-lg-3">
-              <a href="{% url "item:detail" item.product.id %}">
-                <img src="{{ item.product.image.url }}" class="img-thumbnail"  />
-              </a>
-            </div>
-            
-            <div class="col-6 col-lg-6">
-              <div class="pt-2">{{ item.product.name }}</div>
-              {% if item.product.description %}
-                <span class="text-secondary">{{ item.product.description }}</span>
-              {% endif %}
-             <div class="pb-1">
-                Rs. {{ item.product.price }}
-              </div>
+    <div class="row cart-category">
+      <div class="col-lg-5 col-md-5 col-sm-5 col-5">
+        <h5>PRODUCT</h5>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-3">
+        <h5>PRICE</h5>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 col-2">
+        <h5>QUANTITY</h5>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-2">
+        <h5>SUBTOTAL</h5>
+      </div>
+      <hr>
+    </div>
+    {% for item in cart_items %}
+    <div class="row pb-3">  
+      <div class="col-lg-1 col-md-1 col-sm-1 col-3">
+        <a href="{% url "item:detail" item.product.id %}">
+          <img src="{{ item.product.image.url }}" class="img-fluid" width="60rem"/>
+        </a>
+      </div>
 
-              <div class="row pb-1">
-                <div class="col-12">
-                  <div class="d-flex">
-                    <form 
-                      action="{% url 'cart:update_cart' item.product.id %}"
-                      method="post"
-                      class="d-flex"
-                    >
-                      {% csrf_token %}
-                      Quantity:
-                      <input type="hidden" name="action" value="remove">
-                      <button 
-                        class=" btn btn-light pb-0 pt-0 ps-1 pe-1 ms-1 me-1"
-                        type="submit"
-                      >
-                        <i class='bx bxs-minus-circle'></i>
-                      </button>
-                    </form>
-                    
-                    <input 
-                      type="text"
-                      class="text-center"
-                      value="{{ item.quantity }}"
-                      style="width: 1.5rem; height: 1.5rem;"
-                      readonly
-                    >
-                      <form 
-                        action="{% url 'cart:update_cart' item.product.id %}"
-                        method="post"
-                        class="d-flex"
-                      >
-                      {% csrf_token %}
-                      <input type="hidden" name="action" value="add">
-                      <button 
-                        class="btn btn-light pb-0 pt-0 ps-1 pe-1 ms-1 me-1"
-                      >
-                        <span><i class='bx bxs-plus-circle'></i></span>
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-              <p>Subtotal: {{ item.subtotal }}</p>
-              <button 
-                class="btn btn-outline-warning text-dark"
-                onclick="location.href= '{% url "orders:order_now" item.product.id %}' "
-              >
-                Buy now
-              </button>
-            </div>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-5">
+        <div class="pt-2">{{ item.product.name }}</div>
+        {% if item.product.description %}
+          <span class="text-secondary" style="font-size: .8rem;">{{ item.product.description }}</span>
+        {% endif %}
+      </div>
 
-            <!-- ------------ cart delete btn  --------------------- -->
-            <div class="col-lg-1 col-1 pt-1 ms-auto me-auto">
-              <i 
-                class='bx bxs-x-square fs-4 text-danger'
-                onclick="location.href= '{% url "cart:delete_item" item.id %}' "
-              ></i>
-            </div>
-          </div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-4 mt-4">
+        ₹ {{ item.product.price }}
+      </div>
+
+      <!-- ------------ quantity ---------- -->
+      <div class="col-lg-3 col-md-3 col-sm-3 col-5 mt-4">
+        <div class="d-flex">
+          <form action="{% url 'cart:update_cart' item.product.id %}" method="post" class="d-flex">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="remove">
+            <button class=" btn btn-light pb-0 pt-0 ps-1 pe-1 ms-1 me-1" type="submit">
+              <i class='bx bxs-minus-circle'></i>
+            </button>
+          </form>
+          
+          <input  type="text" class="text-center" value="{{ item.quantity }}" style="width: 1.5rem; height: 1.5rem;" readonly>
+            <form action="{% url 'cart:update_cart' item.product.id %}" method="post" class="d-flex">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="add">
+            <button class="btn btn-light pt-0 pb-0 ps-1 pe-1 ms-1 me-1">
+              <span><i class='bx bxs-plus-circle'></i></span>
+            </button>
+          </form>
         </div>
       </div>
+
+      <!-- --------------- subtotal ------------------ -->
+      <div class="col-lg-2 col-md-2 col-sm-2 col-6 mt-4">
+        -{{ item.subtotal }}
+        
+        <button class="btn btn-light ps-1 pe-1 pb-1 p-0 ms-3" onclick="location.href= '{% url "cart:delete_item" item.id %}' ">
+          <img src="{% static "img/bin.png" %}" ></img>
+        </button>
+      </div>
+    </div>
+    <hr>
     {% endfor %}
-    
-  </div>
-  <hr>
-  <div class="hstack gap-2 fs-4 pb-4">
-    <div class="p-2 me-auto">Total </div>
-    <div class="vr" style="height: 2.5rem;"></div>
-    <div class="p-2">₹{{ total }}</div>
-  </div>
+
+    <div class="hstack gap-2 fs-4 pb-4">
+      <div class="p-2 me-auto">Total </div>
+      <div class="vr" style="height: 2.5rem;"></div>
+      <div class="p-2">₹{{ total }}</div>
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <button class="btn btn-dark rounded-0 ps-5 pe-5 p-2">Checkout</button>
+    </div>
 </div>
 
 {% else %}

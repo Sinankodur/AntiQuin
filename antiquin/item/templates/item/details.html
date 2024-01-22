@@ -7,26 +7,24 @@
   <div class="row">
     <div class="col-lg-7 col-md-7 col-sm-7 mb-4">
       <div class="card">
-        <div class="card-img">
-          {% if product.image %}
-          <img
-            src="{{ product.image.url }}"
-            alt=""
-            class="img-fluid rounded mx-auto d-block"
-          />
-          {% else %}
-          <img src="#" alt="image of {{ product.name }}" class="img-fluid item-img" />
-          <h1 class="text-center p-5">Image not Available</h1>
+        {% if product.image %}
+        <img src="{{ product.image.url }}" width="350rem" class="img-fluid rounded mx-auto d-block"/>
+        {% else %}
+        <img src="#" alt="image of {{ product.name }}" class="img-fluid item-img object-fit-none" />
+        <h1 class="text-center p-5">Image not Available</h1>
           {% endif %}
-        </div>
       </div>
     </div>
 
     <div class="col-lg-5 col-md-5 col-sm-5">
       <div class="card position-relative p-3">
         <div>
-          <a 
+          <a
+            {% if user.is_authenticated %}
             href="{% url "favourites:add_to_favourites" product.id %}" 
+            {% else %}
+            href ="{% url 'sign-in' %}?next={% url "favourites:add_to_favourites" product.id %}"
+            {% endif %}
             class="btn-add-to-favourite text-black fs-1 position-absolute top-0 end-0 mt-1 pt-1 me-3"
           >
             <i class='bx bxs-heart' style='color:#ff0000'></i>
@@ -34,7 +32,7 @@
         </div>
         
         {% if product.description %}
-        <h5 class='card-title'>{{ product.description }}</h5>
+        <h5 class="text-dark" style="font-size: 1.1rem;">{{ product.description }}</h5>
 
         <p class="card-text">{{ product.name }}</p>
         {% else %}
@@ -46,7 +44,7 @@
         {% if user.is_staff %}
         <div class="container">
           <div class='row p-3 bg-body-tertiary rounded'>
-            <p>This is your item!</p>
+            <p>You can work with your products!</p>
             <div class='col-6'>
               <button 
                 class="btn btn-outline-danger ps-4 pe-4"
@@ -68,10 +66,13 @@
           <i class='bx bx-info-circle'></i>
           Delivery Time : 2-7 Days
         </p> 
-<!-- ------------------ got a problem here when anonymous user ------------------------ -->
         <button 
           class="btn btn-warning fs-6"
+          {% if user.is_authenticated %}
           onclick="location.href = '{% url "cart:add_to_cart" product.id %}' "
+          {% else %}
+          onclick="location.href = '{% url 'sign-in' %}?next={% url "cart:add_to_cart" product.id %}' "
+          {% endif %}
         >
           Add
           <i class='bx bx-shopping-bag fw-medium'></i>
