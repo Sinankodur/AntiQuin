@@ -18,8 +18,9 @@
   <h2 class="pt-3 pb-3">Your Cart</h2>
   {% if cart_items %}
   <div class="row">
-    <div class="col-lg-7">
+    
       {% for item in cart_items %}  
+      <div class="col-lg-6 col-md-6">
         <div class="card mb-3 p-1">
           <div class="row p-1">
             <div class="col-4 col-lg-3">
@@ -33,11 +34,11 @@
               {% if item.product.description %}
                 <span class="text-secondary">{{ item.product.description }}</span>
               {% endif %}
-             <div class="pb-2">
+             <div class="pb-1">
                 Rs. {{ item.product.price }}
               </div>
 
-              <div class="row mb-2">
+              <div class="row pb-1">
                 <div class="col-12">
                   <div class="d-flex">
                     <form 
@@ -47,7 +48,6 @@
                     >
                       {% csrf_token %}
                       Quantity:
-                      <br>
                       <input type="hidden" name="action" value="remove">
                       <button 
                         class=" btn btn-light pb-0 pt-0 ps-1 pe-1 ms-1 me-1"
@@ -92,11 +92,18 @@
             </div>
           </div>
         </div>
+      </div>
       {% endfor %}
-      <p>Total: {{ total }}</p>
-    </div>
+    
+  </div>
+  <hr>
+  <div class="hstack gap-2 fs-4 pb-4">
+    <div class="p-2 me-auto">Total </div>
+    <div class="vr" style="height: 2.5rem;"></div>
+    <div class="p-2">₹{{ total }}</div>
   </div>
 </div>
+
 {% else %}
 <p class="text-center text-body-tertiary pt-3">Your cart is empty</p>
 {% endif %}
