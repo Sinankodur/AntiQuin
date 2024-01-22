@@ -68,12 +68,12 @@ def searchProduct(request):
         })
 
 
-# Account section
-# @login_required
-# def add_items(request):
-#     form = NewProductForm()
+# Account section -- staff only logic --
+@login_required
+def add_items(request):
+    form = NewProductForm()
 
-#     return render(request, 'item/form.html', { 
-#         'form' : form,
-#         'title' : 'Add Items',
-#     })
+    return render(request, 'item/form.html', { 
+        'form' : form,
+        'title' : 'Add Items',
+    })

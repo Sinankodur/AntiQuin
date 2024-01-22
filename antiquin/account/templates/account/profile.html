@@ -13,28 +13,11 @@
                 <br>
                 <ul class="profile-list ps-0">
                     <li>
-                        <button class="btn btn-light p-2">
-                            <span class="">Add Items</span>
-                        </button>
-                    </li>
-
-                    <li>
                         <button 
-                        class="btn btn-light"
-                        onclick="location.href = '' "
+                         class="btn btn-light p-2"
+                         onclick="location.href= '{% url "item:new" %}' "
                         >
-                            <img src="{% static "img/web-store-icon.png" %}" class="me-auto">
-                            <span class="p-5 pe-5">Orders</span>
-                        </button>
-                    </li>
-
-                    <li>
-                        <button 
-                        class="btn btn-light"
-                        onclick="location.href = '' "
-                        >
-                            <img src="{% static "img/location-pin.png" %}">
-                            <span class="p-4 pe-5">Address</span>
+                            Add Items
                         </button>
                     </li>
 
