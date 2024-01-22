@@ -40,7 +40,7 @@
                 <li>
                     <button 
                     class="btn btn-light"
-                    onclick="location.href = '' "
+                    onclick="location.href = '{% url "orders:view_orders" %}' "
                     >
                         <img src="{% static "img/web-store-icon.png" %}" class="me-auto">
                         <span class="p-5 pe-5">Orders</span>
@@ -78,6 +78,10 @@
                 </li>
             </ul>
             {% endif %}
+        </div>
+
+        <div class="col-lg-8">
+            {% block profile %}{% endblock profile %}
         </div>
     </div>
 </div>
