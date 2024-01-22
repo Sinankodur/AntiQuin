@@ -13,7 +13,7 @@ def home(request):
     cart_items = None
     favourites = None
     categories = Category.objects.all()
-    products = Product.objects.filter(is_sold=False)[:8]
+    products = Product.objects.filter(is_sold=False)
 
     if request.user.is_authenticated:
         user = request.user

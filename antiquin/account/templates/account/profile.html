@@ -12,12 +12,13 @@
                 <h4>Welcome {{ request.user }}</h4>
                 <br>
                 <ul class="profile-list ps-0">
-                    <li>
+                    <li class="mb-auto">
                         <button 
                          class="btn btn-light p-2"
                          onclick="location.href= '{% url "item:new" %}' "
                         >
-                            Add Items
+                        <img src="{% static "img/new.png" %}">
+                        <span class="p-4 pe-5">Add Items</span>
                         </button>
                     </li>
 

@@ -6,12 +6,13 @@
 
 <h1 class="text-center"> {{ title }}</h1>
 
-<div class="container pt-4">
+<div class="container pb-3">
     <form method="post" action="." enctype="multipart/form-data">
         {% csrf_token %}
-        
-        <div>
-            {{ form.as_p }}
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                {{ form.as_p }}
+            </div>
         </div>
 
         {% if form.errors or form.non_field_errors %}

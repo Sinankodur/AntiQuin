@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
@@ -71,7 +71,18 @@ def searchProduct(request):
 # Account section -- staff only logic --
 @login_required
 def add_items(request):
-    form = NewProductForm()
+    if request.method == 'POST':
+        form = NewProductForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            item = form.save(commit=False)
+            item.created_by = request.user
+            item.save()
+
+            return redirect('item:detail', pk=item.id)
+        
+    else:
+        form = NewProductForm()
 
     return render(request, 'item/form.html', { 
         'form' : form,

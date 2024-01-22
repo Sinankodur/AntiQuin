@@ -57,39 +57,36 @@
       <div class="container signup-form">
         <h1 class="text-center text-dark">
           Sign in to
+        </h1>
+        <h5 class="text text-center pb-3 pt-1">
           <a class="bg-warning text-dark ps-2 pe-2"
              href="{% url "home" %}"
              title="Home"
             >AntiQuin</a
           >
-        </h1>
-        <h5 class="text text-center pb-5">
-          
         </h5>
-        <div>
           <form 
             action="{% if request.GET.next %}{% url 'sign-in' %}?next={{ request.GET.next }}
             {% else %}{% url 'sign-in' %}{% endif %}" 
             method="post"
           >
-            {% csrf_token %} {{ form.username }} {{ form.password }} 
-            {% if form.errors or form.non_field_errors %}
-              <div class="text-danger-emphasis fs-6 lh-sm">
-                {% for field in form %} 
-                  {{ field.errors }} 
-                {% endfor %}
-                {{form.non_field_errors }}
-              </div>
-            {% endif %}
-            <br />
-            <div class="text-center pb-4">
-              <button class="btn btn-dark" type="submit">Sign in</button>
+          {% csrf_token %} {{ form.username }} {{ form.password }} 
+          {% if form.errors or form.non_field_errors %}
+            <div class="text-danger-emphasis fs-6 lh-sm">
+              {% for field in form %} 
+                {{ field.errors }} 
+              {% endfor %}
+              {{form.non_field_errors }}
             </div>
-            <p class='text-center'> Don't have an account? 
-              <a href="{% url "sign_up" %}"> Create an account</a>
-            </p>
-          </form>
-        </div>
+          {% endif %}
+          <br />
+          <div class="text-center pb-4">
+            <button class="btn btn-dark" type="submit">Sign in</button>
+          </div>
+          <p class='text-center'> Don't have an account? 
+            <a href="{% url "sign_up" %}"> Create an account</a>
+          </p>
+        </form>
       </div>
     </div>
   </body>
