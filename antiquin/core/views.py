@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login, authenticate
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 from item.models import Category, Product
 from cart.models import Cart, CartItem
@@ -14,6 +16,19 @@ def home(request):
     favourites = None
     categories = Category.objects.all()
     products = Product.objects.filter(is_sold=False)
+
+    items_per_page = 8
+
+    paginator = Paginator(products, items_per_page)
+
+    page = request.GET.get('page')
+
+    try:
+        paginated_products = paginator.page(page)
+    except PageNotAnInteger:
+        paginated_products = paginator.page(1)
+    except EmptyPage:
+        paginated_products = paginator.page(paginator.num_pages)
 
     if request.user.is_authenticated:
         user = request.user
@@ -29,7 +44,7 @@ def home(request):
 
         return render(request, 'core/index.html', {
             'categories': categories,
-            'products': products,
+            'products': paginated_products,
             'total': total,
             'product_count': product_count,
             'fav_count': fav_count,
@@ -37,7 +52,7 @@ def home(request):
 
     return render(request, 'core/index.html',{
         'categories' : categories,
-        'products' : products
+        'products' : paginated_products
     })
 
 
