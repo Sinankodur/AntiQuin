@@ -12,7 +12,7 @@
                 <h4>Welcome {{ request.user }}</h4>
                 <br>
                 <ul class="profile-list ps-0">
-                    <li class="mb-auto">
+                    <li>
                         <button 
                          class="btn btn-light p-2"
                          onclick="location.href= '{% url "item:new" %}' "
@@ -36,7 +36,7 @@
             {% else %}
             <h4>Welcome {{ request.user }}</h4>
             <br>
-            <ol class="profile-list ps-0">
+            <ul class="profile-list ps-0">
                 <li>
                     <button 
                     class="btn btn-light"
@@ -62,16 +62,6 @@
                     class="btn btn-light"
                     onclick="location.href = '' "
                     >
-                        <img src="{% static "img/credit-card.png" %}">
-                        <span class="p-4 pe-5">Payment Details</span>
-                    </button>
-                </li>
-
-                <li>
-                    <button 
-                    class="btn btn-light"
-                    onclick="location.href = '' "
-                    >
                         <img src="{% static "img/phone.png" %}">
                         <span class="p-4 pe-5">Contact Us</span>
                     </button>
@@ -86,7 +76,7 @@
                         <span class="p-4 pe-5">Sign out</span>
                     </button>
                 </li>
-            </ol>
+            </ul>
             {% endif %}
         </div>
     </div>

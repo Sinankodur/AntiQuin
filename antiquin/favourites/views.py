@@ -8,7 +8,7 @@ from cart.models import Cart, CartItem
 def add_to_favourites(request, product_id):
     product_id = int(product_id)
     user = request.user
-
+    
     if not Favourite.objects.filter(user=user, product_id=product_id).exists():
         favourites = Favourite(user=user, product_id=product_id)
         favourites.save()
