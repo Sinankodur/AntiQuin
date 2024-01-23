@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 
 from item.models import Category, Product
@@ -26,3 +27,9 @@ def profile(request):
         'product_count': product_count,
         'fav_count': fav_count,
     })
+
+
+
+@login_required
+def address(request):
+    return render(request, 'account/address.html')
