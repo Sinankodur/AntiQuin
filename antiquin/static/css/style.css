@@ -106,14 +106,6 @@ body {
     font-size: 2.5rem;
   }
   
-  /* .insta :hover{
-      color: rgb(225, 48, 108);
-  }
-  
-  .wtsp :hover{
-      color: rgb(37, 211, 102);
-  } */
-  
   @media screen and (max-width: 575.5px) {
     .item-img {
       height: 38rem;
@@ -162,7 +154,7 @@ body {
   }
   
   .social-media-link :hover {
-    color: white;
+    color: white ;
   }
   
   /* ---------------- MENU CLOSE BUTTON --------------------------- */
