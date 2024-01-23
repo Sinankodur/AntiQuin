@@ -43,23 +43,21 @@
         <div class="search-bar pt-3 ms-auto">
           <!-- search filter -->
             <ul class="search-bar-list rounded">
-              <li class="dropdown mt-2 pt-1 ms-2">
+              <li class="dropdown mt-2 pt-1 ms-2" id="categoryDropdown">
                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Categories
+                    Categories
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{% url "home" %}">All categories</a></li>
-
-                  {% for category in categories %}
+                    <li><a class="dropdown-item" href="{% url "home" %}">All categories</a></li>
+                    {% for category in categories %}
                     <li>
-                      <a class="dropdown-item" href="#">
-                        {{ category.name }}
-                      </a>
+                        <a class="dropdown-item category-link" href="#" data-category="{{ category.name }}">
+                            {{ category.name }}
+                        </a>
                     </li>
-                  {% endfor %}
-
+                    {% endfor %}
                 </ul>
-              </li>
+            </li>            
 
               <li class="me-auto mt-auto">
                 <div>

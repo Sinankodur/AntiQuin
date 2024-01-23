@@ -51,7 +51,7 @@
       <!-- ------------ quantity ---------- -->
       <div class="col-lg-3 col-md-3 col-sm-3 col-5 mt-4">
         <div class="d-flex">
-          <form action="{% url 'cart:update_cart' item.id %}" method="post" class="d-flex">
+          <form action="{% url 'cart:update_cart' item.product.id %}" method="post" class="d-flex">
             {% csrf_token %}
             <input type="hidden" name="action" value="remove">
             <button class=" btn btn-light pb-0 pt-0 ps-1 pe-1 ms-1 me-1" type="submit">

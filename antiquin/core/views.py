@@ -17,7 +17,7 @@ def home(request):
     categories = Category.objects.all()
     products = Product.objects.filter(is_sold=False)
 
-    items_per_page = 8
+    items_per_page = 12
 
     paginator = Paginator(products, items_per_page)
 

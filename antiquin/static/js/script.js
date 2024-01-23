@@ -1,16 +1,24 @@
-// let updateBtns = document.getElementsByClassName('update-cart')
+document.addEventListener("DOMContentLoaded", function () {
+  const categoryLinks = document.querySelectorAll(".category-link");
+  const productItems = document.querySelectorAll(".product-item");
 
-// for(var i = 0; i < updateBtns.length; i++){
-//     updateBtns[i].addEventListener('click', function(){
-//         let productId = this.dataset.product
-//         let action = this.dataset.action
-//         console.log('productId:', productId, 'action:', action);
+  categoryLinks.forEach((link) => {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      const selectedCategory = this.getAttribute("data-category");
 
-//         console.log('USER:', user);
-//         if(user == 'AnonymousUser'){
-//             console.log('not logged in')
-//         }else{
-//             console.log('adding items...');
-//         }
-//     })
-// }
+      // Hide all products
+      productItems.forEach((item) => {
+        item.style.display = 'none';
+      });
+
+      // Show products of the selected category
+      const selectedCategoryItems = document.querySelectorAll(
+        `.category-${selectedCategory}`
+      );
+      selectedCategoryItems.forEach((item) => {
+        item.style.display = 'block';
+      });
+    });
+  });
+});
