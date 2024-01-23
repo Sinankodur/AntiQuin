@@ -5,20 +5,16 @@
 {% block content %}
 
 <div class="container">
-    <button 
-      onclick="history.back()"
-      class="btn btn-warning rounded-pill"
-    >
-      <i class='bx bx-arrow-back pe-1'></i>
-      continue shopping
-    </button>
-    <br/>
-    <br/>
-  
-    <h2 class="pt-3 pb-3">Favourites</h2>
+  <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" onclick="history.back()">
+    <i class='bx bx-arrow-back pe-1'></i>
+    continue shopping
+  </a>
+
+    <h2 class="pt-4 pb-1">Favourites</h2>
+    <hr>
     {% if favourites %}
     <div class="row">
-      
+
         {% for favourite in favourites %}  
         <div class="col-lg-6 col-md-6">
           <div class="card mb-3">
