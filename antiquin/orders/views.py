@@ -32,14 +32,14 @@ def order_now(request, product_id):
 
             cart_item.delete()
 
-            # You may want to integrate payment processing here
+            # may to integrate payment processing here
 
-            return render(request, 'orders/thank_you.html', {'order': order})
+            return render(request, '/orders/thank_you.html', {'order': order})
 
     else:
         form = OrderForm()
 
-    return render(request, 'orders/order_now.html', {'product': product, 'form': form})
+    return render(request, '/orders/order_now.html', {'product': product, 'form': form})
 
 
 

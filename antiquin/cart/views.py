@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
 
 
 from .models import Cart, CartItem, Product
@@ -10,9 +9,6 @@ from item.models import Category
 from favourites.models import Favourite
 
 
-def edit(request):
-    if not request.user.is_staff:
-        raise PermissionDenied
 
 @login_required
 def add_to_cart(request, product_id):
@@ -24,7 +20,7 @@ def add_to_cart(request, product_id):
         cart_item.quantity += 1
         cart_item.save()
 
-    return redirect('/cart/view_cart')
+    return redirect('/cart/')
 
 
 @login_required
@@ -43,7 +39,7 @@ def update_cart(request, product_id):
 
         cart_item.save()
 
-    return redirect('/cart/view_cart')
+    return redirect('/cart/')
 
 
 @login_required
@@ -79,4 +75,4 @@ def view_cart(request):
 def delete_item(request, item_id):
     item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)
     item.delete()
-    return redirect('/cart/view_cart')
+    return redirect('/cart/')

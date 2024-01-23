@@ -51,7 +51,7 @@
       <!-- ------------ quantity ---------- -->
       <div class="col-lg-3 col-md-3 col-sm-3 col-5 mt-4">
         <div class="d-flex">
-          <form action="{% url 'cart:update_cart' item.product.id %}" method="post" class="d-flex">
+          <form action="{% url 'cart:update_cart' item.id %}" method="post" class="d-flex">
             {% csrf_token %}
             <input type="hidden" name="action" value="remove">
             <button class=" btn btn-light pb-0 pt-0 ps-1 pe-1 ms-1 me-1" type="submit">
@@ -88,7 +88,9 @@
       <div class="p-2">₹{{ total }}</div>
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button class="btn btn-dark rounded-0 ps-5 pe-5 p-2">Checkout</button>
+      <button class="btn btn-dark rounded-0 ps-5 pe-5 p-2" 
+        href="location.href= '' "
+      >Checkout</button>
     </div>
 </div>
 

@@ -1,85 +1,95 @@
-{% extends "core/base.html" %}
-
-{% block title %}Address{% endblock title %}
-
+{% extends "core/base.html" %} 
+{% block title %}Address{% endblock title %} 
 {% block content %}
 
 <div class="container">
-    <div class="row">
-        <div class="col-lg-8 pb-5">
-            <h3 class="pb-4">Shipping Address</h3>
-            <form class="row g-3">
-                <div class="col-12">
-                  <input type="text" class="form-control" id="inputAddress" placeholder="house no., floor, apartment" autofocus required>
-                  <label for="inputAddress" class="form-label ms-auto" style="font-size: .9rem;">Address</label>
-                </div>
-                <div class="col-12">
-                  <input type="text" class="form-control" id="inputAddress2" placeholder="area, street,village">
-                  <label for="inputAddress2" class="form-label ms-auto" style="font-size: .9rem;">Address 2</label>
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" id="inputCity" required>
-                  <label for="inputCity" class="form-label ms-auto" style="font-size: .9rem;">City</label>
-                </div>
-                <div class="col-md-6">
-                  <select id="inputState" class="form-select" required="">
-                    <option>Choose...</option>
-                    <option>Andhra Pradesh</option>
-                    <option>Chhattisgarh</option>
-                    <option>Delhi</option>
-                    <option>Goa</option>
-                    <option>Jharkhand</option>
-                    <option>Karnataka</option>
-                    <option>Kerala</option>
-                    <option>Madhya Pradesh</option>
-                    <option>Maharashtra</option>
-                    <option>Mizoram</option>
-                    <option>Puducherry</option>
-                    <option>Tamil Nadu</option>
-                    <option>Telangana</option>
-                    <option>Uttar Pradesh</option>
-                  </select>
-                  <label for="inputState" class="form-label ms-auto" style="font-size: .9rem;">State</label>
-                </div>
-                <div class="col-md-2">
-                  <input type="text" class="form-control" id="inputZip" required>
-                  <label for="inputZip" class="form-label ms-auto" style="font-size: .9rem;">PIN Code</label>
-                </div>
-                <div class="col-12">
-                  <button type="submit" class="btn btn-dark rounded-0 ps-5 pe-5">Submit</button>
-                </div>
-            </form>
+  <div class="row">
+    <div class="col-lg-8 pb-5">
+      <h3 class="pb-4">Shipping Address</h3>
+      <form class="row g-3">
+        <div class="col-12">
+          <input
+            type="text"
+            class="form-control"
+            id="inputAddress"
+            placeholder="house no., floor, apartment"
+            autofocus
+            required
+          />
+          <label
+            for="inputAddress"
+            class="form-label ms-auto"
+            style="font-size: 0.9rem"
+            >Address line</label
+          >
         </div>
-
-        
-        <div class="col-lg-4 pt-auto">
-            <div class="card rounded-0 text-secondary-emphasis p-3">
-                <span class="text-center fs-3">Order Summary</span>
-                <hr>
-                <div class="row">
-                    <div class="col-4">Product</div>
-                    <div class="vr p-0"></div>
-                    <div class="col-3">Qty</div>
-                    <div class="vr p-0"></div>
-                    <div class="col-3">Price</div>
-                </div>
-                <hr>
-        <!-- orders shown here -->
-                {% if orders %}
-                Items
-                <div class="row">
-                    <div class="col-12">
-                        Total
-                    </div>
-                </div>
-                {% else %}
-                <span class="text-center">You haven't ordered anything</span>
-                {% endif %}
-                
-            </div>
+        <div class="col-12">
+          <input
+            type="text"
+            class="form-control"
+            id="inputAddress2"
+            placeholder="area, street,village"
+          />
+          <label
+            for="inputAddress2"
+            class="form-label ms-auto"
+            style="font-size: 0.9rem"
+            >Address line 2</label
+          >
         </div>
-        
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="inputCity" required />
+          <label
+            for="inputCity"
+            class="form-label ms-auto"
+            style="font-size: 0.9rem"
+            >City</label
+          >
+        </div>
+        <div class="col-md-6">
+          <select id="inputState" class="form-select" required="True">
+            <option>Choose...</option>
+            <option>Andhra Pradesh</option>
+            <option>Chhattisgarh</option>
+            <option>Delhi</option>
+            <option>Goa</option>
+            <option>Jharkhand</option>
+            <option>Karnataka</option>
+            <option>Kerala</option>
+            <option>Madhya Pradesh</option>
+            <option>Maharashtra</option>
+            <option>Mizoram</option>
+            <option>Puducherry</option>
+            <option>Tamil Nadu</option>
+            <option>Telangana</option>
+            <option>Uttar Pradesh</option>
+          </select>
+          <label
+            for="inputState"
+            class="form-label ms-auto"
+            style="font-size: 0.9rem"
+            >State</label
+          >
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" id="inputZip" required />
+          <label
+            for="inputZip"
+            class="form-label ms-auto"
+            style="font-size: 0.9rem"
+            >PIN Code</label
+          >
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-dark rounded-0 ps-5 pe-5">
+            Submit
+          </button>
+        </div>
+      </form>
     </div>
+
+    
+  </div>
 </div>
 
 {% endblock content %}

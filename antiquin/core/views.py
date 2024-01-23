@@ -30,11 +30,14 @@ def home(request):
     except EmptyPage:
         paginated_products = paginator.page(paginator.num_pages)
 
+    # cart total, count and favourite count
     if request.user.is_authenticated:
         user = request.user
 
         user_cart, created = Cart.objects.get_or_create(user=user)
 
+        # categories = Category.objects.all()
+        
         cart_items = CartItem.objects.filter(cart=user_cart)
         product_count = cart_items.count()
         total = sum(item.product.price * item.quantity for item in cart_items)
@@ -44,6 +47,7 @@ def home(request):
 
         return render(request, 'core/index.html', {
             'categories': categories,
+            # here products need not to be called
             'products': paginated_products,
             'total': total,
             'product_count': product_count,
