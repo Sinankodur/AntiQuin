@@ -25,16 +25,18 @@
                 </a>  
               </div>
   
-              <div class="col-6 col-lg-7 pt-4 pb-4">
+              <div class="col-6 col-lg-7 pt-2">
                 <span>{{ favourite.product.name }}</span>
                 <br>
                 {% if favourite.product.description %}
                   <span class="text-secondary" style="font-size: .8rem;">{{ favourite.product.description }}</span>
                 {% endif %}
                 <br>
-                <br>
-                <div class="">
+                <div>
                   Rs. {{ favourite.product.price }}
+                </div>
+                <div class="pt-2">
+                  <a class="btn btn-warning" href="{% url "favourites:move_to_cart" favourite.product.id %}">Add to cart</a>
                 </div>
               </div>
               <div class="col-2 col-lg-2 pt-2 ms-auto me-auto">

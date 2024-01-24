@@ -40,11 +40,22 @@ def view_favourites(request):
     })
 
 @login_required
-def delete_item(request, item_id):
-    item = get_object_or_404(Favourite, id=item_id, user=request.user)
-    item.delete()
+def delete_item(request, product_id):
+    product = get_object_or_404(Favourite, id=product_id, user=request.user)
+    product.delete()
     return redirect('/favourites')
 
 @login_required
-def move_to_cart(request,product_id):
-    
+def move_to_cart(request, product_id):
+    favourite = get_object_or_404(Favourite, product_id=product_id, user=request.user)
+
+    cart, created = Cart.objects.get_or_create(user=request.user)
+    cart_item, created = CartItem.objects.get_or_create(cart=cart, product=favourite.product)
+
+    favourite.delete()
+
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+
+    return redirect('/cart/')
