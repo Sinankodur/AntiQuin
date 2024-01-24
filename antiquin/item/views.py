@@ -42,6 +42,7 @@ def searchProduct(request):
         searched = request.POST['searched']
         products = Product.objects.filter(Q(name__contains=searched) | Q(description__contains=searched) )
         categories = Category.objects.all()
+        
 
     if request.user.is_authenticated:
         user = request.user.id
@@ -65,7 +66,7 @@ def searchProduct(request):
         'searched': searched,
         'products': products,
         'categories': categories,
-        })
+    })
 
 
 # Account section -- staff only logic --
