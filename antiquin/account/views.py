@@ -74,8 +74,8 @@ def add_address(request):
             }
             address_instance = Address.objects.create(**address_data)
 
-            return redirect('/orders/')
+            return redirect('/account/profile')
     else:
         form = AddressForm()
 
-    return render(request, 'my_template.html', {'form': form})
+    return render(request, 'account/address.html', {'form': form})

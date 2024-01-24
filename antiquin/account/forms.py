@@ -1,8 +1,11 @@
 from django import forms
 
+
 class AddressForm(forms.Form):
-    inputAddress = forms.CharField(
-        label='Address line',
+    class Meta:
+        fields = {'address1', 'address2', 'city', 'state', 'pincode'}
+
+    address1 = forms.CharField(
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'id': 'inputAddress',
@@ -11,24 +14,21 @@ class AddressForm(forms.Form):
             'required': True,
         })
     )
-    inputAddress2 = forms.CharField(
-        label='Address line 2',
+    address2 = forms.CharField(
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'id': 'inputAddress2',
             'placeholder': 'area, street, village',
         })
     )
-    inputCity = forms.CharField(
-        label='City',
+    city = forms.CharField(
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'id': 'inputCity',
             'required': True,
         })
     )
-    inputState = forms.ChoiceField(
-        label='State',
+    state = forms.ChoiceField(
         choices=[
             ('', 'Choose...'),
             ('1', 'Andhra Pradesh'),
@@ -40,15 +40,14 @@ class AddressForm(forms.Form):
         ],
         widget=forms.Select(attrs={
             'class': 'form-select',
-            'id': 'inputState',
+            # 'id': 'inputState',
             'required': True,
         })
     )
-    inputZip = forms.CharField(
-        label='PIN Code',
+    pincode = forms.CharField(
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'id': 'inputZip',
+            # 'id': 'inputZip',
             'required': True,
         })
     )
