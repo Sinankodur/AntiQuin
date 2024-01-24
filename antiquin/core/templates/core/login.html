@@ -28,7 +28,7 @@
     />
     <!-- css file -->
     <link rel="stylesheet" href="{% static "css\style.css" %}">
-    <title>Sign in | AntiQuin</title>
+    <title>Sign in</title>
   </head>
   <body>
 
@@ -56,15 +56,15 @@
     <div class="container pt-5">
       <div class="container signup-form">
         <h1 class="text-center text-dark">
-          Sign in to
+          <u>Sign in</u>
         </h1>
-        <h5 class="text text-center pb-3 pt-1">
-          <a class="bg-warning text-dark ps-2 pe-2"
+        <p class="text text-center pb-3 pt-1">
+          <a class="bg-warning text-dark text-decoration-none ps-2 pe-2 fs-6"
              href="{% url "home" %}"
              title="Home"
             >AntiQuin</a
           >
-        </h5>
+        </p>
           <form 
             action="{% if request.GET.next %}{% url 'sign-in' %}?next={{ request.GET.next }}
             {% else %}{% url 'sign-in' %}{% endif %}" 
@@ -84,6 +84,7 @@
             <button class="btn btn-dark" type="submit">Sign in</button>
           </div>
           <p class='text-center'> Don't have an account? 
+            <br>
             <a href="{% url "sign_up" %}"> Create an account</a>
           </p>
         </form>

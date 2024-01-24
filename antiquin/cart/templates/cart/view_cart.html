@@ -8,7 +8,7 @@
 <div class="container pb-5">
   <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" onclick="history.back()">
     <i class='bx bx-arrow-back pe-1'></i>
-    continue shopping
+    Continue shopping
   </a>
   
   <h2 class="pt-4 pb-1">Your Cart</h2>
@@ -79,7 +79,9 @@
         </button>
       </div>
     </div>
-    <a href="{% url "cart:move_to_favourites" item.product.id %}">move to favourites</a>
+    <a href="{% url "cart:move_to_favourites" item.product.id %}" class="link-secondary link-offset-1 link-underline-opacity-50 link-underline-opacity-100-hover">
+      Move to favourites
+    </a>
     <hr>
     {% endfor %}
 
