@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 
 from item.models import Category, Product
 from cart.models import Cart, CartItem
 from favourites.models import Favourite
+from .forms import AddressForm
 
 def profile(request):
     user = request.user
@@ -56,3 +57,16 @@ def address(request):
         'product_count' : product_count,
         'fav_count' : fav_count,
     })
+
+def add_address(request):
+    if request.method == 'POST':
+        addressform = AddressForm(request.POST)
+        if addressform.is_valid():
+            address_instance = addressform.save(commit=False)
+            address_instance.save()
+
+            return redirect('/orders/')
+    else:
+        addressform = AddressForm()
+
+    return render(request, 'account/address.html', {'form': addressform})
