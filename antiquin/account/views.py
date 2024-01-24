@@ -6,6 +6,7 @@ from item.models import Category, Product
 from cart.models import Cart, CartItem
 from favourites.models import Favourite
 from .forms import AddressForm
+from .models import Address
 
 def profile(request):
     user = request.user
@@ -58,15 +59,23 @@ def address(request):
         'fav_count' : fav_count,
     })
 
+
+
 def add_address(request):
     if request.method == 'POST':
-        addressform = AddressForm(request.POST)
-        if addressform.is_valid():
-            address_instance = addressform.save(commit=False)
-            address_instance.save()
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            address_data = {
+                'address_line': form.cleaned_data['inputAddress'],
+                'address_line2': form.cleaned_data['inputAddress2'],
+                'city': form.cleaned_data['inputCity'],
+                'state': form.cleaned_data['inputState'],
+                'pin_code': form.cleaned_data['inputZip'],
+            }
+            address_instance = Address.objects.create(**address_data)
 
             return redirect('/orders/')
     else:
-        addressform = AddressForm()
+        form = AddressForm()
 
-    return render(request, 'account/address.html', {'form': addressform})
+    return render(request, 'my_template.html', {'form': form})

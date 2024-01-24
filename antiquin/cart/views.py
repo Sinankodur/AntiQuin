@@ -27,10 +27,8 @@ def add_to_cart(request, product_id):
 def update_cart(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     
-    # Get the cart for the logged-in user
     cart = Cart.objects.get(user=request.user)
     
-    # Get the cart item for the specified product and cart
     cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
 
     if request.method == 'POST':
