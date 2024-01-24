@@ -36,7 +36,6 @@
       .responsive-menu-bar li{
         width: 100%;
         list-style: none;
-        padding-left: 0;
       }
     </style>
     <title>{% block title %}{% endblock title %} | AntiQuin</title>
@@ -193,18 +192,27 @@
           </div>
           <div class="offcanvas-body">
             <div class='responsive-menu-bar'>
-              <ul>
-                <li>
-                  
+              <ul class="ps-0">
+                <li class="pb-3">
+                  <a href="" class="text-decoration-none">
+                    <img src="{% static "img/user-circle.png" %}" alt="" width="40rem">
+                    <span class="ps-5 pe-5">Profile</span>
+                  </a>
                 </li>
 
-                <li>
-                  
+                <li class="pb-3">
+                  <a href="" class="text-decoration-none">
+                    <img src="{% static "img/heart.png" %}" alt="" width="40rem">
+                    <span class="ps-5 pe-5">Your Favourites</span>
+                  </a>
                 </li>
 
                 <!-- view cart ------------------- -->
-                <li>
-                  
+                <li class="pb-3">
+                  <a href="" class="text-decoration-none">
+                    <img src="{% static "img/shopping-bag.png" %}" alt="" width="40rem">
+                    <span class="ps-5 pe-5">Your Cart</span>
+                  </a>
                 </li>
               </ul>
             </div>
