@@ -7,7 +7,8 @@ from cart.models import Cart, CartItem
 from favourites.models import Favourite
 
 
-def profile(request):
+@login_required
+def account(request):
     user = request.user
     categories = Category.objects.all()
     products = Product.objects.all()
@@ -28,3 +29,4 @@ def profile(request):
         'product_count': product_count,
         'fav_count': fav_count,
     })
+
