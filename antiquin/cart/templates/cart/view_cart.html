@@ -79,6 +79,7 @@
         </button>
       </div>
     </div>
+    <a href="{% url "cart:move_to_favourites" item.product.id %}">move to favourites</a>
     <hr>
     {% endfor %}
 

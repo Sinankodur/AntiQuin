@@ -44,3 +44,7 @@ def delete_item(request, item_id):
     item = get_object_or_404(Favourite, id=item_id, user=request.user)
     item.delete()
     return redirect('/favourites')
+
+@login_required
+def move_to_cart(request,product_id):
+    

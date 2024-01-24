@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Order
 from .forms import OrderForm
-from item.models import Product
+from item.models import Product,Category
 from cart.models import Cart, CartItem
+from favourites.models import Favourite
 
 
 @login_required
@@ -46,5 +47,30 @@ def order_now(request, product_id):
 @login_required
 def view_orders(request):
     user_orders = Order.objects.filter(user=request.user).order_by('-order_date')
+    # if this is needed or not need to check 
+    user = request.user
 
-    return render(request, 'orders/orders.html', {'user_orders': user_orders})
+    cart, created = Cart.objects.get_or_create(user=user)
+        
+    cart_items = CartItem.objects.filter(cart=cart)
+    product_count = CartItem.objects.filter(cart=cart).count()
+    total = sum(item.product.price * item.quantity for item in cart_items)
+    categories = Category.objects.all()
+    product = Product.objects.all()
+
+    for item in cart_items:
+        item.subtotal = item.product.price * item.quantity
+
+    favourites = Favourite.objects.filter(user=user)
+    fav_count = favourites.count()
+
+    return render(request, 'orders/orders.html', {
+        'user_orders': user_orders,
+        'cart_items': cart_items,
+        'total': total,
+        'categories' : categories,
+        'product' : product,
+        'product_count' : product_count,
+        'fav_count' : fav_count,
+    })
+

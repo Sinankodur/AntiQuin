@@ -32,4 +32,27 @@ def profile(request):
 
 @login_required
 def address(request):
-    return render(request, 'account/address.html')
+    user = request.user
+
+    cart, created = Cart.objects.get_or_create(user=user)
+        
+    cart_items = CartItem.objects.filter(cart=cart)
+    product_count = CartItem.objects.filter(cart=cart).count()
+    total = sum(item.product.price * item.quantity for item in cart_items)
+    categories = Category.objects.all()
+    product = Product.objects.all()
+
+    for item in cart_items:
+        item.subtotal = item.product.price * item.quantity
+
+    favourites = Favourite.objects.filter(user=user)
+    fav_count = favourites.count()
+
+    return render(request, 'account/address.html', {
+        'cart_items': cart_items,
+        'total': total,
+        'categories' : categories,
+        'product' : product,
+        'product_count' : product_count,
+        'fav_count' : fav_count,
+    })
