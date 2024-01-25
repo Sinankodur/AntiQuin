@@ -38,29 +38,33 @@ def detail(request,pk):
         })
 
 def searchProduct(request):
+    searched = None
+    products = None
+    categories = Category.objects.all()
+    
     if request.method == 'POST':
         searched = request.POST['searched']
         products = Product.objects.filter(Q(name__contains=searched) | Q(description__contains=searched) )
         categories = Category.objects.all()
         
 
-    if request.user.is_authenticated:
-        user = request.user.id
-        cart = Cart.objects.get(user=user)
-        cart_items = CartItem.objects.filter(cart=cart)
-        product_count = cart_items.count()
-        total = sum(item.product.price * item.quantity for item in cart_items)
+        if request.user.is_authenticated:
+            user = request.user.id
+            cart = Cart.objects.get(user=user)
+            cart_items = CartItem.objects.filter(cart=cart)
+            product_count = cart_items.count()
+            total = sum(item.product.price * item.quantity for item in cart_items)
 
-        fav_count = Favourite.objects.filter(user=user).count()
+            fav_count = Favourite.objects.filter(user=user).count()
 
-        return render(request, 'item/searchProducts.html' ,{
-            'searched': searched,
-            'products': products,
-            'categories': categories,
-            'total' : total,
-            'product_count' : product_count,
-            'fav_count' : fav_count
-        })
+            return render(request, 'item/searchProducts.html' ,{
+                'searched': searched,
+                'products': products,
+                'categories': categories,
+                'total' : total,
+                'product_count' : product_count,
+                'fav_count' : fav_count
+            })
     
     return render(request, 'item/searchProducts.html' ,{
         'searched': searched,
@@ -102,7 +106,7 @@ def edit(request, pk):
         if form.is_valid():
             item.save()
 
-            return redirect('item:detail', pk=item.id)
+            return redirect('item:detail', pk=pk)
         
     else:
         form = EditProductForm(instance=item)
