@@ -1,0 +1,40 @@
+{% extends "core/base.html" %} 
+{% block title %}Contact{% endblock title %} 
+{% block content %}
+
+<div class="container">
+  <h2 class="pb-3">Delivery Contact</h2>
+  <div class="row">
+    <div class="col-lg-8">
+        <form action="." method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-6">
+                <label for="fname">First Name:</label>
+                <input type="text" name="first_name" id="fname" value="{{ request.user.first_name }}" class="form-control bg-secondary-subtle">
+            </div>
+            <br>
+            <div class="col-6">
+                <label for="lname">Last Name:</label>
+                <input type="text" name="last_name" id="lname" value="{{ request.user.last_name }}" class="form-control bg-secondary-subtle">
+            </div>
+            <br>
+        </div>
+        <br>
+        <div>
+            <label for="email">E-mail:</label>
+            <input type="email" name="emial" id="email" value="{{ request.user.email}}" class="form-control bg-secondary-subtle">
+        </div>
+        <br>
+        <div>
+            <label for="phone">Phone:</label>
+            <input type="number" name="phone" id="phone" value="{{ request.user.phone }}" class="form-control bg-secondary-subtle">
+        </div>
+        <br>
+        <button class="btn btn-dark rounded-0" type="submit">Sumbmit</button>
+    </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
