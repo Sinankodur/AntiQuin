@@ -12,7 +12,7 @@ class SignupForm(UserCreationForm):
         'class': 'form-control mb-3',
         'id': 'username',
         'aria-describedby':"inputGroup-sizing-sm",
-        'autofocus' : 'autofocus'
+        'autofocus' : True
     }))
     
     email = forms.CharField(widget=forms.EmailInput(attrs={
@@ -42,7 +42,7 @@ class LoginForm(AuthenticationForm):
         'placeholder': 'Username',
         'class': 'form-control mb-4',
         'id': 'username',
-        'autofocus' : 'autofocus'
+        'autofocus' : True
     }))
      password = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Password',

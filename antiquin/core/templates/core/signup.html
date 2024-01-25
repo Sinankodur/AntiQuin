@@ -66,12 +66,33 @@
             {{ form.password2 }}
             <br />
 
-            {% if form.errors or form.non_field_errors %}
-            <div class="text-danger fs-6 lh-sm pb-3">
-              {% for field in form %} {{ field.errors }} {% endfor %}
-              {{form.non_field_errors }}
+            {% comment %} {% if form.errors or form.non_field_errors %}
+            <div class="text- bg-danger-subtle rounded lh-sm p-1 mb-2">
+              {% for field in form %}
+                <p>{{ field.errors|escape }}</p>
+              {% endfor %}
+                <p>{{form.non_field_errors|escape }}</p>
             </div>
+            {% endif %} {% endcomment %}
+
+            {% if form.errors %}
+              {% for field in form %}
+                {% for error in field.errors %}
+                <div class="text-danger-emphasis bg-danger-subtle rounded lh-sm fw-bold ps-3 p-2 pb-1 mb-1" 
+                style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; ">
+                  <p>{{ error | escape }}</p>
+                </div>
+                {% endfor %}
+              {% endfor %}
+
+                {% for error in form.non_field_errors %}
+                <div class="text- bg-danger-subtle rounded fs-6 lh-sm pt-3 pb-1 mb-2">
+                  <p>{{ error|escape }}</p>
+                </div>
+                {% endfor %}
             {% endif %}
+
+
             
             <div class="text-center pb-3">
               <button class="btn btn-dark mt-2" type="submit">Create an account</button>
