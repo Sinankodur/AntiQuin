@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Order Now{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Order Now</h2>
+    <div class="col-lg-4 pt-auto">
+        <div class="card rounded-0 text-secondary-emphasis p-3">
+          <span class="text-center fs-3">Order Summary</span>
+          <hr />
+          <div class="row">
+            <div class="col-4">Product</div>
+            <div class="vr p-0"></div>
+            <div class="col-3">Qty</div>
+            <div class="vr p-0"></div>
+            <div class="col-3">Price</div>
+          </div>
+          <hr />
+          <!-- orders shown here -->
+           Items
+          <div class="row">
+            <div class="col-12">Total</div>
+          </div>
+        </div>
+      </div>
+    <p>Product: {{ product.name }}</p>
+
+    <form method="post" action="{% url 'orders:order_now' product_id=product.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Place Order</button>
+    </form>
+</div>
+
+
+{% endblock content %}
