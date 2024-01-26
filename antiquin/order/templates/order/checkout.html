@@ -7,9 +7,9 @@
     <form action="{% url "order:start_order" %}" method="post">
         {% csrf_token %}
         <div class="row">
-            <div class="col-lg-8 col-12 pb-5">
+            <div class="col-lg-8 col-12 pb-3">
                 <div class="p-4 mb-3 rounded bg-secondary-subtle">
-                    <h3 class="pb-2">CONTACT INFORMATION</h3>
+                    <h3 class="text-warning-emphasis pb-2">CONTACT INFORMATION</h3>
                     <div class="row">
                         <div class="col-6">
                             <label for="fname" class="form-label">First Name</label>
@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="p-4 mb-3 rounded bg-secondary-subtle">
-                    <h3 class="pb-2">SHIPPING INFORMATION</h3>
+                    <h3 class="text-warning-emphasis pb-2">SHIPPING INFORMATION</h3>
                     <div>
                         <label for="address" class="form-label">Address :</label>
                         <input type="text" name="address" id="address" value="{{ request.user.address }}" class="form-control" required>    
@@ -63,9 +63,9 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-12">
-                <div class="card text-secondary-emphasis border border-warning-subtle p-3">
-                        <span class="text-center fs-3">Summary</span>
+            <div class="col-lg-4 col-12 mb-4">
+                <div class="card bg-dark-subtle text-dark  p-3">
+                        <span class="text-center  fs-3">Summary</span>
                     <hr />
                     <div class="row">
                         <div class="col-4">Product</div>
@@ -87,7 +87,7 @@
                         <div class="col-12">Total : ₹{{ total }}</div>
                     </div>
                     
-                    <button class="btn btn-warning rounded-0" type="submit">Confirm checkout</button>
+                    <button class="btn btn-dark rounded-0" type="submit">Confirm checkout</button>
                 </div>
             </div>
         </div>
