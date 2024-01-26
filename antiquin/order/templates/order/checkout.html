@@ -64,7 +64,7 @@
             </div>
 
             <div class="col-lg-4 col-12">
-                <div class="card text-secondary-emphasis p-3">
+                <div class="card text-secondary-emphasis border border-warning-subtle p-3">
                         <span class="text-center fs-3">Summary</span>
                     <hr />
                     <div class="row">
@@ -78,16 +78,16 @@
                     {% for item in cart_items %}
                     <div class="row pb-3">
                         <div class="col-5">{{ item.product.name }}</div>
-                        <div class="col-4">{{ item.quantity }}</div>
-                        <div class="col-3">{{ item.subtotal }}</div>
+                        <div class="col-3">{{ item.quantity }}</div>
+                        <div class="col-4">₹ {{ item.subtotal }}</div>
                     </div>
                     {% endfor %}
-
+                    <hr>
                     <div class="row pb-3">
-                        <div class="col-12">Total : {{ total }}</div>
+                        <div class="col-12">Total : ₹{{ total }}</div>
                     </div>
                     
-                    <button class="btn btn-dark rounded-0" type="submit">Confirm checkout</button>
+                    <button class="btn btn-warning rounded-0" type="submit">Confirm checkout</button>
                 </div>
             </div>
         </div>
