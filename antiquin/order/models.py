@@ -5,11 +5,11 @@ from item.models import Product
 
 class Order(models.Model):
     ORDERED = 'ordered'
-    SHIPPED = 'shipped'
+    DISPATCHED = 'dispatched'
 
     STATUS_CHOICES = (
         (ORDERED, 'Ordered'),
-        (SHIPPED, 'Shipped')
+        (DISPATCHED, 'dispatched')
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -27,6 +27,10 @@ class Order(models.Model):
     paid_amount = models.IntegerField(blank=True, null=True)
 
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=ORDERED)
+
+    def calculate_total(self):
+        total = sum(item.calculate_subtotal() for item in self.orderitem_set.all())
+        return total
 
     def __str__(self):
         return f"Order #{self.id} - {self.user.username}"
