@@ -1,4 +1,4 @@
-{% comment %} {% extends "core/base.html" %}
+{% extends "core/base.html" %}
 
 {% block title %}Checkout{% endblock title %}
 
@@ -87,10 +87,11 @@
                         <div class="col-12">Total : ₹{{ total }}</div>
                     </div>
                     
-                    <button class="btn btn-dark rounded-0" type="submit">Cash on delivery</button>
+                    <button class="btn btn-dark rounded-0 mb-2" type="submit">Cash on delivery</button>
+                    <button class="btn btn-primary rounded-0" type="button">Pay with razorpay</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
-{% endblock content %} {% endcomment %}
+{% endblock content %}
