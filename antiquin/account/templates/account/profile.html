@@ -36,29 +36,21 @@
     {% if request.user.get_full_name %}
       <span>Full Name : </span>{{ request.user.get_full_name }} <br>
     {% endif %}
-      <span>E-mail : </span>{{ request.user.email }} <br>
-      <br>
-      <button onclick="location.href= '{% url "account:edit" %}' " class="btn btn-outline-warning text-dark">Edit</button>
+      <span >E-mail : </span>{{ request.user.email }} <br>
+      <button onclick="location.href= '{% url "account:edit" %}' " class="btn btn-outline-dark ps-5 p-1 pe-5 mt-2">Edit</button>
       <hr>
   </div>
 
   <div>
-    <h2>My Orders</h2>
+    <h2 class="mb-4">My Orders</h2>
     {% if orders %}
     {% for order in orders %}
-    <div class="card bg-body-tertiary p-2 ps-3 mb-3">
-      <div class="row">
-        {% if order.status == 'ordered' %}
-        <div class='mt-4'>
-          <button class='btn btn-light p-0 position-absolute top-0 end-0' onclick="location.href= '{% url "order:cancel_order" order.id %}' ">
-            <img src="{% static "img/bin.png" %}" ></img>
-          </button>
-        </div>
-        {% endif %}
+    <div class="p-1 ps-3 mb-3">
+      <div class="row mt-3">
+        <hr>
         <div class="d-flex mb-2">
           <span class="text-secondary me-auto">Order ID # {{ order.id }}</span>
-          
-          <!-- if ordered warning and if shipped success -->
+
           {% if order.status == 'ordered' %}
           <div class="ms-auto">
             <span class="badge bg-warning text-wrap rounded-pill">Ordered</span>
@@ -68,8 +60,16 @@
             <span class="badge bg-success text-wrap rounded-pill">Shipped</span>
           </div>
           {% endif %}
-          
+
+          {% if order.status == 'ordered' %}
+            <div class='ms-3 d-flex'>
+              <button class='btn btn-light p-0 ms-auto' onclick="location.href= '{% url "order:cancel_order" order.id %}' ">
+                <img src="{% static "img/bin.png" %}" ></img>
+              </button>
+            </div>
+          {% endif %}
         </div>
+
         <hr />
 
         {%  for order_item in order.orderitem_set.all %}
@@ -84,8 +84,7 @@
             
           <div class="col-lg-4 col-md-4 col-sm-4 col-5">
             <div class="pt-2">
-              {{ order_item.product.name }} <!-- Change here -->
-              Product
+              {{ order_item.product.name }}
             </div>
             {% if order_item.product.description %}
               <span class="text-secondary" style="font-size: .8rem;">
@@ -95,11 +94,11 @@
           </div>
           
           <div class="col-lg-2 col-md-2 col-sm-2 col-4 mt-4">
-            ₹ {{ order_item.product.price }} <!-- Change here -->
+            ₹ {{ order_item.product.price }}
           </div>
           
           <!-- ------------ quantity ---------- -->
-          <div class="col-lg-3 col-md-3 col-sm-3 col-5 mt-4">
+          <div class="col-lg-3 col-md-3 col-sm-3 col-5 mt-4 mb-4">
             <div class="d-flex">
               <input  
                 type="text" 
@@ -114,10 +113,11 @@
           <div class="col-lg-2 col-md-2 col-sm-2 col-6 mt-4">
              ₹ {{ order_item.calculate_subtotal }}
           </div>
+          <hr>
         {% endfor %}
-        <hr>
         <div>Date : {{ order.created_at }}</div>
-        <div>Total: {{ order.order_total }}</div>
+        <div class="mb-2">Total: </div>
+        <hr>
       </div>
     </div>
   {% endfor %}
