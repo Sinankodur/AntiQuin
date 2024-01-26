@@ -1,4 +1,4 @@
-{% extends "core/base.html" %}
+{% comment %} {% extends "core/base.html" %}
 {% load static %}
 
 <title> {% block title %}Profile{% endblock title %}</title>
@@ -38,68 +38,91 @@
     {% endif %}
       <span>E-mail : </span>{{ request.user.email }} <br>
       <br>
-      <button onclick="location.href= '' " class="btn btn-outline-warning text-dark">Edit</button>
+      <button onclick="location.href= '{% url "account:edit" %}' " class="btn btn-outline-warning text-dark">Edit</button>
       <hr>
   </div>
 
   <div>
     <h2>My Orders</h2>
-    <div class="card bg-body-tertiary p-4">
-      <div class="row pb-3">
+    {% if orders %}
+    {% for order in orders %}
+    <div class="card bg-body-tertiary p-2 ps-3 mb-3">
+      <div class="row">
+        {% if order.status == 'ordered' %}
+        <div class='mt-4'>
+          <button class='btn btn-light p-0 position-absolute top-0 end-0' onclick="location.href= '{% url "order:cancel_order" order.id %}' ">
+            <img src="{% static "img/bin.png" %}" ></img>
+          </button>
+        </div>
+        {% endif %}
         <div class="d-flex mb-2">
-          <span class="text-secondary me-auto">Order ID # 4551115</span>
+          <span class="text-secondary me-auto">Order ID # {{ order.id }}</span>
+          
           <!-- if ordered warning and if shipped success -->
-          <div>
+          {% if order.status == 'ordered' %}
+          <div class="ms-auto">
             <span class="badge bg-warning text-wrap rounded-pill">Ordered</span>
           </div>
-        </div>
-              
-        <div class="col-lg-1 col-md-1 col-sm-1 col-3">
-          {% comment %} <a href="{% url "item:detail" item.product.id %}"> {% endcomment %}
-          <img 
-            {% comment %} src="{{ item.product.image.url }}"  {% endcomment %}
-            alt='img'
-            class="img-fluid" width="60rem"/>
-            {% comment %} </a> {% endcomment %}
-        </div>
-          
-        <div class="col-lg-4 col-md-4 col-sm-4 col-5">
-          <div class="pt-2">
-            {% comment %} {{ item.product.name }} {% endcomment %}
-            Product
+          {% else %}
+          <div>
+            <span class="badge bg-success text-wrap rounded-pill">Shipped</span>
           </div>
-            {% comment %} {% if item.product.description %} {% endcomment %}
-            <span class="text-secondary" style="font-size: .8rem;">
-              {% comment %} {{ item.product.description }} {% endcomment %}
-              Product Description sjfjasfjsfjvnljfnsfhakf
-            </span>
-            {% comment %} {% endif %} {% endcomment %}
+          {% endif %}
+          
+        </div>
+        <hr />
+
+        {%  for order_item in order.orderitem_set.all %}
+          <div class="col-lg-1 col-md-1 col-sm-1 col-3 mb-4">
+            <a href="{% url 'item:detail' order_item.product.id %}">
+              <img 
+                src="{{ order_item.product.image.url }}" 
+                alt='img'
+                class="img-fluid" width="60rem"/>
+            </a>
+          </div>
+            
+          <div class="col-lg-4 col-md-4 col-sm-4 col-5">
+            <div class="pt-2">
+              {{ order_item.product.name }} <!-- Change here -->
+              Product
+            </div>
+            {% if order_item.product.description %}
+              <span class="text-secondary" style="font-size: .8rem;">
+                {{ order_item.product.description }}
+              </span>
+            {% endif %}
           </div>
           
           <div class="col-lg-2 col-md-2 col-sm-2 col-4 mt-4">
-            {% comment %} ₹ {{ item.product.price }} {% endcomment %}
-            ₹ 6432
+            ₹ {{ order_item.product.price }} <!-- Change here -->
           </div>
           
           <!-- ------------ quantity ---------- -->
           <div class="col-lg-3 col-md-3 col-sm-3 col-5 mt-4">
             <div class="d-flex">
-              <input  type="text" class="text-center form-control" 
-              {% comment %} value="{{ item.quantity }}"  {% endcomment %}
-              value="1"
-              style="width: 3rem; height: 1.5rem;" readonly>
-           </div>
+              <input  
+                type="text" 
+                class="text-center form-control" 
+                value="{{ order_item.quantity }}" 
+                style="width: 3rem; height: 1.5rem;" 
+                readonly>
+            </div>
           </div>
           
           <!-- --------------- subtotal ------------------ -->
           <div class="col-lg-2 col-md-2 col-sm-2 col-6 mt-4">
-            {% comment %} -{{ item.subtotal }} {% endcomment %}
-            - 3215
+             ₹ {{ order_item.calculate_subtotal }}
           </div>
-        </div>
+        {% endfor %}
         <hr>
+        <div>Date : {{ order.created_at }}</div>
+        <div>Total: {{ order.total }}</div>
       </div>
     </div>
-  </div>
+  {% endfor %}
+  {% else %}
+  <p class="text-center text-body-tertiary">You haven't ordered anything yet</p>
+  {% endif %}
 </div>
-{% endblock content %}
+{% endblock content %} {% endcomment %}

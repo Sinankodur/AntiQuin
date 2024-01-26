@@ -104,7 +104,7 @@
                   </span></a
                 >
                 {% else %}
-                <a href="{% url "sign-in" %}"
+                <a href="{% url "sign-in" %}?next={% url "account:account" %}"
                   ><span class="material-symbols-outlined">
                     account_circle
                   </span></a

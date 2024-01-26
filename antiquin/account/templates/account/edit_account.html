@@ -1,0 +1,44 @@
+{% comment %} {% extends "core/base.html" %}
+
+{% block title %}Edit Account{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <h2 class="text-center">Edit account</h2>
+
+            <form action="." method="post" class="space-y-3">
+            {% csrf_token %}
+                <div class="row">
+                    <div class="col-6">
+                        <div>
+                            <label for="fname" class="form-label">First name</label>
+                            <input type="text" name="first_name" class="form-control bg-secondary-subtle" id="fname" value="{{ request.user.first_name }}">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div>
+                            <label for="lname" class="form-label">Last name</label>
+                            <input type="text" name="last_name" id="lname" class="form-control bg-secondary-subtle" value="{{ request.user.last_name }}">
+                        </div>
+                    </div>
+                </div>                
+                <br>
+                <div>
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control bg-secondary-subtle" id="username" value="{{ request.user.username }}">
+                </div>
+                <br>
+                <div>
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" name="email" class="form-control bg-secondary-subtle" id="email" value="{{ request.user.email }}">
+                </div>
+                <br>
+                <button class="btn btn-dark ps-4 pe-4" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %} {% endcomment %}
