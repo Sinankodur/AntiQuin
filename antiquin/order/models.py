@@ -37,6 +37,8 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     subtotal = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    order_total = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+
 
     def calculate_subtotal(self):
         if self.product and self.quantity:
@@ -47,6 +49,15 @@ class OrderItem(models.Model):
     def save(self, *args, **kwargs):
         self.calculate_subtotal()
         super().save(*args, **kwargs)
+
+    def calculate_order_total(self):
+        total = sum(item.subtotal for item in self.orderitem_set.all())
+        return total
+ 
+    def save(self, *args, **kwargs):
+        self.order_total = self.calculate_order_total()
+        super().save(*args, **kwargs)
+
 
     def __str__(self):
         return f"{self.quantity} x {self.product.name} for Order #{self.order.id}"
