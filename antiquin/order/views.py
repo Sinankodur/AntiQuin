@@ -23,6 +23,9 @@ def checkout(request):
 
     favourites = Favourite.objects.filter(user=user)
     fav_count = favourites.count()
+
+    order = Order.objects.all()
+
     return render(request, 'order/checkout.html', {
         'cart_items' : cart_items,
         'total': total,
@@ -30,6 +33,7 @@ def checkout(request):
         'product' : product,
         'product_count' : product_count,
         'fav_count' : fav_count,
+        'order' : order
     })
 
 
