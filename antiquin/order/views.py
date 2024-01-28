@@ -13,7 +13,7 @@ def checkout(request):
     cart, created = Cart.objects.get_or_create(user=user)
         
     cart_items = CartItem.objects.filter(cart=cart)
-    product_count = CartItem.objects.filter(cart=cart).count()
+    product_count = cart_items.count()
     total = sum(item.product.price * item.quantity for item in cart_items)
     categories = Category.objects.all()
     product = Product.objects.all()
