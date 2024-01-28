@@ -57,14 +57,14 @@
                     <br>
                 </div>
 
-                {% if errors %}
+                {% if form.errors or form.non_field_errors %}
                 <div class="p-4 mb-3 rounded bg-secondary-subtle">
                     <p>There is an error</p>
                 </div>
                 {% endif %}
             </div>
 
-            <div class="col-lg-4 col-12 mb-4">
+            <div class="col-lg-4 col-md-8 ms-auto me-auto mb-4">
                 <div class="card bg-dark-subtle text-dark  p-3">
                         <span class="text-center  fs-3">Summary</span>
                     <hr />
@@ -89,7 +89,8 @@
                     </div>
                     
                     <button class="btn btn-dark rounded-0 mb-2" type="submit">Cash on delivery</button>
-                    <button class="btn btn-primary rounded-0" id="rzp-button-1" type="button">Pay with razorpay</button>
+                    <p>Note: <span style="font-size: .8rem;"> By default, you will have your payment method as Cash on delivery for online payment click below button</span> </p>
+                    <button class="btn btn-primary rounded-0" onclick="window.location.href= '{% url "payment:pay_now" %}' " type="submit">Pay with razorpay</button>
                 </div>
             </div>
         </div>

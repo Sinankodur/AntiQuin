@@ -1,5 +1,6 @@
+from datetime import time
 from django.shortcuts import render, redirect, get_object_or_404
-
+import razorpay
 
 from cart.models import CartItem,Cart
 from order.models import Order, OrderItem
@@ -62,8 +63,8 @@ def start_order(request):
 
         cart_items.delete()
 
-        return redirect('/account/') 
-
+        return redirect('/account/')
+    
     return redirect('/cart/')
 
 def cancel_order(request, order_id):
@@ -73,3 +74,4 @@ def cancel_order(request, order_id):
         order.delete()
 
     return redirect('/account/') 
+

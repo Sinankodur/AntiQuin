@@ -106,4 +106,4 @@ def success(request):
 
 def sign_out(request):
     logout(request)
-    return redirect('home')
+    return redirect('sign-in')

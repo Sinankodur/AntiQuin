@@ -17,9 +17,9 @@ class Order(models.Model):
     last_name = models.CharField(max_length=100)
     email = models.EmailField(blank=True, null=True)
     address = models.TextField()
-    pincode = models.CharField(max_length=20)
+    pincode = models.IntegerField()
     place = models.CharField(max_length=100)
-    phone = models.CharField(max_length=20)
+    phone = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     is_cancelled = models.BooleanField(default=False)
 
