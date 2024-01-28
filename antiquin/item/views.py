@@ -73,27 +73,6 @@ def searchProduct(request):
     })
 
 
-@login_required
-def update_cart(request, product_id):
-    product = get_object_or_404(Product, pk=product_id)
-    
-    cart = Cart.objects.get(user=request.user)
-    
-    cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
-
-    if request.method == 'POST':
-        action = request.POST.get('action')
-
-        if action == 'add':
-            cart_item.quantity += 1
-        elif action == 'remove' and cart_item.quantity > 1:
-            cart_item.quantity -= 1
-
-        cart_item.save()
-    return 
-
-
-
 # Account section -- staff only logic --
 @login_required
 def add_items(request):
