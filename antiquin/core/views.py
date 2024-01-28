@@ -4,6 +4,7 @@ from django.contrib.auth import logout, login, authenticate
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib import messages
 
 
 from item.models import Category, Product
@@ -18,7 +19,7 @@ def home(request):
     categories = Category.objects.all()
     products = Product.objects.filter(is_sold=False)
 
-    items_per_page = 12
+    items_per_page = 8
 
     paginator = Paginator(products, items_per_page)
 
@@ -73,11 +74,10 @@ def sign_up(request):
 
         if form.is_valid():
             user = form.save()
-                
+            messages.success(request,"You can sign in now!")   
             return redirect('/success/')
     else:
         form = SignupForm()
-    
     return render(request, 'core/signup.html', {'form' : form})
 
 

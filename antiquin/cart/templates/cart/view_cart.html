@@ -60,7 +60,7 @@
           </form>
           
           <input  type="text" class="text-center form-control" value="{{ item.quantity }}" style="width: 2.9rem; height: 1.5rem;" readonly>
-            <form action="{% url 'cart:update_cart' item.product.id %}" method="post" class="d-flex">
+          <form action="{% url 'cart:update_cart' item.product.id %}" method="post" class="d-flex">
             {% csrf_token %}
             <input type="hidden" name="action" value="add">
             <button class="btn btn-outline-light text-dark border border-0 pt-0 pb-0 ps-1 pe-1 ms-1 me-1">

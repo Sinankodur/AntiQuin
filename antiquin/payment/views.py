@@ -42,5 +42,4 @@ def pay_now(request):
         messages.info(request, 'You will be redirected to payment page')
         return render(request, 'payment/payment_page.html', {'razorpay_order': razorpay_order})
     
-    messages.info(request, 'Your password has been changed successfully!')
     return HttpResponseRedirect('/account/')

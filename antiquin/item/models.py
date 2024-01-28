@@ -19,6 +19,7 @@ class Product(models.Model):
     price = models.FloatField()
     image = models.ImageField(null=True, blank=True, upload_to="images/")
     is_sold = models.BooleanField(default=False)
+    quantity = models.PositiveIntegerField(default=1) 
     created_by = models.ForeignKey(User, related_name='items', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
