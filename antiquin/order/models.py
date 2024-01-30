@@ -9,7 +9,7 @@ class Order(models.Model):
 
     STATUS_CHOICES = (
         (ORDERED, 'Ordered'),
-        (DISPATCHED, 'dispatched')
+        (DISPATCHED, 'Dispatched')
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
