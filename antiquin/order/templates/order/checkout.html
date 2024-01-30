@@ -88,12 +88,61 @@
                         <div class="col-12">Total : ₹{{ total }}</div>
                     </div>
                     
-                    <button class="btn btn-dark rounded-0 mb-2" type="submit">Cash on delivery</button>
-                    <p>Note: <span style="font-size: .8rem;"> By default, you will have your payment method as Cash on delivery for online payment click below button</span> </p>
-                    <button class="btn btn-primary rounded-0" onclick="window.location.href= '{% url "payment:pay_now" %}' " type="submit">Pay with razorpay</button>
+                    <!-- buttons for cod and online payment -->
+
+                    <div class="form-check">
+                        <input type="radio" id="cod" name="payment_method" value="cod" class="form-check-input" checked>
+                        <label for="cod" class="form-check-label">Cash on Delivery</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" id="onlinePayment" name="payment_method" value="online_payment" class="form-check-input">
+                        <label for="onlinePayment" class="form-check-label">Online Payment</label>
+                    </div>
+            
+                    <div id="codSection" class="hidden">
+                        <!-- Button for Cod -->
+                        <button class="btn btn-dark rounded-0 mb-2" type="submit">Cash on delivery</button>
+                    </div>
+            
+                    <div id="onlinePaymentSection" class="col-12 hidden">
+                        <!-- Button for Online Payment -->
+                        <button class="btn btn-primary rounded-0" type="submit">
+                            <img src="{% static "img/Razorpay_logo.svg" %}" class="img-fluid" style="height: 1.5rem;" alt="">
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const codRadio = document.getElementById('cod');
+        const onlinePaymentRadio = document.getElementById('onlinePayment');
+        const codSection = document.getElementById('codSection');
+        const onlinePaymentSection = document.getElementById('onlinePaymentSection');
+
+        // Initial setup
+        if (codRadio.checked) {
+            codSection.classList.remove('hidden');
+            onlinePaymentSection.classList.add('hidden');
+        } else if (onlinePaymentRadio.checked) {
+            codSection.classList.add('hidden');
+            onlinePaymentSection.classList.remove('hidden');
+        }
+
+        // Event listeners
+        codRadio.addEventListener('change', function () {
+            codSection.classList.remove('hidden');
+            onlinePaymentSection.classList.add('hidden');
+        });
+
+        onlinePaymentRadio.addEventListener('change', function () {
+            codSection.classList.add('hidden');
+            onlinePaymentSection.classList.remove('hidden');
+        });
+    });
+</script>
+
 {% endblock content %}

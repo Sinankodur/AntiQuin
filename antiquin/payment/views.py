@@ -33,13 +33,13 @@ def pay_now(request):
         cart_items.delete()
 
         client = razorpay.Client(auth=("rzp_test_irphkDgn8Na7V5", "20FQicfgG7rcFmlv4hIxvly8"))
-        order_amount = int(order.get_total_amount() * 100)
+        order_amount = int(order.get_total_amount()) * 100
         order_currency = 'INR'
-        order_receipt = f'order_{order.id}'
+        order_receipt = f'order_{order.id} for {order_amount}'
 
         razorpay_order = client.order.create(dict(amount=order_amount, currency=order_currency, receipt=order_receipt))
 
         messages.info(request, 'You will be redirected to payment page')
         return render(request, 'payment/payment_page.html', {'razorpay_order': razorpay_order})
     
-    return HttpResponseRedirect('/account/')
+    return HttpResponseRedirect('/cart/')
