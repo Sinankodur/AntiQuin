@@ -1,45 +1,83 @@
-import razorpay
 from django.shortcuts import render
-from django.contrib import messages
-from django.http import HttpResponseRedirect
+import razorpay
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponseBadRequest
 
-from cart.models import CartItem
-from order.models import Order, OrderItem
+
+# authorize razorpay client with API Keys.
+razorpay_client = razorpay.Client(
+	auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
 
 
-def pay_now(request):
-    cart_items = CartItem.objects.filter(cart__user=request.user)
+def homepage(request):
+	currency = 'INR'
+	amount = 20000 # Rs. 200
 
-    if request.method == 'POST':
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        email = request.POST.get('email')
-        address = request.POST.get('address')
-        pincode = request.POST.get('pincode')
-        place = request.POST.get('place')
-        phone = request.POST.get('phone')
+	# Create a Razorpay Order
+	razorpay_order = razorpay_client.order.create(dict(amount=amount,
+													currency=currency,
+													payment_capture='0'))
 
-        order = Order.objects.create(user=request.user, first_name=first_name, last_name=last_name, email=email,
-            address=address, pincode=pincode, place=place, phone=phone
-        )
+	# order id of newly created order.
+	razorpay_order_id = razorpay_order['id']
+	callback_url = 'paymenthandler/'
 
-        for cart_item in cart_items:
-            product = cart_item.product
-            quantity = cart_item.quantity
-            price = product.price * quantity
+	# we need to pass these details to frontend.
+	context = {}
+	context['razorpay_order_id'] = razorpay_order_id
+	context['razorpay_merchant_key'] = settings.RAZOR_KEY_ID
+	context['razorpay_amount'] = amount
+	context['currency'] = currency
+	context['callback_url'] = callback_url
 
-            order_item = OrderItem.objects.create(order=order, product=product, quantity=quantity, price=price)
+	return render(request, 'index.html', context=context)
 
-        cart_items.delete()
 
-        client = razorpay.Client(auth=("rzp_test_irphkDgn8Na7V5", "20FQicfgG7rcFmlv4hIxvly8"))
-        order_amount = int(order.get_total_amount()) * 100
-        order_currency = 'INR'
-        order_receipt = f'order_{order.id} for {order_amount}'
+# we need to csrf_exempt this url as
+# POST request will be made by Razorpay
+# and it won't have the csrf token.
+@csrf_exempt
+def paymenthandler(request):
 
-        razorpay_order = client.order.create(dict(amount=order_amount, currency=order_currency, receipt=order_receipt))
+	# only accept POST request.
+	if request.method == "POST":
+		try:
+		
+			# get the required parameters from post request.
+			payment_id = request.POST.get('razorpay_payment_id', '')
+			razorpay_order_id = request.POST.get('razorpay_order_id', '')
+			signature = request.POST.get('razorpay_signature', '')
+			params_dict = {
+				'razorpay_order_id': razorpay_order_id,
+				'razorpay_payment_id': payment_id,
+				'razorpay_signature': signature
+			}
 
-        messages.info(request, 'You will be redirected to payment page')
-        return render(request, 'payment/payment_page.html', {'razorpay_order': razorpay_order})
-    
-    return HttpResponseRedirect('/cart/')
+			# verify the payment signature.
+			result = razorpay_client.utility.verify_payment_signature(
+				params_dict)
+			if result is not None:
+				amount = 20000 # Rs. 200
+				try:
+
+					# capture the payemt
+					razorpay_client.payment.capture(payment_id, amount)
+
+					# render success page on successful caputre of payment
+					return render(request, 'paymentsuccess.html')
+				except:
+
+					# if there is an error while capturing payment.
+					return render(request, 'paymentfail.html')
+			else:
+
+				# if signature verification fails.
+				return render(request, 'paymentfail.html')
+		except:
+
+			# if we don't find the required parameters in POST data
+			return HttpResponseBadRequest()
+	else:
+	# if other than POST request is made.
+		return HttpResponseBadRequest()
