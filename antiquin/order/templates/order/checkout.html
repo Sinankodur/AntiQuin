@@ -116,33 +116,4 @@
     </form>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const codRadio = document.getElementById('cod');
-        const onlinePaymentRadio = document.getElementById('onlinePayment');
-        const codSection = document.getElementById('codSection');
-        const onlinePaymentSection = document.getElementById('onlinePaymentSection');
-
-        // Initial setup
-        if (codRadio.checked) {
-            codSection.classList.remove('hidden');
-            onlinePaymentSection.classList.add('hidden');
-        } else if (onlinePaymentRadio.checked) {
-            codSection.classList.add('hidden');
-            onlinePaymentSection.classList.remove('hidden');
-        }
-
-        // Event listeners
-        codRadio.addEventListener('change', function () {
-            codSection.classList.remove('hidden');
-            onlinePaymentSection.classList.add('hidden');
-        });
-
-        onlinePaymentRadio.addEventListener('change', function () {
-            codSection.classList.add('hidden');
-            onlinePaymentSection.classList.remove('hidden');
-        });
-    });
-</script>
-
 {% endblock content %}
