@@ -88,32 +88,42 @@
                         <div class="col-12">Total : ₹{{ total }}</div>
                     </div>
                     
-                    <!-- buttons for cod and online payment -->
+                    <input type="hidden" name="payment_method" id="payment_method" value="" />
+                    <!-- Buttons for COD and Online Payment -->
+                    <button class="btn btn-dark rounded-0 mb-2" type="submit" onclick="setPaymentMethod('COD')">Cash on delivery</button>
 
-                    <div class="form-check">
-                        <input type="radio" id="cod" name="payment_method" value="cod" class="form-check-input" checked>
-                        <label for="cod" class="form-check-label">Cash on Delivery</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="radio" id="onlinePayment" name="payment_method" value="online_payment" class="form-check-input">
-                        <label for="onlinePayment" class="form-check-label">Online Payment</label>
-                    </div>
-            
-                    <div id="codSection" class="hidden">
-                        <!-- Button for Cod -->
-                        <button class="btn btn-dark rounded-0 mb-2" type="submit">Cash on delivery</button>
-                    </div>
-            
-                    <div id="onlinePaymentSection" class="hidden">
-                        <!-- Button for Online Payment -->
-                        <button class="btn btn-primary rounded-0" type="submit">
-                            <img src="{% static "img/Razorpay_logo.svg" %}" class="img-fluid" style="height: 1.5rem;" alt="">
-                        </button>
-                    </div>
+                    <button class="btn btn-primary rounded-0" id="pay-btn" type="submit" onclick="setPaymentMethod('online')">
+                        <img src="{% static "img/Razorpay_logo.svg" %}" class="img-fluid" style="height: 1.5rem;" alt="">
+                    </button>
                 </div>
             </div>
         </div>
     </form>
 </div>
 
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    function setPaymentMethod(method) {
+        document.getElementById("payment_method").value = method;
+    }
+
+    var options = {
+        key: "{{ razorpay_merchant_key }}", 
+       
+        amount: "{{ razorpay_amount }}", 
+        currency: "{{ currency }}",
+        
+        name: "AntiQuin", 
+        
+        order_id: "{{ razorpay_order_id }}", 
+        callback_url: "{{ callback_url }}",
+    };
+     
+    var rzp1 = new Razorpay(options);
+     
+    document.getElementById("pay-btn").onclick = function (e) {
+      rzp1.open();
+      e.preventDefault();
+    };
+</script>
 {% endblock content %}
