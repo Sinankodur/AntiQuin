@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container">
     <form action="{% url "order:start_order" %}" method="post">
-        {% csrf_token %}
+    {% csrf_token %}
         <div class="row">
             <div class="col-lg-8 col-12 pb-3">
                 <div class="p-4 mb-3 rounded bg-secondary-subtle">
@@ -104,7 +104,7 @@
                         <button class="btn btn-dark rounded-0 mb-2" type="submit">Cash on delivery</button>
                     </div>
             
-                    <div id="onlinePaymentSection" class="col-12 hidden">
+                    <div id="onlinePaymentSection" class="hidden">
                         <!-- Button for Online Payment -->
                         <button class="btn btn-primary rounded-0" type="submit">
                             <img src="{% static "img/Razorpay_logo.svg" %}" class="img-fluid" style="height: 1.5rem;" alt="">
