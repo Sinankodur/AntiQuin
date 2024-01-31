@@ -1,3 +1,4 @@
+// category filtering
 document.addEventListener("DOMContentLoaded", function () {
   const categoryLinks = document.querySelectorAll(".category-link");
   const productItems = document.querySelectorAll(".product-item");
@@ -23,3 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+function setPaymentMethod(method) {
+  document.getElementById("payment_method").value = method;
+}

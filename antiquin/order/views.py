@@ -110,19 +110,22 @@ def start_order(request):
 
                 order_item = OrderItem.objects.create(order=order, product=product, quantity=quantity, price=price)
 
+            order_items = OrderItem.objects.filter(order=order)          
+
             cart, created = Cart.objects.get_or_create(user=request.user)
             cart_items = CartItem.objects.filter(cart=cart)
             total = sum(item.product.price * item.quantity for item in cart_items)
 
             cart_items.delete()
-            
-            return render(request, 'payment/payment_page.html',{
+
+            return render(request, 'payment/payment_page.html', {
                 'cart_items': cart_items,
                 'total': total,
                 'categories' : categories,
                 'product' : product,
                 'product_count' : product_count,
                 'fav_count' : fav_count,
+                'order_items' : order_items
             })
 
         else:
@@ -130,6 +133,8 @@ def start_order(request):
 
     else:
         return render(request, 'order/checkout.html')
+
+
 
 
 def cancel_order(request, order_id):
