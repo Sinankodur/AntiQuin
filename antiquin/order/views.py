@@ -2,6 +2,7 @@ from datetime import time
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 import razorpay
 
 from cart.models import CartItem,Cart
@@ -42,89 +43,93 @@ def checkout(request):
     })
 
 
+
+@login_required
 def start_order(request):
-    cart_items = CartItem.objects.filter(cart__user=request.user)
+    user = request.user
 
-    if request.method == 'POST':
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        email = request.POST.get('email')
-        address = request.POST.get('address')
-        pincode = request.POST.get('pincode')
-        place = request.POST.get('place')
-        phone = request.POST.get('phone')
+    cart, created = Cart.objects.get_or_create(user=user)
+        
+    cart_items = CartItem.objects.filter(cart=cart)
+    product_count = CartItem.objects.filter(cart=cart).count()
+    total = sum(item.product.price * item.quantity for item in cart_items)
+    categories = Category.objects.all()
+    product = Product.objects.all()
 
-        order = Order.objects.create(user=request.user, first_name=first_name, last_name=last_name, email=email,
-            address=address, pincode=pincode, place=place, phone=phone
-        )
+    for item in cart_items:
+        item.subtotal = item.product.price * item.quantity
 
-        for cart_item in cart_items:
-            product = cart_item.product
-            quantity = cart_item.quantity
-            price = product.price * quantity
-
-            order_item = OrderItem.objects.create(order=order, product=product, quantity=quantity, price=price)
-
-        cart_items.delete()
-
-        return redirect('/account/')
+    favourites = Favourite.objects.filter(user=user)
+    fav_count = favourites.count()
     
-    return redirect('/cart/')
-
-
-razorpay_client = razorpay.Client(auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
-
-def start_order(request):
     if request.method == "POST":
-        # Retrieve the payment method from the form
         payment_method = request.POST.get('payment_method')
-
-        # Retrieve or create an order (you might have to adjust this logic)
-        order_id = 1  # Replace with your logic to get the order ID
-        order = get_object_or_404(Order, id=order_id, user=request.user)
+        cart_items = CartItem.objects.filter(cart__user=request.user)
 
         if payment_method == 'COD':
-            # Handle Cash on Delivery (COD) logic here
-            # ...
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            email = request.POST.get('email')
+            address = request.POST.get('address')
+            pincode = request.POST.get('pincode')
+            place = request.POST.get('place')
+            phone = request.POST.get('phone')
 
-            return render(request, 'cod_success.html')  # You can create a COD success template
+            order = Order.objects.create(user=request.user, first_name=first_name, last_name=last_name, email=email,
+                address=address, pincode=pincode, place=place, phone=phone
+            )
 
+            for cart_item in cart_items:
+                product = cart_item.product
+                quantity = cart_item.quantity
+                price = product.price * quantity
+
+                order_item = OrderItem.objects.create(order=order, product=product, quantity=quantity, price=price)
+
+            cart_items.delete()
+
+            return redirect('/account/')
+    
         elif payment_method == 'online':
-            # Handle online payment logic here
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            email = request.POST.get('email')
+            address = request.POST.get('address')
+            pincode = request.POST.get('pincode')
+            place = request.POST.get('place')
+            phone = request.POST.get('phone')
 
-            currency = 'INR'
-            amount = order.calculate_total() * 100  # Convert to paise (Razorpay accepts amounts in the smallest currency unit)
+            order = Order.objects.create(user=request.user, first_name=first_name, last_name=last_name, email=email,
+                address=address, pincode=pincode, place=place, phone=phone
+            )
 
-            # Create a Razorpay Order
-            razorpay_order = razorpay_client.order.create(dict(amount=amount,
-                                                            currency=currency,
-                                                            payment_capture='0'))
+            for cart_item in cart_items:
+                product = cart_item.product
+                quantity = cart_item.quantity
+                price = product.price * quantity
 
-            # Order ID of the newly created Razorpay order
-            razorpay_order_id = razorpay_order['id']
-            callback_url = 'paymenthandler/'
+                order_item = OrderItem.objects.create(order=order, product=product, quantity=quantity, price=price)
 
-            # Pass these details to the frontend
-            context = {
-                'razorpay_order_id': razorpay_order_id,
-                'razorpay_merchant_key': settings.RAZOR_KEY_ID,
-                'razorpay_amount': amount,
-                'currency': currency,
-                'callback_url': callback_url,
-            }
+            cart, created = Cart.objects.get_or_create(user=request.user)
+            cart_items = CartItem.objects.filter(cart=cart)
+            total = sum(item.product.price * item.quantity for item in cart_items)
 
-            return render(request, 'payment_home.html', context=context)
+            cart_items.delete()
+            
+            return render(request, 'payment/payment_page.html',{
+                'cart_items': cart_items,
+                'total': total,
+                'categories' : categories,
+                'product' : product,
+                'product_count' : product_count,
+                'fav_count' : fav_count,
+            })
 
         else:
-            # Invalid payment method, handle accordingly
             return HttpResponse("Invalid payment method")
 
     else:
-        # Handle GET request for the initial form rendering
-        return render(request, 'checkout.html')
-
-
-
+        return render(request, 'order/checkout.html')
 
 
 def cancel_order(request, order_id):
@@ -134,5 +139,3 @@ def cancel_order(request, order_id):
         order.delete()
 
     return redirect('/account/') 
-
-

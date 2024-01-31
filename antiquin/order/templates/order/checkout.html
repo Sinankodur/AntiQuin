@@ -101,29 +101,4 @@
     </form>
 </div>
 
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-    function setPaymentMethod(method) {
-        document.getElementById("payment_method").value = method;
-    }
-
-    var options = {
-        key: "{{ razorpay_merchant_key }}", 
-       
-        amount: "{{ razorpay_amount }}", 
-        currency: "{{ currency }}",
-        
-        name: "AntiQuin", 
-        
-        order_id: "{{ razorpay_order_id }}", 
-        callback_url: "{{ callback_url }}",
-    };
-     
-    var rzp1 = new Razorpay(options);
-     
-    document.getElementById("pay-btn").onclick = function (e) {
-      rzp1.open();
-      e.preventDefault();
-    };
-</script>
 {% endblock content %}
