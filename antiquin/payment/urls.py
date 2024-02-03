@@ -5,5 +5,4 @@ app_name = 'payment'
 
 urlpatterns = [
     path('',views.payment_home, name='payment_home'),
-    path('paymenthandler/', views.payment_handler, name='paymenthandler'),
 ]

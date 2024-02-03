@@ -115,8 +115,10 @@
           </div>
           <hr>
         {% endfor %}
-        <div>Date - {{ order.created_at }}</div>
-        <div class="mb-2">Total - ₹{{ order.calculate_total }} </div>
+        <div class="d-flex">
+          <div>Date - {{ order.created_at }}</div>
+          <div class="ms-auto">Total - ₹{{ order.calculate_total }} </div>
+        </div>
         <hr>
       </div>
     </div>
