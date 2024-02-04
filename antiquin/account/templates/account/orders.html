@@ -2,15 +2,29 @@
 
 {% block admin %}
 
-<div class="col-lg-8 col-md-8 col-12">
-{% for order in order_items %}
-    <div class="card p-2 mb-2">
-        <div class="card-text mb-2">Order ID #{{ order.id }}</div>
-        <img class="img-fluid object-fit-cover" width="45rem" src="{{ order.product.image.url }}" >
-        {{ order.product.name }}
-        Qty {{ order.quantity }}
-        <span class="ms-auto">Price {{ order.price }}</span>
-    </div>
-{% endfor %}
+<div class="col-lg-8 col-md-8 col-12 mb-3">
+    <h2>Customer Orders</h2>
+    <hr>
+    {% if order_items %}
+    {% for order in order_items %}
+        <div class="p-2 mb-2">
+            <div class="mb-2"><a href="{% url "account:orders_details" order.order.id %}" class="text-decoration-none">{{ order.order }}</a></div>
+            <img class="img-fluid object-fit-cover" width="45rem" src="{{ order.product.image.url }}" >
+            <span class="ps-2">
+                {{ order.product.name }}
+                {% if order.product.description %}
+                {{ order.product.description }}
+                {% endif %}
+                x {{ order.quantity }}
+            </span>
+            <div class="ms-auto mt-2">Total - {{ order.price }}</div>
+        </div>
+        <hr>
+    {% endfor %}
+    {% else %}
+    <p class="text-center text-body-tertiary">
+        There are no orders yet!!
+    </p>
+    {% endif %}
 </div>
 {% endblock admin %}

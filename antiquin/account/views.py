@@ -55,9 +55,13 @@ def users_page(request):
     })
 
 def orders_page(request):
-    users_orders = Order.objects.all()
     order_items = OrderItem.objects.all()
     return render(request, 'account/orders.html', {
-        'orders' : users_orders,
         'order_items' : order_items
+    })
+
+def orders_details(request, pk):
+    orders = Order.objects.filter(pk=pk)
+    return render(request, 'account/orders_details.html',{
+        'orders' : orders,
     })

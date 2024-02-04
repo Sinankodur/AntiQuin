@@ -33,7 +33,7 @@ class Order(models.Model):
         return total
 
     def __str__(self):
-        return f"Order #{self.id} - {self.user.username}"
+        return f"Order ID #{self.id} - {self.user.username}"
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
