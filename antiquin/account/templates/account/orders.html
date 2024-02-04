@@ -1,21 +1,16 @@
 {% extends "account/profile.html" %}
-{% load static %}
 
 {% block admin %}
-<div class="col-lg-8">
+
+<div class="col-lg-8 col-md-8 col-12">
 {% for order in order_items %}
-    <a class="text-dark text-decoration-none" href="">
-        Order ID #{{ order.id }}
-        <div class="col-4">
-            <img src="{{ order.product.image.url }}" class="img-fluid" style="height: 5rem;">
-        </div>
-        {{ order.product }}
-        {{ order.quantity }}
-        {{ order.price }}
-    </a>
-    <br>
+    <div class="card p-2 mb-2">
+        <div class="card-text mb-2">Order ID #{{ order.id }}</div>
+        <img class="img-fluid object-fit-cover" width="45rem" src="{{ order.product.image.url }}" >
+        {{ order.product.name }}
+        Qty {{ order.quantity }}
+        <span class="ms-auto">Price {{ order.price }}</span>
+    </div>
 {% endfor %}
 </div>
-
-
 {% endblock admin %}

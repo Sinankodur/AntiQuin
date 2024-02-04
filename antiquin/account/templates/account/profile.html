@@ -36,15 +36,16 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-2 col-11">
-      <button class="btn btn-outline-dark ps-5 pe-5 mb-2" onclick="location.href= '{% url "account:users_page" %}' ">Users</button>
-      <br>
-      <button class="btn btn-outline-dark ps-5 pe-5" onclick="location.href= '{% url "account:orders_page" %}' ">Orders</button>
+    <div class="col-lg-3 col-md-4 col-12 mb-3">
+      <div class="d-grid gap-2">
+        <button class="btn btn-outline-dark ps-5 pe-5 mb-2" onclick="location.href= '{% url "account:users_page" %}' ">Users</button>
+        <button class="btn btn-outline-dark ps-5 pe-5" onclick="location.href= '{% url "account:orders_page" %}' ">Orders</button>
+      </div>
     </div>
     
     {% block admin %}
-      <div class="col-lg-8">
-        <p class="text-center text-body-tertiary">
+      <div class="col-lg-8 col-md-8 col-12">
+        <p class="text-body-tertiary">
           You can view all the users and orders of customers by clicking the buttons
         </p>
       </div>
