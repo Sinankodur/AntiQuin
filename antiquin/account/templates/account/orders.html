@@ -1,0 +1,21 @@
+{% extends "account/profile.html" %}
+{% load static %}
+
+{% block admin %}
+<div class="col-lg-8">
+{% for order in order_items %}
+    <a class="text-dark text-decoration-none" href="">
+        Order ID #{{ order.id }}
+        <div class="col-4">
+            <img src="{{ order.product.image.url }}" class="img-fluid" style="height: 5rem;">
+        </div>
+        {{ order.product }}
+        {{ order.quantity }}
+        {{ order.price }}
+    </a>
+    <br>
+{% endfor %}
+</div>
+
+
+{% endblock admin %}

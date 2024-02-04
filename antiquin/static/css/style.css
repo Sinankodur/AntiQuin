@@ -90,10 +90,6 @@ body {
   }
   
   
-  .close-btn {
-    display: none;
-  }
-  
   .signup-form {
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -103,22 +99,6 @@ body {
     box-shadow: 0 .5rem 4rem rgba(0, 0, 0, 0.25);
   }
   
-  .btn-qty{
-    padding: .3% 2%;
-    box-shadow: 0 .5rem 3rem rgba(0, 0, 0, 0.25);
-  }
-  
-  .card-qty{
-    border: solid rgba(0, 0, 0, 0.239);
-    padding: .5rem;
-    
-  }
-  
-  .btn-add-to-favourite{
-    color: white;
-    border: black ;
-  }
-
   .btn-add-to-favourite :hover{
     scale: 110%;
   }
@@ -131,8 +111,6 @@ body {
   .profile-list li button{
     width: 100%;
   }
-
-
 
 
   @media screen and (max-width: 2560px) {
@@ -201,4 +179,9 @@ body {
       height: 22rem;
       width: 19rem;
     }
+  }
+
+  .responsive-menu-bar li{
+    width: 100%;
+    list-style: none;
   }

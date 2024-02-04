@@ -27,9 +27,9 @@
             {% else %}
             href ="{% url 'sign-in' %}?next={% url "favourites:add_to_favourites" product.id %}"
             {% endif %}
-            class="btn-add-to-favourite text-black fs-1 position-absolute top-0 end-0 mt-1 pt-1 me-3"
+            class="btn-add-to-favourite text-danger fs-1 position-absolute top-0 end-0 mt-1 pt-1 me-3"
           >
-            <i class='bx bxs-heart' style='color:#ff0000'></i>
+            <i class='bx bxs-heart'></i>
           </a>
         </div>
         <h5 class='card-title'>{{ product.name }}</h5>

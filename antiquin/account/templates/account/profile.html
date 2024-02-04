@@ -5,38 +5,70 @@
 
 {% block content %}
 
+{% if user.is_staff %}
 <div class="container">
   <div class="d-flex mt-4">
     <h2>Account</h2>
-    {% if user.is_staff %}
-      <ul class="ms-auto" style="list-style: none;">
-        <li class="mb-1">
-          <a href= '{% url "item:new" %}' class="text-decoration-none text-dark ">
-            <img src="{% static "img/new.png" %}" width="20rem">
-            <span class="fs-6">Add Items</span>
-          </a>
-        </li>
-        <li>
-          <a href="{% url "sign-out" %}" class="text-decoration-none text-dark">
-            <img src="{% static "img/log-out.png" %}" width="20rem">
-            <span class="fs-6">Sign out</span>
-          </a>
-        </li>
-      </ul>
-    {% else %}
-      <a href="{% url "sign-out" %}" class="text-decoration-none text-dark ms-auto">
-        <img src="{% static "img/log-out.png" %}" width="25rem">
-        <span class="fs-6">Sign out</span>
-      </a>
-    {% endif %}
+    <ul class="ms-auto" style="list-style: none;">
+      <li class="mb-1">
+        <a href= '{% url "item:new" %}' class="text-decoration-none text-dark ">
+          <img src="{% static "img/new.png" %}" width="20rem">
+          <span class="fs-6">Add Products</span>
+        </a>
+      </li>
+      <li>
+        <a href="{% url "sign-out" %}" class="text-decoration-none text-dark">
+          <img src="{% static "img/log-out.png" %}" width="20rem">
+          <span class="fs-6">Sign out</span>
+        </a>
+      </li>
+    </ul>
   </div>
 
-  <div class="mt-3 mb-4">
-    <span class="text-success-empahasis">Username : </span>{{ request.user.username }} <br>
+  <div class="text-success-emphasis">
+    <span>Username : </span>{{ request.user.username }} <br>
     {% if request.user.get_full_name %}
       <span>Full Name : </span>{{ request.user.get_full_name }} <br>
     {% endif %}
       <span >E-mail : </span>{{ request.user.email }} <br>
+      <button onclick="location.href= '{% url "account:edit" %}' " class="btn btn-outline-dark ps-5 p-1 pe-5 mt-2">Edit</button>
+      <hr>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-2 col-11">
+      <button class="btn btn-outline-dark ps-5 pe-5 mb-2" onclick="location.href= '{% url "account:users_page" %}' ">Users</button>
+      <br>
+      <button class="btn btn-outline-dark ps-5 pe-5" onclick="location.href= '{% url "account:orders_page" %}' ">Orders</button>
+    </div>
+    
+    {% block admin %}
+      <div class="col-lg-8">
+        <p class="text-center text-body-tertiary">
+          You can view all the users and orders of customers by clicking the buttons
+        </p>
+      </div>
+    {% endblock admin %}
+  <div>
+</div>
+
+<!-- ------------------ for customers ----------- -->
+{% else %}
+<div class="container">
+  <div class="d-flex mt-4">
+    <h2>Account</h2>
+    <a href="{% url "sign-out" %}" class="text-decoration-none text-dark ms-auto">
+      <img src="{% static "img/log-out.png" %}" width="25rem">
+      <span class="fs-6">Sign out</span>
+    </a>
+  </div>
+
+  <div class="text-success-emphasis mb-4">
+    <span>Username : </span>{{ request.user.username }} <br>
+    {% if request.user.get_full_name %}
+      <span>Full Name : </span>{{ request.user.get_full_name }} <br>
+    {% endif %}
+      <span>E-mail : </span>{{ request.user.email }} <br>
       <button onclick="location.href= '{% url "account:edit" %}' " class="btn btn-outline-dark ps-5 p-1 pe-5 mt-2">Edit</button>
       <hr>
   </div>
@@ -73,7 +105,7 @@
         <hr />
 
         {%  for order_item in order.orderitem_set.all %}
-          <div class="col-lg-1 col-md-1 col-sm-1 col-3 mb-4">
+          <div class="col-lg-1 col-md-1 col-sm-1 col-3 mb-3">
             <a href="{% url 'item:detail' order_item.product.id %}">
               <img 
                 src="{{ order_item.product.image.url }}" 
@@ -93,12 +125,12 @@
             {% endif %}
           </div>
           
-          <div class="col-lg-2 col-md-2 col-sm-2 col-4 mt-4">
+          <div class="col-lg-2 col-md-2 col-sm-2 col-4 mt-3">
             ₹ {{ order_item.product.price }}
           </div>
           
           <!-- ------------ quantity ---------- -->
-          <div class="col-lg-3 col-md-3 col-sm-3 col-5 mt-4 mb-4">
+          <div class="col-lg-3 col-md-3 col-sm-3 col-5 mt-3 mb-4">
             <div class="d-flex">
               <input  
                 type="text" 
@@ -110,14 +142,15 @@
           </div>
           
           <!-- --------------- subtotal ------------------ -->
-          <div class="col-lg-2 col-md-2 col-sm-2 col-6 mt-4">
+          <div class="col-lg-2 col-md-2 col-sm-2 col-6 mt-3">
              ₹ {{ order_item.calculate_subtotal }}
           </div>
           <hr>
         {% endfor %}
-        <div class="d-flex">
-          <div>Date - {{ order.created_at }}</div>
-          <div class="ms-auto">Total - ₹{{ order.calculate_total }} </div>
+
+        <div class="d-flex mb-2">
+          <div class="text-body-tertiary"> <span class="text-black">Date - </span> {{ order.created_at }}</div>
+          <div class="text-warning-emphasis ms-auto">Total : ₹{{ order.calculate_total }} </div>
         </div>
         <hr>
       </div>
@@ -127,4 +160,6 @@
   <p class="text-center text-body-tertiary">You haven't ordered anything yet</p>
   {% endif %}
 </div>
+{% endif %}
+
 {% endblock content %}

@@ -1,0 +1,8 @@
+{% extends "account/profile.html" %}
+
+{% block admin %}
+
+    {% for user in users %}
+        {{ user.username }}
+    {% endfor %}
+{% endblock admin %}

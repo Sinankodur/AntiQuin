@@ -1,12 +1,12 @@
-
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.models import User
 
 from item.models import Category, Product
 from cart.models import Cart, CartItem
 from favourites.models import Favourite
-from order.models import Order
+from order.models import Order, OrderItem
+
 
 
 @login_required
@@ -25,7 +25,7 @@ def account(request):
     fav_count = favourites.count()
 
     orders = Order.objects.filter(user=user)
-    
+
     return render(request, 'account/profile.html', {
         'categories': categories,
         'products': products,
@@ -46,3 +46,18 @@ def edit_account(request):
 
         return redirect('/account/')
     return render(request, 'account/edit_account.html')
+
+def users_page(request):
+    users = User.objects.all()
+
+    return render(request, 'account/users.html', {
+        'users' : users
+    })
+
+def orders_page(request):
+    users_orders = Order.objects.all()
+    order_items = OrderItem.objects.all()
+    return render(request, 'account/orders.html', {
+        'orders' : users_orders,
+        'order_items' : order_items
+    })
