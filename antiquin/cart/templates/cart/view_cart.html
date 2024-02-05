@@ -74,9 +74,9 @@
       <div class="col-lg-2 col-md-2 col-sm-2 col-6 mt-4">
         -{{ item.subtotal }}
         
-        <button class="btn btn-light ps-1 pe-1 pb-1 p-0 ms-3" onclick="location.href= '{% url "cart:delete_item" item.id %}' ">
+        <a class="btn btn-light ps-1 pe-1 pb-1 p-0 ms-3" onclick="return confirmCancel()" href= "{% url "cart:delete_item" item.id %}">
           <img src="{% static "img/bin.png" %}" ></img>
-        </button>
+        </a>
       </div>
     </div>
     <a href="{% url "cart:move_to_favourites" item.product.id %}" class="link-secondary link-offset-1 link-underline-opacity-50 link-underline-opacity-100-hover">

@@ -54,4 +54,4 @@ class OrderItem(models.Model):
     subtotal = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.quantity} x {self.product.name} for Order #{self.order.id}"
+        return f"{self.product.name} x {self.quantity} - Order #{self.order.id}"

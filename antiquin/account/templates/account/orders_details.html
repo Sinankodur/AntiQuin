@@ -1,16 +1,23 @@
 {% extends "account/profile.html" %}
 
 {% block admin %}
-<div class="col-lg-9 col-md-8 col-12">
+<div class="col-lg-5 col-md-8 col-12">
     <h2>Address Details</h2>
     <hr>
     {% for order in orders %}
-    <div>
+    <div class="card p-4 pt-3 pb-0 mb-3">
+        <div class="mb-2">
+            {% for item in order.orderitem_set.all %}
+                {{ item }}
+                <br>
+            {% endfor %}
+        </div>
         Username : {{ order.user.username }} <br>
-        Full Name : {{ order.user.get_full_name }} <br>
+        Full Name : {{ order.first_name }} {{ order.last_name }} <br>
         E-mail : {{ order.email }} <br>
+        Phone : {{ order.phone }} <br>
         Address : {{ order.address }}, {{ order.place }} <br>
-        E-mail : {{ order.email }} <br>
+        <span class="text-danger">Order Time : {{ order.created_at }}</span> <br>
     </div>
     {% endfor %}
 </div>

@@ -37,7 +37,7 @@
 
   <div class="row">
     <div class="col-lg-3 col-md-4 col-12 mb-3">
-      <div class="d-grid gap-2">
+      <div class="d-grid gap-1">
         <button class="btn btn-outline-dark ps-5 pe-5 mb-2" onclick="location.href= '{% url "account:users_page" %}' ">Users</button>
         <button class="btn btn-outline-dark ps-5 pe-5" onclick="location.href= '{% url "account:orders_page" %}' ">Orders</button>
       </div>
@@ -75,12 +75,12 @@
   </div>
 
   <div>
-    <h2 class="mb-4">My Orders</h2>
+    <h2>My Orders</h2>
+    <hr>
     {% if orders %}
     {% for order in orders %}
     <div class="p-1 ps-3 mb-3">
-      <div class="row mt-3">
-        <hr>
+      <div class="row">
         <div class="d-flex mb-2">
           <span class="text-secondary me-auto">Order ID # {{ order.id }}</span>
 
@@ -96,9 +96,9 @@
 
           {% if order.status == 'ordered' %}
             <div class='ms-3 d-flex'>
-              <button class='btn btn-outline-light p-0 ps-1 pe-1 ms-auto' onclick="location.href= '{% url "order:cancel_order" order.id %}' ">
+              <a class='btn btn-outline-light p-0 ps-1 pe-1 ms-auto' href="{% url "order:cancel_order" order.id %}"  onclick="return confirmCancel()">
                 <img src="{% static "img/bin.png" %}" ></img>
-              </button>
+              </a>
             </div>
           {% endif %}
         </div>

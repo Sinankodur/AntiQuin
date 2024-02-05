@@ -45,11 +45,12 @@
           <div class='row p-3 bg-body-tertiary rounded'>
             <p>You can work with your products!</p>
             <div class='col-6'>
-              <button 
+              <a 
                 class="btn btn-outline-danger"
-                onclick="location.href = '{% url "item:delete" product.id %}' "
+                onclick="return confirmCancel()"
+                href = "{% url "item:delete" product.id %}"
               >Delete
-              </button>
+              </a>
             </div>
             <div class='col-6'>
               <button 

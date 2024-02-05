@@ -1,9 +1,6 @@
-from datetime import time
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.conf import settings
 from django.contrib.auth.decorators import login_required
-import razorpay
 
 from cart.models import CartItem,Cart
 from order.models import Order, OrderItem

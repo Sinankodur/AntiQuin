@@ -62,6 +62,8 @@ def orders_page(request):
 
 def orders_details(request, pk):
     orders = Order.objects.filter(pk=pk)
+    order_items = OrderItem.objects.filter(pk=pk)
     return render(request, 'account/orders_details.html',{
         'orders' : orders,
+        'order_items' : order_items
     })

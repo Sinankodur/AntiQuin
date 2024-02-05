@@ -27,3 +27,13 @@ document.addEventListener("DOMContentLoaded", function () {
 function setPaymentMethod(method) {
   document.getElementById("payment_method").value = method;
 }
+
+function confirmCancel() {
+  let res = confirm("Are you sure you want to proceed with this action? This action cannot be undone!");
+
+  if (res) {
+    return true;
+} else {
+    return false;
+}
+}
