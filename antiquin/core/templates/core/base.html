@@ -35,8 +35,8 @@
     <title>{% block title %}{% endblock title %} | AntiQuin</title>
   </head>
   <body>
-    <nav class="navbar">
-      <div class="container pt-3">
+    <nav class="navbar fixed-top bg-white pt-0 pb-0 border-bottom">
+      <div class="container pt-2">
         <a href="{% url "home" %}">
           <img src="{% static "img\logo.png" %}" alt="logo" class="logo" />
         </a>
@@ -234,9 +234,10 @@
         </div>
       </div>
     </nav>
-    <hr />
 
-    {% block content %}{% endblock content %}
+    <div style="margin-top: 8rem;">
+      {% block content %}{% endblock content %}
+    </div>
   
     <script src="{% static "js\script.js" %}"></script>
     <script

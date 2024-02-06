@@ -7,6 +7,7 @@
     <hr>
     {% if order_items %}
     {% for order in order_items %}
+    {% if not order.is_delivered %}
         <div class="p-2 mb-2">
             <div class="mb-2">
                 <a href="{% url "account:orders_details" order.order.id %}" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
@@ -23,6 +24,7 @@
             </span>
             <div class="ms-auto mt-2">Total - {{ order.price }}</div>
         </div>
+    {% endif %}
     {% endfor %}
     {% else %}
     <p class="text-center text-body-tertiary">

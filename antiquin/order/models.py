@@ -3,13 +3,13 @@ from django.db import models
 from item.models import Product
 
 
-class DeliveredProduct(models.Model):
-    order = models.ForeignKey('Order', on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()
+# class DeliveredProduct(models.Model):
+#     order = models.ForeignKey('Order', on_delete=models.DO_NOTHING)
+#     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+#     quantity = models.PositiveIntegerField()
 
-    def __str__(self):
-        return f"{self.product.name} x {self.quantity} - Delivered from Order #{self.order.id}"
+#     def __str__(self):
+#         return f"{self.product.name} x {self.quantity} - Delivered from Order #{self.order.id}"
 
 
 class Order(models.Model):
@@ -44,12 +44,9 @@ class Order(models.Model):
     
     def mark_as_delivered(self):
         if not self.is_delivered:
-            for item in self.orderitem_set.all():
-                DeliveredProduct.objects.create(order=self, product=item.product, quantity=item.quantity)
-            self.is_delivered = True
-            self.status = Order.DISPATCHED
-            self.save()
-            print(f"Order {self.id} marked as delivered. Delivered products created.")
+           self.is_delivered = True
+           self.status = Order.DISPATCHED
+           self.save()
 
     def __str__(self):
         return f"Order ID #{self.id} - {self.user.username}"

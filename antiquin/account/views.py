@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from item.models import Category, Product
 from cart.models import Cart, CartItem
 from favourites.models import Favourite
-from order.models import Order, OrderItem, DeliveredProduct
+from order.models import Order, OrderItem
 
 
 
@@ -74,15 +74,15 @@ def deliver_order(request, order_id):
     if not order.is_delivered:
         order.mark_as_delivered()
         order.save()
-        order.delete()
-        return render(request, 'account/delivered.html', {
-            'delivered' : delivered
-        })
+      
+        return redirect('/account/delivered')
 
-    return render(request, 'account/orders_details.html')
+    return render(request, 'account/orders.html')
 
 def delivered(request):
-    delivered = DeliveredProduct.objects.all()
+    orders = Order.objects.filter(is_delivered=True)
+
     return render(request, 'account/delivered.html', {
-        'delivered' : delivered
-    })
+            'orders' : orders
+        })
+    
