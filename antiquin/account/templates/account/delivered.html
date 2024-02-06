@@ -1,0 +1,14 @@
+{% extends "account/profile.html" %}
+
+{% block admin %}
+<div class="col-lg-9 col-md-8 col-12">
+    <h2>Delivered Products</h2>
+    <hr>
+{% for item in delivered %}
+    {{ item.order }}
+    {{ item.product }}
+    {{ item.quantity }}
+{% endfor %}
+</div>
+
+{% endblock admin %}

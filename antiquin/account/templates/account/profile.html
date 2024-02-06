@@ -37,16 +37,17 @@
 
   <div class="row">
     <div class="col-lg-3 col-md-4 col-12 mb-3">
-      <div class="d-grid gap-1">
-        <button class="btn btn-outline-dark ps-5 pe-5 mb-2" onclick="location.href= '{% url "account:users_page" %}' ">Users</button>
+      <div class="d-grid gap-2">
+        <button class="btn btn-outline-dark ps-5 pe-5" onclick="location.href= '{% url "account:users_page" %}' ">Users</button>
         <button class="btn btn-outline-dark ps-5 pe-5" onclick="location.href= '{% url "account:orders_page" %}' ">Orders</button>
+        <button class="btn btn-outline-dark ps-5 pe-5" onclick="location.href= '{% url "account:delivered" %}' ">Delivered</button>
       </div>
     </div>
     
     {% block admin %}
       <div class="col-lg-8 col-md-8 col-12 mt-2">
-        <p class="text-center text-body-tertiary">
-          You can view all the users and orders of customers by clicking the buttons
+        <p class="text-center">
+          "The administrator is afforded the capability to access comprehensive information regarding users and their corresponding orders through the designated buttons."
         </p>
       </div>
     {% endblock admin %}

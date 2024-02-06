@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 from item.models import Category, Product
 from cart.models import Cart, CartItem
 from favourites.models import Favourite
-from order.models import Order, OrderItem
+from order.models import Order, OrderItem, DeliveredProduct
 
 
 
@@ -66,4 +66,23 @@ def orders_details(request, pk):
     return render(request, 'account/orders_details.html',{
         'orders' : orders,
         'order_items' : order_items
+    })
+
+def deliver_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+
+    if not order.is_delivered:
+        order.mark_as_delivered()
+        order.save()
+        order.delete()
+        return render(request, 'account/delivered.html', {
+            'delivered' : delivered
+        })
+
+    return render(request, 'account/orders_details.html')
+
+def delivered(request):
+    delivered = DeliveredProduct.objects.all()
+    return render(request, 'account/delivered.html', {
+        'delivered' : delivered
     })

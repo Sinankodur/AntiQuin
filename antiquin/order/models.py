@@ -3,6 +3,15 @@ from django.db import models
 from item.models import Product
 
 
+class DeliveredProduct(models.Model):
+    order = models.ForeignKey('Order', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f"{self.product.name} x {self.quantity} - Delivered from Order #{self.order.id}"
+
+
 class Order(models.Model):
     ORDERED = 'ordered'
     DISPATCHED = 'dispatched'
@@ -22,6 +31,7 @@ class Order(models.Model):
     phone = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     is_cancelled = models.BooleanField(default=False)
+    is_delivered = models.BooleanField(default=False)
 
     paid = models.BooleanField(default=False)
     paid_amount = models.IntegerField(blank=True, null=True)
@@ -31,6 +41,15 @@ class Order(models.Model):
     def calculate_total(self):
         total = sum(item.calculate_subtotal() for item in self.orderitem_set.all())
         return total
+    
+    def mark_as_delivered(self):
+        if not self.is_delivered:
+            for item in self.orderitem_set.all():
+                DeliveredProduct.objects.create(order=self, product=item.product, quantity=item.quantity)
+            self.is_delivered = True
+            self.status = Order.DISPATCHED
+            self.save()
+            print(f"Order {self.id} marked as delivered. Delivered products created.")
 
     def __str__(self):
         return f"Order ID #{self.id} - {self.user.username}"
@@ -55,3 +74,5 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.product.name} x {self.quantity} - Order #{self.order.id}"
+    
+
