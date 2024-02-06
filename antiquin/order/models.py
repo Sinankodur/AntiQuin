@@ -2,16 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from item.models import Product
 
-
-# class DeliveredProduct(models.Model):
-#     order = models.ForeignKey('Order', on_delete=models.DO_NOTHING)
-#     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
-#     quantity = models.PositiveIntegerField()
-
-#     def __str__(self):
-#         return f"{self.product.name} x {self.quantity} - Delivered from Order #{self.order.id}"
-
-
 class Order(models.Model):
     ORDERED = 'ordered'
     DISPATCHED = 'dispatched'

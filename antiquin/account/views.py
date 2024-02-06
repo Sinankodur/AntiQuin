@@ -55,7 +55,9 @@ def users_page(request):
     })
 
 def orders_page(request):
-    order_items = OrderItem.objects.all()
+    undelivered_orders = Order.objects.filter(is_delivered=False)
+    order_items = OrderItem.objects.filter(order__in=undelivered_orders)
+    
     return render(request, 'account/orders.html', {
         'order_items' : order_items
     })
@@ -83,6 +85,5 @@ def delivered(request):
     orders = Order.objects.filter(is_delivered=True)
 
     return render(request, 'account/delivered.html', {
-            'orders' : orders
-        })
-    
+        'orders' : orders
+    })

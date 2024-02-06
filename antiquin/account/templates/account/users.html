@@ -30,7 +30,11 @@
                     <td class="ps-3"><i class='bx bxs-no-entry text-danger'></i></td>
                     {% endif %}
                     {% if not user.is_staff %}
-                    <td><button class="btn btn-outline-light p-0" type="submit" onclick="location.href= '' "><img src="{% static "img/bin.png" %}" ></img></a></td>
+                    <td>
+                        <button class="btn btn-outline-light p-0" type="submit" onclick="location.href= '' ">
+                            <img src="{% static "img/bin.png" %}" ></img>
+                        </button>
+                    </td>
                     {% else %}
                     <td></td>
                     {% endif %}

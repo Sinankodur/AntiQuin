@@ -7,14 +7,15 @@
     <hr>
     {% if order_items %}
     {% for order in order_items %}
-    {% if not order.is_delivered %}
         <div class="p-2 mb-2">
             <div class="mb-2">
                 <a href="{% url "account:orders_details" order.order.id %}" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
                     {{ order.order }}
                 </a>
             </div>
-            <a href="{% url "item:detail" order.product.id %}"><img class="img-fluid object-fit-cover" width="45rem" src="{{ order.product.image.url }}" ></a>
+            <a href="{% url "item:detail" order.product.id %}">
+                <img class="img-fluid object-fit-cover" width="45rem" src="{{ order.product.image.url }}" >
+            </a>
             <span class="ps-2">
                 {{ order.product.name }}
                 {% if order.product.description %}
@@ -24,11 +25,10 @@
             </span>
             <div class="ms-auto mt-2">Total - {{ order.price }}</div>
         </div>
-    {% endif %}
     {% endfor %}
     {% else %}
     <p class="text-center text-body-tertiary">
-        Orders will be shown here!
+        Pending and undelivered orders will be shown here!
     </p>
     {% endif %}
 </div>
