@@ -16,7 +16,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, related_name='items', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255, null=True, blank=True)
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(null=True, blank=True, upload_to="images/")
     is_sold = models.BooleanField(default=False)
     quantity = models.PositiveIntegerField(default=1) 

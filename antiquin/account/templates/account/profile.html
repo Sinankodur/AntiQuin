@@ -6,162 +6,150 @@
 {% block content %}
 
 {% if user.is_staff %}
-<div class="container">
-  <div class="d-flex mt-4">
-    <h2>Account</h2>
-    <ul class="ms-auto" style="list-style: none;">
-      <li class="mb-1">
-        <a href= '{% url "item:new" %}' class="text-decoration-none text-dark ">
-          <img src="{% static "img/new.png" %}" width="20rem">
-          <span class="fs-6">Add Products</span>
-        </a>
-      </li>
-      <li>
-        <a href="{% url "sign-out" %}" class="text-decoration-none text-dark">
-          <img src="{% static "img/log-out.png" %}" width="20rem">
-          <span class="fs-6">Sign out</span>
-        </a>
-      </li>
-    </ul>
-  </div>
+  <div class="container">
+    <div class="d-flex mt-4">
+      <h2>Account</h2>
+      <ul class="ms-auto" style="list-style: none;">
+        <li class="mb-1">
+          <a href= '{% url "item:new" %}' class="text-decoration-none text-dark ">
+            <img src="{% static "img/new.png" %}" width="20rem">
+            <span class="fs-6">Add Products</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url "sign-out" %}" class="text-decoration-none text-dark">
+            <img src="{% static "img/log-out.png" %}" width="20rem">
+            <span class="fs-6">Sign out</span>
+          </a>
+        </li>
+      </ul>
+    </div>
 
-  <div class="text-success-emphasis">
-    <span>Username : </span>{{ request.user.username }} <br>
-    {% if request.user.get_full_name %}
-      <span>Full Name : </span>{{ request.user.get_full_name }} <br>
-    {% endif %}
+    <div class="text-success-emphasis">
+      <span>Username : </span>{{ request.user.username }} <br>
+      {% if request.user.get_full_name %}
+        <span>Full Name : </span>{{ request.user.get_full_name }} <br>
+      {% endif %}
       <span >E-mail : </span>{{ request.user.email }} <br>
       <button onclick="location.href= '{% url "account:edit" %}' " class="btn btn-outline-dark ps-5 p-1 pe-5 mt-2">Edit</button>
       <hr>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-3 col-md-4 col-12 mb-3">
-      <div class="d-grid gap-2">
-        <button class="btn btn-outline-dark ps-5 pe-5" onclick="location.href= '{% url "account:users_page" %}' ">Users</button>
-        <button class="btn btn-outline-dark ps-5 pe-5" onclick="location.href= '{% url "account:orders_page" %}' ">Orders</button>
-        <button class="btn btn-outline-dark ps-5 pe-5" onclick="location.href= '{% url "account:delivered" %}' ">Delivered</button>
-      </div>
     </div>
-    
-    {% block admin %}
-      <div class="col-lg-8 col-md-8 col-12 mt-2">
-        <p class="text-center">
-          "The administrator is afforded the capability to access comprehensive information regarding users and orders through the designated buttons."
-        </p>
+
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-12 mb-3">
+        <div class="d-grid gap-2">
+          <button class="btn btn-outline-dark ps-5 pe-5" onclick="location.href= '{% url "account:users_page" %}' ">Users</button>
+          <button class="btn btn-outline-dark ps-5 pe-5" onclick="location.href= '{% url "account:orders_page" %}' ">Orders</button>
+          <button class="btn btn-outline-dark ps-5 pe-5" onclick="location.href= '{% url "account:delivered" %}' ">Delivered</button>
+        </div>
       </div>
-    {% endblock admin %}
-  <div>
+    
+      {% block admin %}
+        <div class="col-lg-8 col-md-8 col-12 mt-2">
+          <p class="text-center">
+            "The administrator is afforded the capability to access comprehensive information regarding users and orders through the designated buttons."
+          </p>
+        </div>
+      {% endblock admin %}
+    <div>
 </div>
 
 <!-- ------------------ for customers ----------- -->
 {% else %}
-<div class="container">
-  <div class="d-flex mt-4">
-    <h2>Account</h2>
-    <a href="{% url "sign-out" %}" class="text-decoration-none text-dark ms-auto">
-      <img src="{% static "img/log-out.png" %}" width="25rem">
-      <span class="fs-6">Sign out</span>
-    </a>
-  </div>
+  <div class="container">
+    <div class="d-flex mt-4">
+      <h2>Account</h2>
+      <a href="{% url "sign-out" %}" class="text-decoration-none text-dark ms-auto">
+        <img src="{% static "img/log-out.png" %}" width="25rem">
+        <span class="fs-6">Sign out</span>
+      </a>
+    </div>
 
-  <div class="text-success-emphasis mb-4">
-    <span>Username : </span>{{ request.user.username }} <br>
-    {% if request.user.get_full_name %}
-      <span>Full Name : </span>{{ request.user.get_full_name }} <br>
-    {% endif %}
+    <div class="text-success-emphasis mb-4">
+      <span>Username : </span>{{ request.user.username }} <br>
+      {% if request.user.get_full_name %}
+        <span>Full Name : </span>{{ request.user.get_full_name }} <br>
+      {% endif %}
       <span>E-mail : </span>{{ request.user.email }} <br>
       <button onclick="location.href= '{% url "account:edit" %}' " class="btn btn-outline-dark ps-5 p-1 pe-5 mt-2">Edit</button>
       <hr>
-  </div>
-
-  <div>
-    <h2>My Orders</h2>
-    <hr>
-    {% if orders %}
-    {% for order in orders %}
-    <div class="p-1 ps-3 mb-3">
-      <div class="row">
-        <div class="d-flex mb-2">
-          <span class="text-secondary me-auto">Order ID # {{ order.id }}</span>
-
-          {% if order.status == 'ordered' %}
-          <div class="ms-auto">
-            <span class="badge bg-warning text-wrap rounded-pill">Ordered</span>
-          </div>
-          {% else %}
-          <div>
-            <span class="badge bg-success text-wrap rounded-pill">Dispatched</span>
-          </div>
-          {% endif %}
-
-          {% if order.status == 'ordered' %}
-            <div class='ms-3 d-flex'>
-              <a class='btn btn-outline-light p-0 ps-1 pe-1 ms-auto' href="{% url "order:cancel_order" order.id %}"  onclick="return confirmCancel()">
-                <img src="{% static "img/bin.png" %}" ></img>
-              </a>
-            </div>
-          {% endif %}
-        </div>
-
-        <hr />
-
-        {%  for order_item in order.orderitem_set.all %}
-          <div class="col-lg-1 col-md-1 col-sm-1 col-3 mb-3">
-            <a href="{% url 'item:detail' order_item.product.id %}">
-              <img 
-                src="{{ order_item.product.image.url }}" 
-                alt='img'
-                class="img-fluid" width="60rem"/>
-            </a>
-          </div>
-            
-          <div class="col-lg-4 col-md-4 col-sm-4 col-5">
-            <div class="pt-2">
-              {{ order_item.product.name }}
-            </div>
-            {% if order_item.product.description %}
-              <span class="text-secondary" style="font-size: .8rem;">
-                {{ order_item.product.description }}
-              </span>
-            {% endif %}
-          </div>
-          
-          <div class="col-lg-2 col-md-2 col-sm-2 col-4 mt-3">
-            ₹ {{ order_item.product.price }}
-          </div>
-          
-          <!-- ------------ quantity ---------- -->
-          <div class="col-lg-3 col-md-3 col-sm-3 col-5 mt-3 mb-4">
-            <div class="d-flex">
-              <input  
-                type="text" 
-                class="text-center form-control" 
-                value="{{ order_item.quantity }}" 
-                style="width: 3rem; height: 1.5rem;" 
-                readonly>
-            </div>
-          </div>
-          
-          <!-- --------------- subtotal ------------------ -->
-          <div class="col-lg-2 col-md-2 col-sm-2 col-6 mt-3">
-             ₹ {{ order_item.calculate_subtotal }}
-          </div>
-          <hr>
-        {% endfor %}
-
-        <div class="d-flex mb-2">
-          <div class="text-body-tertiary"> <span class="text-black">Date - </span> {{ order.created_at }}</div>
-          <div class="text-warning-emphasis ms-auto">Total : ₹{{ order.calculate_total }} </div>
-        </div>
-        <hr>
-      </div>
     </div>
-  {% endfor %}
-  {% else %}
-  <p class="text-center text-body-tertiary">You haven't ordered anything yet</p>
-  {% endif %}
-</div>
+
+    <div>
+      <h2>Ordered Products</h2>
+      <!-- if title == purchased need to work on backend -->
+      {% comment %} <h2>Purchased Products</h2> {% endcomment %}
+      <hr>
+      {% block customer %}
+      {% if orders %}
+        {% for order in orders %}
+          {% if not order.is_delivered %}
+            <div class="p-1 mb-3">
+              <div class="row">
+                <div class="d-flex mb-2">
+                  <span class="text-secondary me-auto">Order ID # {{ order.id }}</span>
+
+                  <div class='ms-3 d-flex'>
+                    <a class='btn btn-outline-light p-0 ps-1 pe-1 ms-auto' href="{% url "order:cancel_order" order.id %}"  onclick="return confirmCancel()">
+                      <img src="{% static "img/bin.png" %}" ></img>
+                    </a>
+                  </div>
+                </div>
+                <hr />
+                {%  for order_item in order.orderitem_set.all %}
+                  <div class="col-lg-1 col-md-1 col-sm-1 col-3 mb-3">
+                    <a href="{% url 'item:detail' order_item.product.id %}">
+                      <img src="{{ order_item.product.image.url }}" alt='img' class="img-fluid" width="60rem"/>
+                    </a>
+                  </div>
+            
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-5">
+                    <div class="pt-2">
+                      {{ order_item.product.name }}
+                    </div>
+                    {% if order_item.product.description %}
+                      <span class="text-secondary" style="font-size: .8rem;">
+                        {{ order_item.product.description }}
+                      </span>
+                    {% endif %}
+                  </div>
+          
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-4 mt-3">
+                    ₹{{ order_item.product.price }}
+                  </div>
+          
+                  <!-- ------------ quantity ---------- -->
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-5 mt-3 mb-4">
+                    <div class="d-flex">
+                      Qty: 
+                      <input type="text" class="text-center form-control ms-2"  value="{{ order_item.quantity }}" 
+                        style="width: 3rem; height: 1.5rem;" 
+                        readonly
+                      >
+                    </div>
+                  </div>
+          
+                  <!-- --------------- subtotal ------------------ -->
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-6 mt-3">
+                    ₹{{ order_item.calculate_subtotal }}
+                  </div>
+                  <hr>
+                {% endfor %}
+
+                <div class="d-flex mb-2">
+                  <div class="text-body-tertiary"> <span class="text-black">Date : <br> </span> {{ order.created_at }}</div>
+                  <div class="text-warning-emphasis ms-auto">Total : ₹{{ order.calculate_total }} </div>
+                </div>
+                <hr>
+             </div>
+            </div>
+          {% else %}
+            <p class="text-center text-body-tertiary">You haven't ordered anything yet</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      {% endblock customer %}
+    </div>
 {% endif %}
 
 {% endblock content %}

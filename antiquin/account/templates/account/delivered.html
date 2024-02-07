@@ -1,6 +1,7 @@
 {% extends "account/profile.html" %}
 
 {% block admin %}
+{% if user.is_staff %}
 <div class="col-lg-9 col-md-8 col-12">
     <h2>Delivered Products</h2>
     <hr>
@@ -32,5 +33,9 @@
         {% endif %}
     </div>
 </div>
-
+{% endif %}
 {% endblock admin %}
+
+{% block customer %}
+
+{% endblock customer %}

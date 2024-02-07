@@ -35,7 +35,7 @@
     <title>{% block title %}{% endblock title %} | AntiQuin</title>
   </head>
   <body>
-    <nav class="navbar fixed-top bg-white pt-0 pb-0 border-bottom">
+    <nav class="navbar fixed-top bg-white pt-0 pb-0 border-bottom border-2">
       <div class="container pt-2">
         <a href="{% url "home" %}">
           <img src="{% static "img\logo.png" %}" alt="logo" class="logo" />
@@ -164,7 +164,7 @@
                 {% if total and request.user.username %}
                   <span>₹{{ total }}</span>
                 {% else %}
-                  <span>₹000.0</span>
+                  <span>₹000.00</span>
                 {% endif %}
               </li>
             </ul>
@@ -225,7 +225,7 @@
                   {% if total and request.user.username %}
                     <span>₹{{ total }}</span>
                   {% else %}
-                    <span>₹000.0</span>
+                    <span>₹000.00</span>
                   {% endif %}
                 </li>
               </ul>
