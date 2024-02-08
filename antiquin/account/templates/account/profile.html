@@ -52,9 +52,9 @@
         </div>
       {% endblock admin %}
     <div>
-</div>
+  </div>
 
-<!-- ------------------ for customers ----------- -->
+  <!-- ------------------ for customers ----------- -->
 {% else %}
   <div class="container">
     <div class="d-flex mt-4">
@@ -82,13 +82,13 @@
         </h2>
 
         <h2 class="ms-auto">
-          <a href="{% url "account:delivered" %}" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" title="Click here!">Purchased</a>
+          <a href="{% url "account:delivered_customer" %}" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" title="Click here!">Purchased</a>
         </h2>
       </div>
 
       <hr>
       {% block customer %}
-      {% if orders %}
+      {% if not orders.is_delivered %}
         {% for order in orders %}
           {% if not order.is_delivered %}
             <div class="p-1 mb-3">
@@ -158,6 +158,7 @@
 
       {% endblock customer %}
     </div>
+  </div>
 {% endif %}
 
 {% endblock content %}

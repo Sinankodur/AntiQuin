@@ -1,28 +1,27 @@
 {% extends "account/profile.html" %}
 {% load static %}
 
-{% if user.is_staff %}
 {% block admin %}
    <div class="col-lg-8 col-md-8 col-12 mb-3">
         <h2>Customer Orders</h2>
         <hr>
         {% if order_items %}
-            {% for order in order_items %}
+            {% for order_item in order_items %}
                 <div class="p-2 mb-2">
                     <div class="mb-2">
-                        <a href="{% url "account:orders_details" order.order.id %}" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
-                            {{ order.order }}
+                        <a href="{% url "account:orders_details" order_item.order.id %}" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+                            {{ order_item.order }}
                         </a>
                     </div>
-                    <a href="{% url "item:detail" order.product.id %}"><img class="img-fluid object-fit-cover" width="45rem" src="{{ order.product.image.url }}"></a>
+                    <a href="{% url "item:detail" order_item.product.id %}"><img class="img-fluid object-fit-cover" width="45rem" src="{{ order_item.product.image.url }}"></a>
                     <span class="ps-2">
-                        {{ order.product.name }}
-                        {% if order.product.description %}
-                           {{ order.product.description }}
+                        {{ order_item.product.name }}
+                        {% if order_item.product.description %}
+                           {{ order_item.product.description }}
                         {% endif %}
-                        x {{ order.quantity }}
+                        x {{ order_item.quantity }}
                     </span>
-                    <div class="ms-auto mt-2">Total - {{ order.price }}</div>
+                    <div class="ms-auto mt-2">Total - {{ order_item.price }}</div>
                 </div>
             {% endfor %}
         {% else %}
@@ -32,9 +31,71 @@
         {% endif %}
     </div>
 {% endblock admin %}
-{% else %}
 
 {% block customer %}
-    
-{% endblock customer %}
+{% if not orders.is_delivered %}
+{% for order in orders %}
+    {% if not order.is_delivered %}
+        <div class="p-1 mb-3">
+            <div class="row">
+                <div class="d-flex mb-2">
+                    <span class="text-secondary me-auto">Order ID # {{ order.id }}</span>
+                    <div class='ms-3 d-flex'>
+                        <a class='btn btn-outline-light p-0 ps-1 pe-1 ms-auto' href="{% url "order:cancel_order" order.id %}"  onclick="return confirmCancel()">
+                            <img src="{% static "img/bin.png" %}" ></img>
+                        </a>
+                    </div>
+                </div>
+                <hr />
+                {%  for order_item in order.orderitem_set.all %}
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-3 mb-3">
+                        <a href="{% url 'item:detail' order_item.product.id %}">
+                            <img src="{{ order_item.product.image.url }}" alt='img' class="img-fluid" width="60rem"/>
+                        </a>
+                    </div>
+                
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-5">
+                        <div class="pt-2">
+                            {{ order_item.product.name }}
+                        </div>
+                        {% if order_item.product.description %}
+                            <span class="text-secondary" style="font-size: .8rem;">
+                                {{ order_item.product.description }}
+                            </span>
+                        {% endif %}
+                    </div>
+            
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-4 mt-3">
+                        ₹{{ order_item.product.price }}
+                    </div>
+            
+                    <!-- ------------ quantity ---------- -->
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-5 mt-3 mb-4">
+                        <div class="d-flex">
+                            Qty: 
+                            <input type="text" class="text-center form-control ms-2"  value="{{ order_item.quantity }}" 
+                                style="width: 3rem; height: 1.5rem;" 
+                                readonly
+                            >
+                        </div>
+                    </div>
+            
+                    <!-- --------------- subtotal ------------------ -->
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-6 mt-3">
+                        ₹{{ order_item.calculate_subtotal }}
+                    </div>
+                    <hr>
+                {% endfor %}
+
+                <div class="d-flex mb-2">
+                    <div class="text-body-tertiary"> <span class="text-black">Date : <br> </span> {{ order.created_at }}</div>
+                    <div class="text-warning-emphasis ms-auto">Total : ₹{{ order.calculate_total }} </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+<p class="text-center mt-5 text-body-tertiary">Orders are shown here </p>
 {% endif %}
+{% endblock customer %}
