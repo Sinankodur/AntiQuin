@@ -36,6 +36,8 @@ def account(request):
 
     return render(request, 'account/profile.html', context)
 
+
+@login_required
 def edit_account(request):
     user = request.user
     context = get_common_context(user)
@@ -50,10 +52,14 @@ def edit_account(request):
 
     return render(request, 'account/edit_account.html',context)
 
+
+@login_required
 def users_page(request):
     users = User.objects.all()
     return render(request, 'account/users.html', {'users': users})
 
+
+@login_required
 def orders_page(request):
     user = request.user
     orders = Order.objects.filter(user=user)
@@ -61,10 +67,12 @@ def orders_page(request):
     order_items = OrderItem.objects.filter(order__in=undelivered_orders)
 
     context = get_common_context(user)
-    context.update({'orders': orders, 'order_items': order_items})
+    context.update({'orders': orders, 'order_items': order_items })
 
     return render(request, 'account/orders.html', context)
 
+
+@login_required
 def orders_details(request, pk):
     orders = Order.objects.filter(pk=pk)
     order_items = OrderItem.objects.filter(pk=pk)
@@ -73,6 +81,8 @@ def orders_details(request, pk):
         'order_items' : order_items
     })
 
+
+@login_required
 def deliver_order(request, order_id):
     order = get_object_or_404(Order, id=order_id)
 
@@ -83,12 +93,16 @@ def deliver_order(request, order_id):
 
     return redirect('/account/orders')
 
+
+@login_required
 def delivered(request):
     orders = Order.objects.filter(is_delivered=True)
     context = get_common_context(request.user)
     context.update({'orders': orders})
     return render(request, 'account/delivered.html', context)
 
+
+@login_required
 def delivered_customer(request):
     user = request.user
     orders = Order.objects.filter(is_delivered=True, user=user)
@@ -97,6 +111,3 @@ def delivered_customer(request):
     context.update({'orders': orders})
 
     return render(request, 'account/delivered.html', context)
-
-# def delete_user(request):
-    

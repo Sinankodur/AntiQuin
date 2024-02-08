@@ -40,15 +40,46 @@
 
 {% block customer %}
 {% if orders %}
-<div class="row">
+<div class="row align-center">
     {% for order in orders %}
         {% if order.is_delivered %}
-        <div class="col-lg-4">
-            <div class="card p-2">
+        <div class="col-lg-4 col-md-6 col-sm-8">
+            <div class="card p-3 mb-2">
                 Order ID #{{ order.id }}
-                <hr>
-                
+                <div class="row pt-2">
+                    {% for order_item in order.orderitem_set.all %}
+                        <div class="col-lg-3">
+                            <a href="{% url 'item:detail' order_item.product.id %}"><img src="{{ order_item.product.image.url }}" alt='img' class="img-fluid" width="60rem"/></a>
+                        </div>
 
+                        <div class="col-lg-9">
+                            <div class="pt-2">
+                                {{ order_item.product.name }}
+                            </div>
+                            {% if order_item.product.description %}
+                                <span class="text-secondary" style="font-size: .8rem;">
+                                    {{ order_item.product.description }}
+                                </span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="row pt-2">
+                            <!-- ------------ quantity ---------- -->
+                            <div class="col-lg-4">
+                                Qty: {{ order_item.quantity }}
+                            </div>
+
+                            <div class="col-lg-7">
+                                Total : ₹{{ order_item.product.price }}
+                            </div>
+                        </div>
+                        <div class="row pt-1">
+                            <div class="col-lg-12 text-danger">
+                                Date : {{ order.created_at }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
         {% endif %}

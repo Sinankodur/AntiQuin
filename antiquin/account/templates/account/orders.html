@@ -33,7 +33,7 @@
 {% endblock admin %}
 
 {% block customer %}
-{% if not orders.is_delivered %}
+{% if orders %}
 {% for order in orders %}
     {% if not order.is_delivered %}
         <div class="p-1 mb-3">
@@ -96,6 +96,7 @@
         </div>
     {% endif %}
 {% endfor %}
-<p class="text-center mt-5 text-body-tertiary">Orders are shown here </p>
+{% else %}
+<p class="text-center text-body-tertiary">You haven't ordered anything yet</p>
 {% endif %}
 {% endblock customer %}
