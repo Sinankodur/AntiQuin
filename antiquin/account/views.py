@@ -26,6 +26,11 @@ def account(request):
 
     orders = Order.objects.filter(user=user)
 
+
+    undelivered_orders = Order.objects.filter(is_delivered=False)
+    order_items = OrderItem.objects.filter(order__in=undelivered_orders)
+
+
     return render(request, 'account/profile.html', {
         'categories': categories,
         'products': products,
@@ -33,6 +38,7 @@ def account(request):
         'product_count': product_count,
         'fav_count': fav_count,
         'orders' : orders,
+        'order_items' : order_items,
     })
 
 def edit_account(request):
@@ -55,11 +61,14 @@ def users_page(request):
     })
 
 def orders_page(request):
+    user = request.user
     undelivered_orders = Order.objects.filter(is_delivered=False)
     order_items = OrderItem.objects.filter(order__in=undelivered_orders)
-    
+    orders = Order.objects.filter(user=user)
+
     return render(request, 'account/orders.html', {
-        'order_items' : order_items
+        'order_items' : order_items,
+        'orders' : orders
     })
 
 def orders_details(request, pk):

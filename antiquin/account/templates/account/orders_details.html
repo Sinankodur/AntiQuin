@@ -1,5 +1,5 @@
 {% extends "account/profile.html" %}
-
+{% load static %}
 {% block admin %}
 <div class="col-lg-5 col-md-8 col-12">
     <h2>Address Details</h2>
@@ -8,10 +8,11 @@
         {% if not order.is_delivered %}
             <form action="{% url "account:deliver_order" order.id %}" method="post">
                 {% csrf_token %}
-                <div class="card p-4 pt-3 pb-3 mb-3">
+                <div class="card p-4 pt-3 pb-3 mb-3 bg-body-secondary">
                     <span class="text-success-emphasis">
                         {% for item in order.orderitem_set.all %}
                             {{ item }}
+                            <br>
                         {% endfor %}
                     </span>
                     <hr>
@@ -21,6 +22,7 @@
                     E-mail : {{ order.email }} <br>
                     Phone : {{ order.phone }} <br>
                     Address : {{ order.address }}, {{ order.place }} <br>
+                    Pin Code : {{ order.pincode }} <br>
                     <div>
                         <label for="delivered_{{ order.id }}" class="pe-2">Delivered</label>
                         <input type="checkbox" id="delivered_{{ order.id }}" name="delivered_orders[]" value="{{ order.id }}" required>   

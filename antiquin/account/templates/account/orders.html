@@ -1,35 +1,40 @@
 {% extends "account/profile.html" %}
 {% load static %}
-{% block admin %}
 
-<div class="col-lg-8 col-md-8 col-12 mb-3">
-    <h2>Customer Orders</h2>
-    <hr>
-    {% if order_items %}
-    {% for order in order_items %}
-        <div class="p-2 mb-2">
-            <div class="mb-2">
-                <a href="{% url "account:orders_details" order.order.id %}" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
-                    {{ order.order }}
-                </a>
-            </div>
-            <a href="{% url "item:detail" order.product.id %}">
-                <img class="img-fluid object-fit-cover" width="45rem" src="{{ order.product.image.url }}" >
-            </a>
-            <span class="ps-2">
-                {{ order.product.name }}
-                {% if order.product.description %}
-                {{ order.product.description }}
-                {% endif %}
-                x {{ order.quantity }}
-            </span>
-            <div class="ms-auto mt-2">Total - {{ order.price }}</div>
-        </div>
-    {% endfor %}
-    {% else %}
-    <p class="text-center text-body-tertiary">
-        Pending and undelivered orders will be shown here!
-    </p>
-    {% endif %}
-</div>
+{% if user.is_staff %}
+{% block admin %}
+   <div class="col-lg-8 col-md-8 col-12 mb-3">
+        <h2>Customer Orders</h2>
+        <hr>
+        {% if order_items %}
+            {% for order in order_items %}
+                <div class="p-2 mb-2">
+                    <div class="mb-2">
+                        <a href="{% url "account:orders_details" order.order.id %}" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+                            {{ order.order }}
+                        </a>
+                    </div>
+                    <a href="{% url "item:detail" order.product.id %}"><img class="img-fluid object-fit-cover" width="45rem" src="{{ order.product.image.url }}"></a>
+                    <span class="ps-2">
+                        {{ order.product.name }}
+                        {% if order.product.description %}
+                           {{ order.product.description }}
+                        {% endif %}
+                        x {{ order.quantity }}
+                    </span>
+                    <div class="ms-auto mt-2">Total - {{ order.price }}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-center text-body-tertiary">
+                Pending and undelivered orders will be shown here!
+            </p>
+        {% endif %}
+    </div>
 {% endblock admin %}
+{% else %}
+
+{% block customer %}
+    
+{% endblock customer %}
+{% endif %}

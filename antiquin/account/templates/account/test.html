@@ -1,52 +1,16 @@
-{% extends "account/profile.html" %}
-
-{% block admin %}
-{% if user.is_staff %}
-<div class="col-lg-9 col-md-8 col-12">
-    <h2>Delivered Products</h2>
-    <hr>
-    <div class="row">
-        {% if orders %}
+{% if orders %}
         {% for order in orders %}
-            <div class="col-lg-6 col-md-6">
-                <div class="card p-4 pt-3 pb-3 mb-3">
-                    <span class="text-success-emphasis">
-                        {% for item in order.orderitem_set.all %}
-                            {{ item }}
-                            <br>
-                        {% endfor %}
-                    </span>
-                    <hr>
-
-                    Username : {{ order.user.username }} <br>
-                    Full Name : {{ order.first_name }} {{ order.last_name }} <br>
-                    E-mail : {{ order.email }} <br>
-                    Phone : {{ order.phone }} <br>
-                    Address : {{ order.address }}, {{ order.place }} <br>
-                    Pin Code : {{ order.pincode }} <br>
-                    <span class="text-danger">Order Time : {{ order.created_at }}</span>
-                </div>
-            </div>
-        {% endfor %}
-        {% else %}
-        <p class="text-center text-body-tertiary">
-            Delivered products are shown in here!
-        </p>
-        {% endif %}
-    </div>
-</div>
-{% endif %}
-{% endblock admin %}
-
-{% block customer %}
-{% for order in orders %}
-            {% if order.is_delivered %}
+            {% if not order.is_delivered %}
                 <div class="p-1 mb-3">
                     <div class="row">
                         <div class="d-flex mb-2">
                         <span class="text-secondary me-auto">Order ID # {{ order.id }}</span>
 
-                    
+                        <div class='ms-3 d-flex'>
+                            <a class='btn btn-outline-light p-0 ps-1 pe-1 ms-auto' href="{% url "order:cancel_order" order.id %}"  onclick="return confirmCancel()">
+                            <img src="{% static "img/bin.png" %}" ></img>
+                            </a>
+                        </div>
                         </div>
                         <hr />
                         {%  for order_item in order.orderitem_set.all %}
@@ -98,4 +62,6 @@
                 </div>
             {% endif %}
         {% endfor %}
-{% endblock customer %}
+    {% else %}
+        <p class="text-center text-body-tertiary">You haven't ordered anything yet</p>
+    {% endif %}

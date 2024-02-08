@@ -76,9 +76,16 @@
     </div>
 
     <div>
-      <h2>Ordered Products</h2>
-      <!-- if title == purchased need to work on backend -->
-      {% comment %} <h2>Purchased Products</h2> {% endcomment %}
+      <div class="d-flex">
+        <h2>
+          <a href="{% url "account:orders_page" %}" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" title="Click here!">Ordered</a>
+        </h2>
+
+        <h2 class="ms-auto">
+          <a href="{% url "account:delivered" %}" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" title="Click here!">Purchased</a>
+        </h2>
+      </div>
+
       <hr>
       {% block customer %}
       {% if orders %}
@@ -143,11 +150,12 @@
                 <hr>
              </div>
             </div>
-          {% else %}
-            <p class="text-center text-body-tertiary">You haven't ordered anything yet</p>
           {% endif %}
         {% endfor %}
+      {% else %}
+          <p class="text-center text-body-tertiary">You haven't ordered anything yet</p>
       {% endif %}
+
       {% endblock customer %}
     </div>
 {% endif %}
