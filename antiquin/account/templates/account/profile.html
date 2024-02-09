@@ -78,11 +78,11 @@
     <div>
       <div class="d-flex">
         <h2>
-          <a href="{% url "account:orders_page" %}" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" title="Click here!">Ordered</a>
+          <a href="{% url "account:orders_page" %}" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" title="Click here!">Orders</a>
         </h2>
 
         <h2 class="ms-auto">
-          <a href="{% url "account:delivered_customer" %}" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" title="Click here!">Purchased</a>
+          <a href="{% url "account:delivered_customer" %}" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" title="Click here!">Purchases</a>
         </h2>
       </div>
 
@@ -152,6 +152,8 @@
             </div>
           {% endif %}
         {% endfor %}
+      {% else %}
+        <p class="text-center text-body-tertiary">You haven't ordered anything yet</p>
       {% endif %}
       {% endblock customer %}
     </div>
