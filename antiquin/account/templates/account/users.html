@@ -5,44 +5,39 @@
 <div class="col-lg-9 col-md-8 col-12 mb-3">
     <h2>Users Details</h2>
     <hr>
-    <form method="post">
-        {% csrf_token %}
-        <div class="table-responsive">
-            <table class="table ">
-                <thead>
-                    <tr>
+    <div class="table-responsive">
+        <table class="table ">
+            <thead>
+                <tr>
                     <th scope="col" class="bg-body-secondary" style="font-size: .9rem;">#</th>
                     <th scope="col" class="bg-body-secondary" style="font-size: .9rem;">Username</th>
                     <th scope="col" class="bg-body-secondary" style="font-size: .9rem;">E-mail</th>
                     <th scope="col" class="bg-body-secondary" style="font-size: .9rem;">Staff</th>
                     <th scope="col" class="bg-body-secondary" style="font-size: .9rem;"></th>
-                    </tr>
-                </thead>
-                {% for user in users %}
+                </tr>
+            </thead>
+            {% for user in users %}
                 <tbody>
                     <tr>
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.username }}</td>
-                    <td>{{ user.email }}</td>
-                    {% if user.is_staff %}
-                    <td class="ps-3"><i class='bx bxs-check-circle text-success' ></i></td>
-                    {% else %}
-                    <td class="ps-3"><i class='bx bxs-no-entry text-danger'></i></td>
-                    {% endif %}
-                    {% if not user.is_staff %}
-                    <td>
-                        <button class="btn btn-outline-light p-0" type="submit" onclick="location.href= '' ">
-                            <img src="{% static "img/bin.png" %}" ></img>
-                        </button>
-                    </td>
-                    {% else %}
-                    <td></td>
-                    {% endif %}
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        {% if user.is_staff %}
+                        <td class="ps-3"><i class='bx bxs-check-circle text-success' ></i></td>
+                        {% else %}
+                        <td class="ps-3"><i class='bx bxs-no-entry text-danger'></i></td>
+                        {% endif %}
+                        {% if not user.is_staff %}
+                        <td>
+                            <a class="btn btn-outline-light p-0" type="button" href="{% url "account:delete_user" user.id %}" onclick="return confirmCancel()"><img src="{% static "img/bin.png" %}" ></img></a>
+                        </td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
                     </tr>
                 </tbody>
                 {% endfor %}
             </table>
         </div>
-    </form>
 </div>
 {% endblock admin %}

@@ -111,3 +111,9 @@ def delivered_customer(request):
     context.update({'orders': orders})
 
     return render(request, 'account/delivered.html', context)
+
+def delete_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    user.delete()
+
+    return redirect('/account/users')

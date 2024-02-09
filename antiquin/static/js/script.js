@@ -29,7 +29,7 @@ function setPaymentMethod(method) {
 }
 
 function confirmCancel() {
-  let res = confirm("Are you sure you want to proceed with this action? This action cannot be undone!");
+  let res = confirm("Are you certain you wish to proceed with this action? All associated items will be permanently removed and cannot be recovered. This action cannot be undone!")
 
   if (res) {
     return true;

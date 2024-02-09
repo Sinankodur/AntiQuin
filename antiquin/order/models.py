@@ -5,12 +5,12 @@ from item.models import Product
 class Order(models.Model):
     ORDERED = 'ordered'
     DISPATCHED = 'dispatched'
-    SHIPPED = 'shipped'
+    DELIVERED = 'delivered'
 
     STATUS_CHOICES = (
         (ORDERED, 'Ordered'),
         (DISPATCHED, 'Dispatched'),
-        (SHIPPED, 'Shipped')
+        (DELIVERED, 'Delivered')
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -37,7 +37,7 @@ class Order(models.Model):
     def mark_as_delivered(self):
         if not self.is_delivered:
            self.is_delivered = True
-           self.status = Order.DISPATCHED
+           self.status = Order.DELIVERED
            self.save()
 
     def __str__(self):
@@ -63,5 +63,3 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.product.name} x {self.quantity} - Order #{self.order.id}"
-    
-
