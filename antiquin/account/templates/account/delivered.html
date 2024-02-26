@@ -43,17 +43,17 @@
 <div class="row">
     {% for order in orders %}
         {% if order.is_delivered %}
-        <div class="col-lg-4 col-md-6 col-sm-8">
+        <div class="col-12">
             <div class="card p-3 mb-2">
                 Order ID #{{ order.id }}
                 <div class="row pt-2">
                     {% for order_item in order.orderitem_set.all %}
                     <hr>
-                        <div class="col-lg-3">
+                        <div class="col-3 col-md-2 col-lg-1">
                             <a href="{% url 'item:detail' order_item.product.id %}"><img src="{{ order_item.product.image.url }}" alt='img' class="img-fluid" width="60rem"/></a>
                         </div>
 
-                        <div class="col-lg-9">
+                        <div class="col-8 col-md-4 col-lg-3">
                             <div class="pt-2">
                                 {{ order_item.product.name }}
                             </div>
@@ -63,14 +63,22 @@
                                 </span>
                             {% endif %}
                         </div>
+
+                        <div class="col-12 col-md-6 col-lg-8 mt-2">
+                            <span class="text-danger-emphasis">Delivery Address:</span> <br>
+                            Full Name: {{ order.first_name }} {{ order.last_name }} <br>
+                            Address: {{ order.address }}, {{ order.place }} <br>
+                            Pin Code : {{ order.pincode }} <br>
+                            Phone: {{ order.phone }}
+                        </div>
                         
                         <div class="row pt-2">
                             <!-- ------------ quantity ---------- -->
-                            <div class="col-lg-4">
+                            <div class="col-9">
                                 Qty: {{ order_item.quantity }}
                             </div>
 
-                            <div class="col-lg-7">
+                            <div class="col-3">
                                 Total : ₹{{ order_item.product.price }}
                             </div>
                         </div>

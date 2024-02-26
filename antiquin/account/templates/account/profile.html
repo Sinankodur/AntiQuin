@@ -31,7 +31,7 @@
         <span>Full Name : </span>{{ request.user.get_full_name }} <br>
       {% endif %}
       <span >E-mail : </span>{{ request.user.email }} <br>
-      <button onclick="location.href= '{% url "account:edit" %}' " class="btn btn-outline-dark ps-5 p-1 pe-5 mt-2">Edit</button>
+      <button onclick="location.href= '{% url "account:edit_account" %}' " class="btn btn-outline-dark ps-5 p-1 pe-5 mt-2">Edit</button>
       <hr>
     </div>
 
