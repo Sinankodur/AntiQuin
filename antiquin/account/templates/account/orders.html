@@ -94,6 +94,8 @@
                 <hr>
             </div>
         </div>
+        {% elif order.is_delivered %}
+        <p class="text-center text-body-tertiary">Purchased items are shown in Purchases section</p>
     {% endif %}
 {% endfor %}
 {% else %}
