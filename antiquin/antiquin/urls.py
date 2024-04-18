@@ -27,6 +27,5 @@ urlpatterns = [
     path('favourites/',include('favourites.urls')),
     path('account/',include('account.urls')),
     path('orders/',include('order.urls')),
-    path('payment/',include('payment.urls'))
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

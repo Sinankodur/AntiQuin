@@ -88,13 +88,8 @@
                         <div class="col-12">Total : ₹{{ total }}</div>
                     </div>
                     
-                    <input type="hidden" name="payment_method" id="payment_method" value="" />
-                    <!-- Buttons for COD and Online Payment -->
-                    <button class="btn btn-dark rounded-0 mb-2" type="submit" onclick="setPaymentMethod('COD')">Cash on delivery</button>
+                    <button class="btn btn-dark rounded-0 mb-2" type="submit">Cash on delivery</button>
 
-                    <button class="btn btn-primary rounded-0" id="pay-btn" type="submit" onclick="setPaymentMethod('online')">
-                        <img src="{% static "img/Razorpay_logo.svg" %}" class="img-fluid" style="height: 1.5rem;" alt="">
-                    </button>
                 </div>
             </div>
         </div>

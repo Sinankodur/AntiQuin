@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'favourites',
     'account',
     'order',
-    'payment',
 ]
 
 MIDDLEWARE = [
@@ -60,9 +59,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'antiquin.urls'
-
-RAZOR_KEY_ID = 'rzp_test_irphkDgn8Na7V5'
-RAZOR_KEY_SECRET = '20FQicfgG7rcFmlv4hIxvly8'
 
 TEMPLATES = [
     {

@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Hide all products
       productItems.forEach((item) => {
-        item.style.display = 'none';
+        item.style.display = "none";
       });
 
       // Show products of the selected category
@@ -18,22 +18,20 @@ document.addEventListener("DOMContentLoaded", function () {
         `.category-${selectedCategory}`
       );
       selectedCategoryItems.forEach((item) => {
-        item.style.display = 'block';
+        item.style.display = "block";
       });
     });
   });
 });
 
-function setPaymentMethod(method) {
-  document.getElementById("payment_method").value = method;
-}
-
 function confirmCancel() {
-  let res = confirm("Are you certain you wish to proceed with this action? All associated items will be permanently removed and cannot be recovered. This action cannot be undone!")
+  let res = confirm(
+    "Are you certain you wish to proceed with this action? All associated items will be permanently removed and cannot be recovered. This action cannot be undone!"
+  );
 
   if (res) {
     return true;
-} else {
+  } else {
     return false;
-}
+  }
 }
