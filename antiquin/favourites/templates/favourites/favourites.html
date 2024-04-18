@@ -40,10 +40,11 @@
                 </div>
               </div>
               <div class="col-2 col-lg-2 pt-2 ms-auto me-auto">
-                <i 
-                  class='bx bxs-x-square fs-4 text-danger'
+                <a 
+                  class="bg-danger text-decoration-none text-white rounded p-0 ps-1 pe-1 fs-6"
                   onclick="location.href= '{% url "favourites:delete_item" favourite.id %}' "
-                ></i>
+                  style='cursor: pointer;'
+                >&times;</a>
               </div>
             </div>
           </div>
