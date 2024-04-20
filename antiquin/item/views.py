@@ -83,61 +83,41 @@ def add_items(request):
         **user_data
     })
 
-# @login_required
-# def edit(request, pk):    
-#     categories = Category.objects.all()
-#     item = get_object_or_404(Product, pk=pk, created_by=request.user)
-#     user_data = {
-#         'user': None,
-#         'cart_items': None,
-#         'total': None,
-#         'product_count': None,
-#         'fav_count': None
-#     }
-
-#     if request.user.is_authenticated:
-#         user_data['user'] = request.user
-#         cart = Cart.objects.get(user=user_data['user'])
-#         user_data['cart_items'] = CartItem.objects.filter(cart=cart)
-#         user_data['product_count'] = user_data['cart_items'].count()
-#         user_data['total'] = sum(item.product.price * item.quantity for item in user_data['cart_items'])
-#         user_data['fav_count'] = Favourite.objects.filter(user=user_data['user']).count()
-
-#     if request.method == 'POST':
-#         form = EditProductForm(request.POST, request.FILES, instance=item)
-
-#         if form.is_valid():
-#             form.save()
-
-#             return redirect('item:detail', pk=item.id)  
-#     else:
-#         form = EditProductForm(instance=item)
-
-#     return render(request, 'item/form.html',  { 
-#         'form' : form,
-#         'title' : 'Edit Item',
-#         'categories' : categories,
-#         **user_data
-#     })
-
 @login_required
-def edit(request, pk):
+def edit(request, pk):    
+    categories = Category.objects.all()
     item = get_object_or_404(Product, pk=pk, created_by=request.user)
+    user_data = {
+        'user': None,
+        'cart_items': None,
+        'total': None,
+        'product_count': None,
+        'fav_count': None
+    }
+
+    if request.user.is_authenticated:
+        user_data['user'] = request.user
+        cart = Cart.objects.get(user=user_data['user'])
+        user_data['cart_items'] = CartItem.objects.filter(cart=cart)
+        user_data['product_count'] = user_data['cart_items'].count()
+        user_data['total'] = sum(item.product.price * item.quantity for item in user_data['cart_items'])
+        user_data['fav_count'] = Favourite.objects.filter(user=user_data['user']).count()
 
     if request.method == 'POST':
         form = EditProductForm(request.POST, request.FILES, instance=item)
 
         if form.is_valid():
-            item.save()
+            form.save()
 
-            return redirect('item:detail', pk=pk)
-        
+            return redirect('item:detail', pk=item.id)  
     else:
         form = EditProductForm(instance=item)
 
-    return render(request, 'item/form.html', { 
+    return render(request, 'item/form.html',  { 
         'form' : form,
         'title' : 'Edit Item',
+        'categories' : categories,
+        **user_data
     })
 
 

@@ -101,7 +101,7 @@ def delivered(request):
     context.update({'orders': orders})
     return render(request, 'account/delivered.html', context)
 
-
+# for users in orders and delivered/purchased section
 @login_required
 def delivered_customer(request):
     user = request.user
@@ -112,6 +112,7 @@ def delivered_customer(request):
 
     return render(request, 'account/delivered.html', context)
 
+# admin
 def delete_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
     user.delete()
