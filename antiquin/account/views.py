@@ -118,3 +118,12 @@ def delete_user(request, user_id):
     user.delete()
 
     return redirect('/account/users')
+
+
+# to show users the details of their when purchased - the address and details 
+@login_required
+def order_details(request, pk):
+    order = Order.objects.filter(pk=pk)
+    order_item = OrderItem.objects.filter(pk=pk)
+
+    return render(request, 'account/order_details.html',{'order':order, 'order_item':order_item })

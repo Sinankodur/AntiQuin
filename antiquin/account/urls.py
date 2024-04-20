@@ -11,7 +11,8 @@ urlpatterns = [
     path('orders/',views.orders_page, name='orders_page'),
     path('orders-details/<int:pk>/',views.orders_details, name='orders_details'),
     path('order-delivered/<int:order_id>',views.deliver_order, name='deliver_order'),
-    path('delivered/',views.delivered, name='delivered'),
-    path('purchases/',views.delivered_customer, name='delivered_customer'),
+    path('delivered/',views.delivered, name='delivered'), #delivered items to show for admin
+    path('purchases/',views.delivered_customer, name='delivered_customer'), #purchase shows for user
     path('delete-user/<int:user_id>/',views.delete_user, name='delete_user'),
+    path('order-details/<int:pk>',views.order_details,name='order_details')
 ]

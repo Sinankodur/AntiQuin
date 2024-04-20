@@ -1,0 +1,18 @@
+{% extends "account/profile.html" %}
+{% load static %}
+{% block customer %}
+
+{% for item in order %}
+
+<div class="card p-4 pt-3 pb-3 mb-3 bg-body-secondary" style="max-width: 30rem;">
+    Username : {{ item.user.username }} <br>
+    Full Name : {{ item.first_name }} {{ order.last_name }} <br>
+    E-mail : {{ item.email }} <br>
+    Phone : {{ item.phone }} <br>
+    Address : {{ item.address }}, {{ item.place }} <br>
+    Pin Code : {{ item.pincode }} <br>
+</div>
+
+{% endfor %}
+
+{% endblock customer %}

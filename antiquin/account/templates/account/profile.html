@@ -94,7 +94,7 @@
             <div class="p-1 mb-3">
               <div class="row">
                 <div class="d-flex mb-2">
-                  <span class="text-secondary me-auto">Order ID # {{ order.id }}</span>
+                  <a href="{% url "account:order_details" order.id %}" class="text-secondary me-auto">Order ID # {{ order.id }}</a>
 
                   <div class='ms-3 d-flex'>
                     <a class='btn btn-outline-light p-0 ps-1 pe-1 ms-auto' href="{% url "order:cancel_order" order.id %}"  onclick="return confirmCancel()">

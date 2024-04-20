@@ -43,24 +43,7 @@ def checkout(request):
 
 @login_required
 def start_order(request):
-    user = request.user
-
-    cart, created = Cart.objects.get_or_create(user=user)
-        
-    cart_items = CartItem.objects.filter(cart=cart)
-    product_count = CartItem.objects.filter(cart=cart).count()
-    total = sum(item.product.price * item.quantity for item in cart_items)
-    categories = Category.objects.all()
-    product = Product.objects.all()
-
-    for item in cart_items:
-        item.subtotal = item.product.price * item.quantity
-
-    favourites = Favourite.objects.filter(user=user)
-    fav_count = favourites.count()
-    
     if request.method == "POST":
-        payment_method = request.POST.get('payment_method')
         cart_items = CartItem.objects.filter(cart__user=request.user)
 
         first_name = request.POST.get('first_name')
@@ -87,8 +70,6 @@ def start_order(request):
         return redirect('/account/')
     else:
         return render(request, 'order/checkout.html')
-
-
 
 
 def cancel_order(request, order_id):
