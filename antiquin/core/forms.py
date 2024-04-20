@@ -8,7 +8,7 @@ class SignupForm(UserCreationForm):
         fields = {'username', 'email', 'password1', 'password2'}
 
     username = forms.CharField(widget=forms.TextInput(attrs={
-        'placeholder': 'your username',
+        'placeholder': 'Username',
         'class': 'form-control mb-3',
         'id': 'username',
         'aria-describedby':"inputGroup-sizing-sm",
@@ -16,21 +16,21 @@ class SignupForm(UserCreationForm):
     }))
     
     email = forms.CharField(widget=forms.EmailInput(attrs={
-        'placeholder': 'your email address',
+        'placeholder': 'Email',
         'class' : 'form-control mb-3',
         'id' : 'email',
         'aria-describedby':"inputGroup-sizing-sm"
     }))
 
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={
-        'placeholder': 'your password',
+        'placeholder': 'Password',
         'class' : 'form-control mb-3',
         'id' : 'password1',
         'aria-describedby':"inputGroup-sizing-sm"
     }))
 
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={
-        'placeholder': 'confirm your password',
+        'placeholder': 'Confirm password',
         'class' : 'form-control',
         'id' : 'password2',
         'aria-describedby':"inputGroup-sizing-sm"

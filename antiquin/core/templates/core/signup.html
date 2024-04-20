@@ -53,41 +53,26 @@
           <form action="." method="post">
             {% csrf_token %}
 
-            <label for="username">Username</label><br />
             {{ form.username }}
-
-            <label for="email">Email</label><br />
             {{ form.email }}
-
-            <label for="password1">Password</label><br />
             {{ form.password1 }}
-
-            <label for="password2">Confirm Password</label><br />
             {{ form.password2 }}
-
-            {% if messages %}
-                <ul class="messages list-style-none">
-                    {% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
             
             <div class="mt-3">
                {% if form.errors %}
-              <p class="text-danger rounded p-2 bg-danger-subtle lh-sm" 
-                style="font-size: .8rem ;">
+              <p class="text-danger fw-light rounded p-2 bg-danger-subtle lh-sm" 
+                style="font-size: .9rem ;">
                  
                 {% for field in form %}
                   {% for error in field.errors %}
-                  <span>{{ error|escape }}</span>
+                  <span>{{ error }}</span>
                   <br>
                   {% endfor %}
                 {% endfor %}
 
-                  {% for error in form.non_field_errors %}
-                    <span>{{ error|escape }}</span>
-                  {% endfor %}
+                {% for error in form.non_field_errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
               </p>
             {% endif %}
             </div>

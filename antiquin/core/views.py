@@ -63,16 +63,9 @@ def home(request):
 def sign_up(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
-        password1 = form["password1"].value()
-        password2 = form["password2"].value()
         
-        if password1 and password2:
-            if password1 != password2:
-                raise forms.ValidationError("Passwords didn't match")
-
         if form.is_valid():
             user = form.save()
-            messages.success(request,"You can sign in now!")   
             return redirect('/success/')
     else:
         form = SignupForm()

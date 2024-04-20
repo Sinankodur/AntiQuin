@@ -43,17 +43,16 @@
 <div class="row">
     {% for order in orders %}
         {% if order.is_delivered %}
-        <div class="col-12">
-            <div class="card p-3 mb-2">
+            <div class="card p-3 mb-5 border-warning">
                 Order ID #{{ order.id }}
                 <div class="row pt-2">
                     {% for order_item in order.orderitem_set.all %}
-                    <hr>
-                        <div class="col-3 col-md-2 col-lg-1">
-                            <a href="{% url 'item:detail' order_item.product.id %}"><img src="{{ order_item.product.image.url }}" alt='img' class="img-fluid" width="60rem"/></a>
+                        <hr>
+                        <div class="col-2 col-sm-2 col-md-2 col-lg-1">
+                            <a href="{% url 'item:detail' order_item.product.id %}"><img src="{{ order_item.product.image.url }}" alt='img' class="img-fluid"/></a>
                         </div>
 
-                        <div class="col-8 col-md-4 col-lg-3">
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-3">
                             <div class="pt-2">
                                 {{ order_item.product.name }}
                             </div>
@@ -64,7 +63,7 @@
                             {% endif %}
                         </div>
 
-                        <div class="col-12 col-md-6 col-lg-8 mt-2">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-8 mt-2" >
                             <span class="text-danger-emphasis">Delivery Address:</span> <br>
                             Full Name: {{ order.first_name }} {{ order.last_name }} <br>
                             Address: {{ order.address }}, {{ order.place }} <br>
@@ -75,15 +74,12 @@
                         <div class="row pt-2">
                             <!-- ------------ quantity ---------- -->
                             <div class="col-9">
-                                Qty: {{ order_item.quantity }}
-                            </div>
-
-                            <div class="col-3">
+                                Qty: {{ order_item.quantity }} <br>
                                 Total : ₹{{ order_item.product.price }}
                             </div>
                         </div>
 
-                        <div class="row pt-1">
+                        <div class="row pb-2">
                             <div class="col-lg-12 text-danger">
                                 Date : {{ order.created_at }}
                             </div>
@@ -96,7 +92,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         {% endif %}
     {% endfor %}
 </div>
