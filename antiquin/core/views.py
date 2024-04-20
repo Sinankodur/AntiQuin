@@ -37,8 +37,6 @@ def home(request):
         user = request.user
 
         user_cart, created = Cart.objects.get_or_create(user=user)
-
-        # categories = Category.objects.all()
         
         cart_items = CartItem.objects.filter(cart=user_cart)
         product_count = cart_items.count()
