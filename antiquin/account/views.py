@@ -56,7 +56,10 @@ def edit_account(request):
 @login_required
 def users_page(request):
     users = User.objects.all()
-    return render(request, 'account/users.html', {'users': users})
+    user = request.user
+    context = get_common_context(user)
+    context.update({'users': users})
+    return render(request, 'account/users.html', context)
 
 
 @login_required
