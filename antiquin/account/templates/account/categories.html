@@ -1,0 +1,27 @@
+{% extends "account/profile.html" %}
+{% load static %}
+{% block admin %}
+
+
+<div class="col-lg-9 col-md-8 col-12 mb-3">
+    <h2>Categories</h2>
+    <a href="{% url "item:add_category" %}" class="text-dark rounded bg-body-tertiary p-1 text-decoration-none"> + Add Categories</a>
+    <hr>
+    <div class="table-responsive">
+        <table class="table">
+            {% for category in categories %}
+                <tbody>
+                <tr>
+                    <td>{{ category.name }}</td>
+                    <td>
+                        <a class="btn border-0 p-0" type="button" href="{% url "item:delete_category" category.id %}" onclick="return confirmCancel()"><img src="{% static "img/bin.png" %}" ></img></a>
+                    </td>
+                </tr>
+                </tbody>
+            {% endfor %}
+          </table>
+    </div>
+</div>
+
+
+{% endblock admin %}

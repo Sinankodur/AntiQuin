@@ -4,7 +4,7 @@ from django.db.models import Q
 from item.models import Category, Product
 from cart.models import CartItem, Cart
 from favourites.models import Favourite
-from .forms import NewProductForm, EditProductForm
+from .forms import NewProductForm, EditProductForm, NewCategoryForm
 
 def get_user_data(request):
     user_data = {
@@ -127,3 +127,27 @@ def delete(request, pk):
     item.delete()
 
     return redirect('/')
+
+@login_required
+def show_categories(request):
+    categories = Category.objects.all()
+    return render(request, 'account/categories.html', {'categories': categories})
+
+@login_required
+def add_category(request):
+    if request.method == 'POST':
+        form = NewCategoryForm(request.POST)
+
+        if form.is_valid():
+            category = form.save()
+
+            return redirect('item:category')
+    else:
+        form = NewCategoryForm()
+    return render(request, 'account/add_category.html', {'form' : form})
+
+@login_required
+def delete_category(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    category.delete()
+    return redirect('/item/categories')
