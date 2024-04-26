@@ -8,7 +8,7 @@ from item.models import Product, Category
 from favourites.models import Favourite
 
 
-
+@login_required
 def checkout(request):
     cart_items = CartItem.objects.filter(cart__user=request.user)
     user = request.user
@@ -38,8 +38,6 @@ def checkout(request):
         'fav_count' : fav_count,
         'order' : order
     })
-
-
 
 @login_required
 def start_order(request):
@@ -71,7 +69,7 @@ def start_order(request):
     else:
         return render(request, 'order/checkout.html')
 
-
+@login_required
 def cancel_order(request, order_id):
     order = get_object_or_404(Order, id=order_id, user=request.user)
 
@@ -79,3 +77,10 @@ def cancel_order(request, order_id):
         order.delete()
 
     return redirect('/account/') 
+
+# admin can delete orders --
+def delete_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    if not order.is_cancelled:
+        order.delete()
+    return redirect('/account/orders')
