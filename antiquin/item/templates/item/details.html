@@ -12,11 +12,14 @@
             <a target="_blank" href="{{ product.image.url }}">
               <img src="{{ product.image.url }}"
                    width="350rem"
+                   height=""
                    alt="..."
                    class="img-fluid rounded mx-auto d-block" />
             </a>
           {% else %}
             <img src="#"
+                 width=""
+                 height=""
                  alt="image of {{ product.name }}"
                  class="img-fluid item-img object-fit-none" />
             <h1 class="text-center p-5">Image not Available</h1>
