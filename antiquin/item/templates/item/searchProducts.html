@@ -1,60 +1,50 @@
 {% extends "core/base.html" %}
-
-{% block title %}Search{% endblock title %}
-
+{% block title %}
+    Search
+{% endblock title %}
 {% block content %}
-
-{% if searched %}
-<h1 class="text-center text-dark pt-3">Showing results for <span class='text-warning'> ' {{ searched }} ' </span></h1>
-<hr 
-    style="width: 15rem; 
-    height: .1rem;
-    background-color: yellow;
-    color: yellow;
-    margin: auto;"
-/>
-
-<div class="container pt-4">
-    <div class="row">
-        {% for product in products %}
-            <!-- loop starts here.... -->
-
-            <div class="col-lg-3 col-md-4 col-sm-6 pt-3 pb-3">
-                <div class="card product-div">
-                    <a class="product-img-link" href="{% url "item:detail" product.id %}">
-                        <div class="card-img">
-                            {% if product.image %}
-                            <img src="{{product.image.url}}" alt="image of {{product.item}}" class="img-fluid object-fit-cover item-img" />
-                            {% else %}
-                            <img src="#" alt="image of {{ product.name }}" class="img-fluid item-img" />
-                            {% endif %}
-                        </div>
-                    </a>
-                    
-                    <div class="card-body">
-                        <div class="text-dark fs-6 lh-1 fw-bold">{{product.name}}</div>
-                        <div class="fs-6 text-body-tertiary fw-light pb-2">
-                            Price: ₹{{product.price}}
-                        </div>
-    
-                        <div class="d-grid gap-2">
-                            <button 
-                                class="btn btn-warning" 
-                                onclick="location.href = '{% url "cart:add_to_cart" product.id %}' "
-                            >
-                                Add to cart
-                            </button>
+    {% if searched %}
+        <h1 class="text-center text-dark pt-3">
+            Showing results for <span class="text-warning">' {{ searched }} '</span>
+        </h1>
+        <hr style="width: 15rem;
+                   height: .1rem;
+                   background-color: yellow;
+                   color: yellow;
+                   margin: auto" />
+        <div class="container pt-4">
+            <div class="row">
+                {% for product in products %}
+                    <!-- loop starts here.... -->
+                    <div class="col-lg-3 col-md-4 col-sm-6 pt-3 pb-3">
+                        <div class="card product-div">
+                            <a class="product-img-link" href="{% url "item:detail" product.id %}">
+                                <div class="card-img">
+                                    {% if product.image %}
+                                        <img src="{{ product.image.url }}"
+                                             alt="image of {{ product.item }}"
+                                             class="img-fluid object-fit-cover item-img" />
+                                    {% else %}
+                                        <img src="#" alt="image of {{ product.name }}" class="img-fluid item-img" />
+                                    {% endif %}
+                                </div>
+                            </a>
+                            <div class="card-body">
+                                <div class="text-dark fs-6 lh-1 fw-bold">{{ product.name }}</div>
+                                <div class="fs-6 text-body-tertiary fw-light pb-2">Price: ₹{{ product.price }}</div>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-warning"
+                                            onclick="location.href = '{% url "cart:add_to_cart" product.id %}' ">
+                                        Add to cart
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-    </div>
-</div>
-
-{% else %}
-<h1 class="text-center text-dark pt-3">Please enter a prompt...</h1>
-{% endif %}
-
-
+        </div>
+    {% else %}
+        <h1 class="text-center text-dark pt-3">Please enter a prompt...</h1>
+    {% endif %}
 {% endblock content %}

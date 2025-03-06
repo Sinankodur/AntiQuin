@@ -1,79 +1,66 @@
-{% extends "core/base.html" %} {% load static %}
-<title>{% block title %}Home{% endblock title %}</title>
-
+{% extends "core/base.html" %}
+{% load static %}
+<title>
+  {% block title %}
+    Home
+  {% endblock title %}
+</title>
 {% block content %}
-<!-- Products -->
-<div class="container pt-4">
-  <h2 class="pb-2">Featured Products</h2>
-  <div class="row">
-    
-    {% for product in products %}
-    <!-- loop starts here.... -->
-    <div class="col-lg-3 col-md-4 col-sm-6 pt-3 pb-3 product-item category-{{ product.category.name }}">
-      <div class="card product-div ">
-        <a class="product-img-link" href="{% url "item:detail" product.id %}">
-          <div class="card-img">
-            {% if product.image %}
-            <img src="{{ product.image.url }}" class="img-fluid item-img object-fit-cover" />
-            {% else %}
-            <img src="#" alt="image of {{ product.name }}" class="img-fluid item-img" />
-            {% endif %}
-          </div>
-        </a>
-        <div class="card-body">
-          <div class="text-dark fs-6 lh-1 fw-bold">{{product.name}}</div>
-          <div class="fs-6 text-body-tertiary fw-light pb-2">
-            Price: ₹{{product.price}}
-          </div>
-          
-          <!-- -------------------- add to cart btn ------------------ -->
-          <div class="d-grid gap-2">
-            <button 
-              class="btn btn-warning"
-              {% if user.is_authenticated %}
-              onclick="location.href = '{% url "cart:add_to_cart" product.id %}' "
-              {% else %}
-              onclick="location.href = '{% url 'sign-in' %}?next={% url "cart:add_to_cart" product.id %}' "
-              {% endif %}
-            >
-              Add to cart
-            </button>
+  <!-- Products -->
+  <div class="container pt-4">
+    <h2 class="pb-2">Featured Products</h2>
+    <div class="row">
+      {% for product in products %}
+        <!-- loop starts here.... -->
+        <div class="col-lg-3 col-md-4 col-sm-6 pt-3 pb-3 product-item category-{{ product.category.name }}">
+          <div class="card product-div ">
+            <a class="product-img-link" href="{% url "item:detail" product.id %}">
+              <div class="card-img">
+                {% if product.image %}
+                  <img src="{{ product.image.url }}"
+                       class="img-fluid item-img object-fit-cover" />
+                {% else %}
+                  <img src="#" alt="image of {{ product.name }}" class="img-fluid item-img" />
+                {% endif %}
+              </div>
+            </a>
+            <div class="card-body">
+              <div class="text-dark fs-6 lh-1 fw-bold">{{ product.name }}</div>
+              <div class="fs-6 text-body-tertiary fw-light pb-2">Price: ₹{{ product.price }}</div>
+              <!-- -------------------- add to cart btn ------------------ -->
+              <div class="d-grid gap-2">
+                <button class="btn btn-warning"
+                        {% if user.is_authenticated %} onclick="location.href = '{% url "cart:add_to_cart" product.id %}' " {% else %} onclick="location.href = '{% url 'sign-in' %}?next={% url "cart:add_to_cart" product.id %}' " {% endif %}>
+                  Add to cart
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-  </div>
-
-  <!-- fixed social media icon -->
-  <div class="ms-auto social-media-div">
-    <a href="http://wa.me/918606923166" class="social-media-link">
-      <i class="bx bxl-whatsapp social-media"></i>
-    </a>
-  </div>
-
-  <div class="text-center pb-3">
-    <span class="step-links">
-      <span class="current">
-        Page {{ products.number }} of {{ products.paginator.num_pages }}.
-     </span>
-     <br>
-      {% if products.has_previous %}
-        <a href="?page=1" class="text-dark">&laquo; First</a>
-        -
-        <a href="?page={{ products.previous_page_number }}" class="text-dark">&laquo; Previous</a>
-        {% if products.has_next %}
-        -
+    <!-- fixed social media icon -->
+    <div class="ms-auto social-media-div">
+      <a href="http://wa.me/918606923166" class="social-media-link">
+        <i class="bx bxl-whatsapp social-media"></i>
+      </a>
+    </div>
+    <div class="text-center pb-3">
+      <span class="step-links">
+        <span class="current">Page {{ products.number }} of {{ products.paginator.num_pages }}.</span>
+        <br>
+        {% if products.has_previous %}
+          <a href="?page=1" class="text-dark">&laquo; First</a>
+          -
+          <a href="?page={{ products.previous_page_number }}" class="text-dark">&laquo; Previous</a>
+          {% if products.has_next %}-{% endif %}
         {% endif %}
-      {% endif %}
-        
-      {% if products.has_next %}
-        <a href="?page={{ products.next_page_number }}" class="text-dark">Next &raquo;</a>
-        -
-        <a href="?page={{ products.paginator.num_pages }}" class="text-dark">Last &raquo;</a>
-      {% endif %}
-    </span>
+        {% if products.has_next %}
+          <a href="?page={{ products.next_page_number }}" class="text-dark">Next &raquo;</a>
+          -
+          <a href="?page={{ products.paginator.num_pages }}" class="text-dark">Last &raquo;</a>
+        {% endif %}
+      </span>
+    </div>
   </div>
-
-</div>
 {% endblock content %}

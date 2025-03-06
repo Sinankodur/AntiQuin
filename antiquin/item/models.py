@@ -6,26 +6,29 @@ class Category(models.Model):
     name = models.CharField(max_length=255)
 
     class Meta:
-        ordering = ('name',)
-        verbose_name_plural = 'Categories'
+        ordering = ("name",)
+        verbose_name_plural = "Categories"
 
     def __str__(self):
         return self.name
 
+
 class Product(models.Model):
-    category = models.ForeignKey(Category, related_name='items', on_delete=models.CASCADE)
+    category = models.ForeignKey(
+        Category, related_name="items", on_delete=models.CASCADE
+    )
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255, null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(null=True, blank=True, upload_to="images/")
     is_sold = models.BooleanField(default=False)
-    quantity = models.PositiveIntegerField(default=1) 
-    created_by = models.ForeignKey(User, related_name='items', on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    created_by = models.ForeignKey(User, related_name="items", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name_plural = 'Products'
-        ordering = ('created_at',)
+        verbose_name_plural = "Products"
+        ordering = ("created_at",)
 
     def __str__(self):
         return self.name

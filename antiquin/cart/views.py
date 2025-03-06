@@ -10,10 +10,10 @@ from favourites.models import Favourite
 @login_required
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-    
     cart, created = Cart.objects.get_or_create(user=request.user)
-    
-    cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+    cart_item, created = CartItem.objects.get_or_create(
+        cart=cart, product=product
+        )
 
     if not created:
         cart_item.quantity += 1
@@ -40,6 +40,7 @@ def update_cart(request, product_id):
         cart_item.save()
 
     return redirect('/cart/')
+
 
 @login_required
 def view_cart(request):
@@ -71,6 +72,7 @@ def view_cart(request):
         'product_count' : product_count,
         'fav_count' : fav_count,
     })
+
 
 @login_required
 def delete_item(request, item_id):
