@@ -73,7 +73,6 @@ def view_cart(request):
         'fav_count' : fav_count,
     })
 
-
 @login_required
 def delete_item(request, item_id):
     item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)

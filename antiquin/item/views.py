@@ -98,7 +98,10 @@ def add_items(request):
     return render(
         request,
         "item/form.html",
-        {"form": form, "title": "Add Item", "categories": categories, **user_data},
+        {
+            "form": form, "title": "Add Item",
+            "categories": categories, **user_data
+        },
     )
 
 
@@ -139,7 +142,8 @@ def edit(request, pk):
     return render(
         request,
         "item/form.html",
-        {"form": form, "title": "Edit Item", "categories": categories, **user_data},
+        {"form": form, "title": "Edit Item", 
+         "categories": categories, **user_data},
     )
 
 
@@ -154,7 +158,10 @@ def delete(request, pk):
 @login_required
 def show_categories(request):
     categories = Category.objects.all()
-    return render(request, "account/categories.html", {"categories": categories})
+    return render(
+        request, "account/categories.html", 
+        {"categories": categories}
+    )
 
 
 @login_required
@@ -168,7 +175,9 @@ def add_category(request):
             return redirect("item:category")
     else:
         form = NewCategoryForm()
-    return render(request, "account/add_category.html", {"form": form})
+    return render(request, "account/add_category.html", {
+        "form": form, "category": category,
+        })
 
 
 @login_required
